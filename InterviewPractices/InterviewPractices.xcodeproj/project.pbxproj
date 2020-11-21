@@ -26,6 +26,7 @@
 		68F772992567A05F001FA363 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772982567A05F001FA363 /* ListTableViewCell.swift */; };
 		68F772A22567A256001FA363 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772A12567A256001FA363 /* JSONHelper.swift */; };
 		68F772BE2567A77F001FA363 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772BD2567A77F001FA363 /* Restaurant.swift */; };
+		68F772CF25685925001FA363 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772CE25685925001FA363 /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		68F772982567A05F001FA363 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		68F772A12567A256001FA363 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		68F772BD2567A77F001FA363 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		68F772CE25685925001FA363 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		6816E8BA25661821007166CB /* InterviewPractices */ = {
 			isa = PBXGroup;
 			children = (
+				68F772C825683F18001FA363 /* ImageLoadingExample */,
 				6816E8EE25661842007166CB /* JSONParsingExample */,
 				68F772A02567A231001FA363 /* Models */,
 				6816E8BB25661821007166CB /* AppDelegate.swift */,
@@ -191,6 +194,14 @@
 				68F772A12567A256001FA363 /* JSONHelper.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		68F772C825683F18001FA363 /* ImageLoadingExample */ = {
+			isa = PBXGroup;
+			children = (
+				68F772CE25685925001FA363 /* ImageLoader.swift */,
+			);
+			path = ImageLoadingExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +337,7 @@
 			files = (
 				68F772BE2567A77F001FA363 /* Restaurant.swift in Sources */,
 				68F772992567A05F001FA363 /* ListTableViewCell.swift in Sources */,
+				68F772CF25685925001FA363 /* ImageLoader.swift in Sources */,
 				6866EE03256648DB00105E06 /* UIStackView+Extensions.swift in Sources */,
 				68F772A22567A256001FA363 /* JSONHelper.swift in Sources */,
 				6816E8C025661821007166CB /* ListViewController.swift in Sources */,

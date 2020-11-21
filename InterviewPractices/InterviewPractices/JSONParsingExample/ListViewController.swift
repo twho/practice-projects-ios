@@ -10,7 +10,7 @@ import UIKit
 class ListViewController: UIViewController {
     // UI widgets
     private var tableView: UITableView!
-    
+    private var navbar: UINavigationBar!
     // Private properties
     private lazy var jsonHelper: JSONHelper = {
         return JSONHelper()
@@ -23,12 +23,14 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        
+        let _ = self.addNavigationBar(title: "Restaurant List")
         restaurantData = jsonHelper.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
-        for res in restaurantData {
-            
-        }
+        setupTableView()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.navbar = self.addNavigationBar(title: "Restaurant List")
     }
     
     private func setupTableView() {
@@ -40,40 +42,38 @@ class ListViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.tableView.setConstraintsToView(top: self.view, bottom: self.view, left: self.view, right: self.view)
+        self.tableView.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
+        self.tableView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
         self.view.layoutIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Use https://imgbb.com/ to create image urls
-//        let url = URL(string: "https://i.ibb.co/F0gNC4J/pexels-valeria-boltneva-1251208.jpg")
-//
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-//            DispatchQueue.main.async { [weak self] in
-//                guard let self = self else { return }
-//                self.imageView.image = UIImage(data: data!)
-//            }
-//        }
-//        imageView.backgroundColor = .blue
+        self.tableView.reloadData()
     }
 }
 
 extension ListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension ListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return restaurantData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier) as UITableViewCell?
         if let listCell = cell as? ListTableViewCell {
-            
+            listCell.loadDataToView(restaurantData[indexPath.item])
         }
         return cell!
     }

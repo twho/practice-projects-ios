@@ -19,9 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         // Create view hierachy programmatically
         let enteringViewController = ListViewController()
-        let navigationViewController = UINavigationController(rootViewController: enteringViewController)
         // Set the rootViewController of the window to the enteringViewController
-        window.rootViewController = navigationViewController
+        window.rootViewController = enteringViewController
         // Set the window and make it visibile
         self.window = window
         window.makeKeyAndVisible()
