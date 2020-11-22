@@ -3,7 +3,7 @@
             "resId": 1,
             "name": "ABC Grill",
             "rating": 4.5,
-            "priceRange": "[12,80]",
+            "priceRange": "12,80",
             "phoneNumber": "123-456-7890",
             "thumbnail": "https://i.ibb.co/F0gNC4J/pexels-valeria-boltneva-1251208.jpg"
         },
@@ -11,7 +11,7 @@
             "resId": 2,
             "name": "24hrs Cuisine of Asia",
             "rating": 4.8,
-            "priceRange": "[8,45]",
+            "priceRange": "8,45",
             "phoneNumber": "123-456-7891",
             "thumbnail": "https://i.ibb.co/m9Qq3TP/pexels-lovefood-art-1437590.jpg"
         },
@@ -19,7 +19,7 @@
             "resId": 3,
             "name": "9to5 Pizza",
             "rating": 3.5,
-            "priceRange": "[2,20]",
+            "priceRange": "2,20",
             "phoneNumber": "123-456-7892",
             "thumbnail": "https://i.ibb.co/nczyZgM/pexels-brett-jordan-825661.jpg"
         },
@@ -27,7 +27,7 @@
             "resId": 4,
             "name": "Frozen Icen Cream Shop",
             "rating": 4.1,
-            "priceRange": "[2,10]",
+            "priceRange": "2,10",
             "phoneNumber": "123-456-7893",
             "thumbnail": "https://i.ibb.co/VVrnctm/pexels-teejay-1362534.jpg"
         },
@@ -35,7 +35,7 @@
             "resId": 5,
             "name": "National Fast Food",
             "rating": 3.9,
-            "priceRange": "[5,30]",
+            "priceRange": "5,30",
             "phoneNumber": "123-456-7894",
             "thumbnail": "https://i.ibb.co/qYrWkXZ/pexels-foodie-factor-551991.jpg"
         },
@@ -43,7 +43,7 @@
             "resId": 6,
             "name": "Burger Queen",
             "rating": 4.0,
-            "priceRange": "[6,30]",
+            "priceRange": "6,30",
             "phoneNumber": "123-456-7895",
             "thumbnail": "https://i.ibb.co/vqHMnzk/pexels-valeria-boltneva-1639562.jpg"
         },
@@ -51,7 +51,7 @@
             "resId": 7,
             "name": "Formosa",
             "rating": 4.9,
-            "priceRange": "[10,80]",
+            "priceRange": "10,80",
             "phoneNumber": "123-456-7896",
             "thumbnail": "https://i.ibb.co/MCbG0kv/pexels-buenosia-carol-1907244.jpg"
         },
@@ -59,7 +59,7 @@
             "resId": 8,
             "name": "Coco 3.0",
             "rating": 3.8,
-            "priceRange": "[9,50]",
+            "priceRange": "9,50",
             "phoneNumber": "123-456-7897",
             "thumbnail": "https://i.ibb.co/b5HXjY1/pexels-buenosia-carol-674574.jpg"
         },
@@ -67,7 +67,7 @@
             "resId": 9,
             "name": "Ron's Steakhouse EST. 1995",
             "rating": 4.7,
-            "priceRange": "[27,360]",
+            "priceRange": "27,360",
             "phoneNumber": "123-456-7898",
             "thumbnail": "https://i.ibb.co/ydYYN9F/pexels-jonathan-borba-2878738.jpg"
         },
@@ -75,7 +75,7 @@
             "resId": 10,
             "name": "The Cake Company",
             "rating": 4.5,
-            "priceRange": "[50,200]",
+            "priceRange": "50,200",
             "phoneNumber": "123-456-7899",
             "thumbnail": "https://i.ibb.co/c1wDrkB/pexels-vinny-kapoor-5669399.jpg"
         },
@@ -83,7 +83,7 @@
             "resId": 11,
             "name": "N Coffee Co.",
             "rating": 4.7,
-            "priceRange": "[5,20]",
+            "priceRange": "5,20",
             "phoneNumber": "123-456-7800",
             "thumbnail": "https://i.ibb.co/VLxzHzn/pexels-tyler-nix-2396220.jpg"
         },
@@ -91,7 +91,7 @@
             "resId": 12,
             "name": "Jack's BBQ Place",
             "rating": 4.1,
-            "priceRange": "[15,150]",
+            "priceRange": "15,150",
             "phoneNumber": "123-456-7801",
             "thumbnail": "https://i.ibb.co/Wp1QKJz/pexels-skitterphoto-1105325.jpg"
         },
@@ -99,7 +99,7 @@
             "resId": 13,
             "name": "Anna's Bakery Since 1980",
             "rating": 4.6,
-            "priceRange": "[4,30]",
+            "priceRange": "4,30",
             "phoneNumber": "123-456-7802",
             "thumbnail": "https://i.ibb.co/KDVxKcG/pexels-daria-shevtsova-1070850.jpg"
         },
@@ -107,7 +107,7 @@
             "resId": 14,
             "name": "Seoul Street Bar",
             "rating": 4.5,
-            "priceRange": "[10,250]",
+            "priceRange": "10,250",
             "phoneNumber": "123-456-7803",
             "thumbnail": "https://i.ibb.co/WcNWHRh/pexels-chris-f-1283219.jpg"
         },
@@ -115,7 +115,7 @@
             "resId": 15,
             "name": "Dim Sum Champion",
             "rating": 4.8,
-            "priceRange": "[5,100]",
+            "priceRange": "5,100",
             "phoneNumber": "123-456-7804",
             "thumbnail": "https://i.ibb.co/Dgfj2Qb/pexels-rovelyn-camato-5214166.jpg"
         },
@@ -123,7 +123,7 @@
             "resId": 16,
             "name": "Mike Ho's Brewery Co.",
             "rating": 4.7,
-            "priceRange": "[10,200]",
+            "priceRange": "10,200",
             "phoneNumber": "123-456-7805",
             "thumbnail": "https://i.ibb.co/LJ3KdCj/pexels-tembela-bohle-1089930.jpg"
         },
@@ -131,7 +131,7 @@
             "resId": 17,
             "name": "Boston Delicious Seafood",
             "rating": 4.2,
-            "priceRange": "[15,200]",
+            "priceRange": "15,200",
             "phoneNumber": "123-456-7806",
             "thumbnail": "https://i.ibb.co/XsFpbj7/pexels-h-h-775863.jpg"
         },
@@ -139,7 +139,7 @@
             "resId": 18,
             "name": "The Toast Place",
             "rating": 4.5,
-            "priceRange": "[10,80]",
+            "priceRange": "10,80",
             "phoneNumber": "123-456-7807",
             "thumbnail": "https://i.ibb.co/sKW6CKj/foodiesfeed-com-breakfast-sandwich-with-poached-eggs-and-sprouts.jpg"
         },
@@ -147,7 +147,7 @@
             "resId": 19,
             "name": "Krish's Burger Kitchen",
             "rating": 3.9,
-            "priceRange": "[9,50]",
+            "priceRange": "9,50",
             "phoneNumber": "123-456-7808",
             "thumbnail": "https://i.ibb.co/3C7C6Z6/2-burgers-on-equare-box-with-potato-and-crorn-setting-on-white-table.jpg"
         },
@@ -155,7 +155,7 @@
             "resId": 20,
             "name": "The Great Steak",
             "rating": 4.3,
-            "priceRange": "[26,300]",
+            "priceRange": "26,300",
             "phoneNumber": "123-456-7809",
             "thumbnail": "https://i.ibb.co/KVCbQPD/pexels-malidate-van-769289.jpg"
         },
@@ -163,7 +163,7 @@
             "resId": 21,
             "name": "Northeast Coffee",
             "rating": 4.6,
-            "priceRange": "[3,25]",
+            "priceRange": "3,25",
             "phoneNumber": "123-456-7810",
             "thumbnail": "https://i.ibb.co/84DtRXw/pexels-jonathan-borba-2878712.jpg"
         }
