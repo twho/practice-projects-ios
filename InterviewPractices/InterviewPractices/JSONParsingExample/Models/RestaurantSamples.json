@@ -3,7 +3,7 @@
             "resId": 1,
             "name": "ABC Grill",
             "rating": 4.5,
-            "priceRange": "[10,80]",
+            "priceRange": "[12,80]",
             "phoneNumber": "123-456-7890",
             "thumbnail": "https://i.ibb.co/F0gNC4J/pexels-valeria-boltneva-1251208.jpg"
         },
@@ -91,7 +91,7 @@
             "resId": 12,
             "name": "Jack's BBQ Place",
             "rating": 4.1,
-            "priceRange": "[10,150]",
+            "priceRange": "[15,150]",
             "phoneNumber": "123-456-7801",
             "thumbnail": "https://i.ibb.co/Wp1QKJz/pexels-skitterphoto-1105325.jpg"
         },
