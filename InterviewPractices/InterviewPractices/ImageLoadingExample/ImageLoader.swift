@@ -24,6 +24,7 @@ class ImageLoader {
      - Parameter imageView: The image view to load image to and display image.
      */
     func load(_ url: URL, for imageView: UIImageView) {
+        imageView.image = #imageLiteral(resourceName: "ic_image_placeholder")
         // The dataTask in loadImage method is asynchronous.
         let token = self.loadImage(url) { result in
             defer { self.uuidMap[imageView] = nil } // Clean up no matter what

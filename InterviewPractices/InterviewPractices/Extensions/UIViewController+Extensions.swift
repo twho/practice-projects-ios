@@ -74,7 +74,6 @@ extension UIViewController {
      Dismiss current view.
      */
     @objc public func backToPreviousVC() {
-        self.modalPresentationStyle = .custom
         self.dismiss(animated: true, completion: nil)
     }
 }

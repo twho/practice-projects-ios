@@ -8,6 +8,9 @@
 import Foundation
 
 class JSONHelper {
+    // Singleton
+    static let shared = JSONHelper()
+    private init() {}
     /**
      Read a local JSON file in a specific format, e.g., RestaurantSamples.json.
      

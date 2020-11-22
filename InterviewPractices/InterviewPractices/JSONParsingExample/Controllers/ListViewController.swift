@@ -12,19 +12,15 @@ class ListViewController: UIViewController {
     private var tableView: UITableView!
     private var navbar: UINavigationBar!
     // Private properties
-    private lazy var jsonHelper: JSONHelper = {
-        return JSONHelper()
-    }()
     private var restaurantData = [Restaurant]()
-    
-    // MARK: - Constants
+    // Constants
     private let tableCellReuseIdentifier = "listTableViewCell"
     private let JSONFile = (name: "RestaurantSamples", directory: "restaurants")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let _ = self.addNavigationBar(title: "Restaurant List")
-        restaurantData = jsonHelper.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
+        restaurantData = JSONHelper.shared.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
         setupTableView()
     }
     
@@ -59,8 +55,11 @@ extension ListViewController: UITableViewDelegate {
         return 200
     }
     
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = ListDetailViewController()
+        detailVC.restaurant = restaurantData[indexPath.row]
+        self.present(detailVC, animated: true, completion: nil)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -73,7 +72,7 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier) as UITableViewCell?
         if let listCell = cell as? ListTableViewCell {
-            listCell.loadDataToView(restaurantData[indexPath.item])
+            listCell.loadDataToView(restaurantData[indexPath.row])
         }
         return cell!
     }
