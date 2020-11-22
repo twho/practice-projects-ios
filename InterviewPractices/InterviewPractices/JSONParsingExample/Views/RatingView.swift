@@ -31,7 +31,6 @@ class RatingView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         title.setConstraintsToView(top: self, bottom: self, left: self)
-        // It is required to set star view in width : height == 5 : 1
         starView.setConstraintsToView(top: self, bottom: self)
         starView.widthAnchor.constraint(equalTo: starView.heightAnchor, multiplier: 5).isActive = true
         starView.leftAnchor.constraint(equalTo: title.rightAnchor, constant: 0.05 * self.frame.width).isActive = true
@@ -49,6 +48,8 @@ class StarView: UIView {
     private static let outlineStar = #imageLiteral(resourceName: "ic_star_outline").colored(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
     // UI
     private var stack: UIStackView!
+    // Constants
+    private let logtag = "[StarView] "
     
     var value: Double = 0.0 {
         didSet {
@@ -64,7 +65,6 @@ class StarView: UIView {
     
     private func create(_ rating: Double) {
         guard rating < 5 else { return }
-//        print(frame)
         stack.removeAllSubviews()
         var remaining = rating
         var count = 0
@@ -101,7 +101,6 @@ class StarView: UIView {
         filled.layer.mask = layer
         // Combine two views.
         outline.addSubview(filled)
-        outline.setHeightConstraint(self.frame.height)
         return outline
     }
     
@@ -109,6 +108,9 @@ class StarView: UIView {
         super.layoutSubviews()
         stack.setConstraintsToView(top: self, bottom: self, left: self, right: self)
         self.layoutIfNeeded()
+        if self.frame.size.width / self.frame.size.height != 5.0 {
+            print("\(logtag) It is required to set star view in width : height == 5 : 1")
+        }
     }
     
     required init?(coder: NSCoder) {

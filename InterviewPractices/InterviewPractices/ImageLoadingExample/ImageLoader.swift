@@ -16,7 +16,7 @@ class ImageLoader {
     private var loadedImages = [URL: UIImage]()
     private var uuidMap = [UIImageView : UUID]()
     private var queuedTasks = [UUID : URLSessionDataTask]()
-    private let logtag = "ImageLoader: "
+    private let logtag = "[ImageLoader] "
     /**
      Load image from URL resource.
      
