@@ -25,6 +25,6 @@ class ListDetailViewController: UIViewController {
         super.loadView()
         navbar = self.addNavigationBar(title: title ?? "Detail",
                                        leftBarBtnItem: nil,
-                                       rightBarBtnItem: UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-multiply-24").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                       rightBarBtnItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
 }

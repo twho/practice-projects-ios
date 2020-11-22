@@ -8,12 +8,12 @@
 struct Restaurant {
     let resId: Int
     let name: String
-    let rating: String
+    let rating: Double
     let priceRange: String
     let phoneNumber: String
     let thumbnail: String
     
-    init(_ resId: Int, _ name: String, _ rating: String, _ priceRange: String, _ phoneNumber: String, _ thumbnail: String) {
+    init(_ resId: Int, _ name: String, _ rating: Double, _ priceRange: String, _ phoneNumber: String, _ thumbnail: String) {
         self.resId = resId
         self.name = name
         self.rating = rating
@@ -35,7 +35,7 @@ extension Restaurant: Decodable {
         // extracting the data
         let resId: Int = try container.decode(Int.self, forKey: .resId)
         let name: String = try container.decode(String.self, forKey: .name)
-        let rating: String = try container.decode(String.self, forKey: .rating)
+        let rating: Double = try container.decode(Double.self, forKey: .rating)
         let priceRange: String = try container.decode(String.self, forKey: .priceRange)
         let phoneNumber: String = try container.decode(String.self, forKey: .phoneNumber)
         let thumbnail: String = try container.decode(String.self, forKey: .thumbnail)
