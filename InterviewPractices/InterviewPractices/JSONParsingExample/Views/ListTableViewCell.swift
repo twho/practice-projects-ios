@@ -64,7 +64,7 @@ class ListTableViewCell: UITableViewCell {
         super.prepareForReuse()
         restaurantImageView.image = nil
         restaurantImageView.cancelImageLoad()
-      }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

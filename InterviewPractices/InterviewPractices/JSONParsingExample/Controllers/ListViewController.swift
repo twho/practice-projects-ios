@@ -11,7 +11,7 @@ class ListViewController: UIViewController {
     // UI widgets
     private var tableView: UITableView!
     private var navbar: UINavigationBar!
-    // Private properties
+    // Data
     private var restaurantData = [Restaurant]()
     // Constants
     private let tableCellReuseIdentifier = "listTableViewCell"
@@ -19,14 +19,14 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let _ = self.addNavigationBar(title: "Restaurant List")
         restaurantData = JSONHelper.shared.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
         setupTableView()
     }
     
     override func loadView() {
         super.loadView()
-        self.navbar = self.addNavigationBar(title: "Restaurant List")
+        self.navbar = self.addNavigationBar(title: Example.jsonParser.title,
+                                            rightBarBtnItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     
     private func setupTableView() {

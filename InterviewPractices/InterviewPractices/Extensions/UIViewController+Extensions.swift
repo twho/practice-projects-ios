@@ -46,7 +46,8 @@ extension UIViewController {
     }
     
     public func addNavigationBar(title: String, leftBarBtnItem: UIBarButtonItem? = nil, rightBarBtnItem: UIBarButtonItem? = nil) -> UINavigationBar {
-        let navbar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 50.0))
+        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let navbar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight, width: UIScreen.main.bounds.width, height: 50.0))
         navbar.barStyle = .black
         navbar.tintColor = .white
         navbar.backgroundColor = .black
@@ -75,19 +76,6 @@ extension UIViewController {
      */
     @objc public func backToPreviousVC() {
         self.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension UIViewController: UIViewControllerTransitioningDelegate {
-    /**
-     Go to other view controllers with custom animation.
-     
-     - Parameter view: The destination view controller.
-     */
-    public func goToView(_ view: UIViewController, completion: (() -> Void)? = nil) {
-        view.transitioningDelegate = self
-        view.modalPresentationStyle = .custom
-        self.present(view, animated: true, completion: nil)
     }
     /**
      Load view with animation. The background will be loaded before the primary views.
