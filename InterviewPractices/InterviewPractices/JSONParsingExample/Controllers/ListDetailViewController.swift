@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: Load cuisine in table view here.
 class ListDetailViewController: UIViewController {
 
     private var navbar: UINavigationBar!

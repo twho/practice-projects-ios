@@ -1,0 +1,19 @@
+{
+    "ABC Grill": [
+        {
+            "cuisineId": 1,
+            "name": "ABC Grill",
+            "price": "12,80"
+        },
+        {
+            "cuisineId": 1,
+            "name": "ABC Grill",
+            "price": "12,80"
+        },
+        {
+            "cuisineId": 1,
+            "name": "ABC Grill",
+            "price": "12,80"
+        }
+    ]
+}
