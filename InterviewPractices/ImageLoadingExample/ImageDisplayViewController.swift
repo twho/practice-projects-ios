@@ -7,6 +7,7 @@
 
 import UIKit
 
+// implement state clear loading by raywanderich
 class ImageDisplayViewController: UIViewController {
     // UI widgets
     private var collectionView: UICollectionView!
@@ -27,7 +28,7 @@ class ImageDisplayViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.navbar = self.addNavigationBar(title: Example.imageLoader.title,
-                                            rightBarBtnItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                            rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     
     private func setupCollectionView() {

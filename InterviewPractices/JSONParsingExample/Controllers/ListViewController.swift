@@ -26,7 +26,7 @@ class ListViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.navbar = self.addNavigationBar(title: Example.jsonParser.title,
-                                            rightBarBtnItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                            rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     
     private func setupTableView() {

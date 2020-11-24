@@ -1,0 +1,359 @@
+{
+    "ABC Grill": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "24hrs Cuisine of Asia": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "9to5 Pizza": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Frozen Icen Cream Shop": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "National Fast Food": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Burger Queen": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Formosa": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Coco 3.0": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Ron's Steakhouse EST. 1995": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "The Cake Company": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "N Coffee Co.": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Jack's BBQ Place": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Anna's Bakery Since 1980": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Seoul Street Bar": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Dim Sum Champion": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Mike Ho's Brewery Co.": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Boston Delicious Seafood": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "The Toast Place": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Krish's Burger Kitchen": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "The Great Steak": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+    "Northeast Coffee": [
+        {
+            "cuisineId": 1,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 2,
+            "name": "ABCGrill",
+            "price": "12.50"
+        },
+        {
+            "cuisineId": 3,
+            "name": "ABCGrill",
+            "price": "12.50"
+        }
+    ]
+}
