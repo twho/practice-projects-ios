@@ -27,6 +27,7 @@
 		68EFB7E0256C76CF006037A3 /* JSONParsingExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFB7DF256C76CF006037A3 /* JSONParsingExampleTests.swift */; };
 		68EFB7F8256C7D48006037A3 /* JSONParsingExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFB7F7256C7D48006037A3 /* JSONParsingExampleUITests.swift */; };
 		68EFB803256C7D90006037A3 /* Cuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFB802256C7D90006037A3 /* Cuisine.swift */; };
+		68EFB836256C9DC4006037A3 /* TestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 68EFB835256C9DC4006037A3 /* TestSample.json */; };
 		68F772992567A05F001FA363 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772982567A05F001FA363 /* ListTableViewCell.swift */; };
 		68F772A22567A256001FA363 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772A12567A256001FA363 /* JSONHelper.swift */; };
 		68F772BE2567A77F001FA363 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772BD2567A77F001FA363 /* Restaurant.swift */; };
@@ -80,6 +81,7 @@
 		68EFB7DF256C76CF006037A3 /* JSONParsingExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParsingExampleTests.swift; sourceTree = "<group>"; };
 		68EFB7F7256C7D48006037A3 /* JSONParsingExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParsingExampleUITests.swift; sourceTree = "<group>"; };
 		68EFB802256C7D90006037A3 /* Cuisine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuisine.swift; sourceTree = "<group>"; };
+		68EFB835256C9DC4006037A3 /* TestSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TestSample.json; path = InterviewPracticesTests/TestSample.json; sourceTree = SOURCE_ROOT; };
 		68F772982567A05F001FA363 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		68F772A12567A256001FA363 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		68F772BD2567A77F001FA363 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				68EFB7F7256C7D48006037A3 /* JSONParsingExampleUITests.swift */,
+				68EFB835256C9DC4006037A3 /* TestSample.json */,
 				6816E8DF25661822007166CB /* Info.plist */,
 			);
 			path = InterviewPracticesUITests;
@@ -372,6 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EFB836256C9DC4006037A3 /* TestSample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
