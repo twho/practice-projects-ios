@@ -19,14 +19,17 @@ class ImageLoadingExampleTests: XCTestCase {
     }
     
     func testSingleImageLoading() {
+        let imageData = UIImage(color: UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))?.pngData()
+        TestURLSession.sharedTestSession.data = imageData
         let imageView = UIImageView()
-        imageView.loadImage(TestConstants.singleImage, TestImageLoader.sharedTestLoader)
+        imageView.loadImage(TestConstants.dummyURL, TestImageLoader.sharedTestLoader)
         // Check the place holder image
         XCTAssertEqual(imageView.image, #imageLiteral(resourceName: "ic_image_placeholder"))
+        // Continue the loading task
         XCTAssertNotNil(TestImageLoader.sharedTestLoader.currentTask)
-        let task = TestImageLoader.sharedTestLoader.currentTask!
-        task.resume()
+        TestImageLoader.sharedTestLoader.currentTask!.resume()
         // Check the loaded image
-        XCTAssertEqual(imageView.image?.getPixelColor(CGPoint(x: 0, y: 0)), UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))
+        XCTAssertNotNil(imageView.image?.pngData())
+        XCTAssertEqual(imageView.image?.pngData(), imageData)
     }
 }

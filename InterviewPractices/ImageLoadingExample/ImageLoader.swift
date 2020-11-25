@@ -27,13 +27,12 @@ class ImageLoader {
     func load(_ url: URL, for imageView: UIImageView) {
         imageView.image = #imageLiteral(resourceName: "ic_image_placeholder")
         // The dataTask in loadImage method is asynchronous.
-        let token = self.loadImage(url) { result in
+        let token = self.loadImage(url) { [weak self] result in
+            guard let self = self else { return }
             defer { self.uuidMap[imageView] = nil } // Clean up no matter what
             do {
                 let image = try result.get()
-                DispatchQueue.main.async {
-                    imageView.image = image
-                }
+                self.setImageOnMainThread(imageView, image)
             } catch {
                 print(self.logtag + error.localizedDescription)
             }
@@ -72,7 +71,8 @@ class ImageLoader {
         
         let uuid = UUID()
         // The dataTask is asynchronous
-        let task = getURLSessionInContext().dataTask(with: url) { (data, response, error) in
+        let task = getURLSessionInContext().dataTask(with: url) { [weak self] (data, response, error) in
+            guard let self = self else { return }
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
@@ -103,6 +103,14 @@ class ImageLoader {
         queuedTasks[uuid] = nil
     }
     // MARK: Test Functions
+    /**
+     
+     */
+    func setImageOnMainThread(_ imageView: UIImageView, _ image: UIImage) {
+        DispatchQueue.main.async {
+            imageView.image = image
+        }
+    }
     /**
      Method to provide right URL session based on the current context, used for test override.
      

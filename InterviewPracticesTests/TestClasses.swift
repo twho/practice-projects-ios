@@ -12,7 +12,7 @@ struct TestConstants {
     /**
      ImageLoadingExample
      */
-    static let singleImage = "https://dummyimage.com/600x400/000000/000000"
+    static let dummyURL = "https://abc.def.ghi.jkl"
     /**
      JSONParsingExample
      */
@@ -43,7 +43,7 @@ class TestJSONHelper: JSONHelper {
 // MARK: Mock  URLSession
 // Reference: https://www.swiftbysundell.com/articles/mocking-in-swift/
 class TestURLSessionDataTask: URLSessionDataTask {
-    private let closure: () -> Void
+    var closure: () -> Void
     
     init(closure: @escaping () -> Void) {
         self.closure = closure
@@ -57,8 +57,9 @@ class TestURLSessionDataTask: URLSessionDataTask {
 }
 
 class TestURLSession: URLSession {
+    static let sharedTestSession = TestURLSession()
     override class var shared: URLSession {
-        return TestURLSession()
+        return sharedTestSession
     }
     typealias Completion = (Data?, URLResponse?, Error?) -> Void
     var data: Data?
@@ -70,16 +71,18 @@ class TestURLSession: URLSession {
         let data = self.data
         let error = self.error
 
-        return TestURLSessionDataTask {
-            completionHandler(data, nil, error)
-        }
+        return TestURLSessionDataTask { completionHandler(data, nil, error) }
     }
 }
 // MARK: TestImageLoader
 class TestImageLoader: ImageLoader {
     static let sharedTestLoader = TestImageLoader()
     override init() {}
-    var currentTask: URLSessionDataTask?
+    var currentTask: TestURLSessionDataTask?
+    
+    override func setImageOnMainThread(_ imageView: UIImageView, _ image: UIImage) {
+        imageView.image = image
+    }
     
     override func getURLSessionInContext() -> URLSession {
         return TestURLSession.shared
@@ -91,7 +94,10 @@ class TestImageLoader: ImageLoader {
     
     override func resumeTask(_ task: URLSessionDataTask, _ uuid: UUID) {
         // task.resume() will be called in the tests.
-        currentTask = task
+        guard let testTask = task as? TestURLSessionDataTask else {
+            preconditionFailure("Need to use TestURLSessionDataTask in test environment.")
+        }
+        currentTask = testTask
         queuedTasks[uuid] = task
     }
 }
