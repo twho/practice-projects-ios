@@ -9,12 +9,12 @@ import UIKit
 
 class ListViewController: UIViewController {
     // UI widgets
-    private var tableView: UITableView!
-    private var navbar: UINavigationBar!
+    var tableView: UITableView!
+    var navbar: UINavigationBar!
     // Data
-    private var restaurantData = [Restaurant]()
+    var restaurantData = [Restaurant]()
     // Constants
-    private let tableCellReuseIdentifier = "listTableViewCell"
+    private let tableCellReuseIdentifier = String(describing: self) + "TableViewCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class ListViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navbar = self.addNavigationBar(title: Example.jsonParser.title,
+        self.navbar = self.addNavigationBar(title: Constants.Example.jsonParser.title,
                                             rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     

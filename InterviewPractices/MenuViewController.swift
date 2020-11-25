@@ -12,7 +12,7 @@ class MenuViewController: UIViewController {
     private var navbar: UINavigationBar!
     private var stackView: UIStackView!
     // Data
-    private let examples: [Example] = [.imageLoader, .jsonParser]
+    private let examples: [Constants.Example] = [.imageLoader, .jsonParser]
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,26 +57,6 @@ class MenuViewController: UIViewController {
             let vcToPresent = exampleButton.example.viewController
             vcToPresent.modalPresentationStyle = .fullScreen
             self.present(vcToPresent, animated: true, completion: nil)
-        }
-    }
-}
-
-enum Example {
-    case jsonParser
-    case imageLoader
-    
-    var title: String {
-        switch self {
-        case .jsonParser: return "JSON Parsing Example"
-        case .imageLoader: return "Image Loading Example"
-        }
-    }
-    
-    var viewController: UIViewController {
-        switch self {
-        case .jsonParser:
-            return ListViewController()
-        case .imageLoader: return ImageDisplayViewController()
         }
     }
 }

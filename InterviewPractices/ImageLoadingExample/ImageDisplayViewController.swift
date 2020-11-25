@@ -15,7 +15,7 @@ class ImageDisplayViewController: UIViewController {
     // Data
     private var restaurantData = [Restaurant]()
     // Constants
-    private let collectionViewCellReuseIdentifier = "imageDisplayViewCell"
+    private let collectionViewCellReuseIdentifier = String(describing: self) + "CollectionViewCell"
     private let numberOfItemsInRow = 3
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class ImageDisplayViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navbar = self.addNavigationBar(title: Example.imageLoader.title,
+        self.navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
                                             rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     

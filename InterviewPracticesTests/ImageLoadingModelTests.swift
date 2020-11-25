@@ -19,8 +19,8 @@ class ImageLoadingExampleTests: XCTestCase {
     }
     
     func testSingleImageLoading() {
-        let imageData = UIImage(color: UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))?.pngData()
-        TestURLSession.sharedTestSession.data = imageData
+        let image = UIImage(color: UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))!
+        TestURLSession.sharedTestSession.data = image.pngData()
         let imageView = UIImageView()
         imageView.loadImage(TestConstants.dummyURL, TestImageLoader.sharedTestLoader)
         // Check the place holder image
@@ -30,6 +30,6 @@ class ImageLoadingExampleTests: XCTestCase {
         TestImageLoader.sharedTestLoader.currentTask!.resume()
         // Check the loaded image
         XCTAssertNotNil(imageView.image?.pngData())
-        XCTAssertEqual(imageView.image?.pngData(), imageData)
+        XCTAssertTrue(imageView.image!.isContentEqualTo(image))
     }
 }

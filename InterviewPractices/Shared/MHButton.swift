@@ -13,13 +13,13 @@ class MHButton: UIButton {
             self.backgroundColor = self.bgColor
         }
     }
-    var example: Example = .jsonParser
+    var example: Constants.Example = .jsonParser
     // Init
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    public convenience init(frame: CGRect = .zero, example: Example) {
+    public convenience init(frame: CGRect = .zero, example: Constants.Example) {
         self.init(text: example.title, textColor: .white, bgColor: .darkGray)
         self.example = example
     }
