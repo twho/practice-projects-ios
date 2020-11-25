@@ -11,11 +11,12 @@ import UIKit
 class ImageLoader {
     // Singleton
     static let shared = ImageLoader()
-    private init() {}
+    init() {}
+    // Testables properties
+    var loadedImages = [URL: UIImage]()
+    var uuidMap = [UIImageView : UUID]()
+    var queuedTasks = [UUID : URLSessionDataTask]()
     // Private properties
-    private var loadedImages = [URL: UIImage]()
-    private var uuidMap = [UIImageView : UUID]()
-    private var queuedTasks = [UUID : URLSessionDataTask]()
     private let logtag = "[ImageLoader] "
     /**
      Load image from URL resource.
@@ -62,7 +63,7 @@ class ImageLoader {
      
      - Returns: An uuid 
      */
-    private func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
+    func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
         // If the image is loaded before, just return it from local storage.
         if let image = loadedImages[url] {
             completion(.success(image))
@@ -71,7 +72,7 @@ class ImageLoader {
         
         let uuid = UUID()
         // The dataTask is asynchronous
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = getURLSessionInContext().dataTask(with: url) { (data, response, error) in
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
@@ -89,14 +90,44 @@ class ImageLoader {
             }
             // the request was cancelled, no need to call the callback
         }
-        task.resume()
-        queuedTasks[uuid] = task
+        resumeTask(task, uuid)
         return uuid
     }
-    
+    /**
+     Cancel the loading task.
+     
+     - Parameter uuid: The uuid of the task to be canceled.
+     */
     private func cancelLoad(_ uuid: UUID) {
         queuedTasks[uuid]?.cancel()
         queuedTasks[uuid] = nil
+    }
+    // MARK: Test Functions
+    /**
+     Method to provide right URL session based on the current context, used for test override.
+     
+     - Returns: An URL session used in current context.
+     */
+    func getURLSessionInContext() -> URLSession {
+        return URLSession.shared
+    }
+    /**
+     Used for test override.
+     
+     - Returns: The correct image loader to be used in the environment.
+     */
+    func getImageLoader() -> ImageLoader {
+        return ImageLoader.shared
+    }
+    /**
+     Method to resume task and record it locally.
+     
+     - Parameter task: Current task.
+     - Parameter uuid: The uuid used to mark the current task.
+     */
+    func resumeTask(_ task: URLSessionDataTask, _ uuid: UUID) {
+        task.resume()
+        queuedTasks[uuid] = task
     }
 }
 
@@ -105,20 +136,23 @@ extension UIImageView {
      Load image into current image view.
      
      - Parameter urlString: The image URL as a String.
+     - Parameter loader:    The utility loader used to load image.
      
      Reference: Use https://imgbb.com/ to create image urls.
      */
-    func loadImage(_ urlString: String) {
+    func loadImage(_ urlString: String, _ loader: ImageLoader) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL string.")
             return
         }
-        ImageLoader.shared.load(url, for: self)
+        loader.load(url, for: self)
     }
     /**
      Cancel image loading task.
+     
+     - Parameter loader: The utility loader used to load image.
      */
-    func cancelImageLoad() {
-        ImageLoader.shared.cancel(for: self)
+    func cancelImageLoad(_ loader: ImageLoader) {
+        loader.cancel(for: self)
     }
 }

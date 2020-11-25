@@ -5,7 +5,7 @@
 //  Created by Michael Ho on 11/19/20.
 //
 
-struct Restaurant {
+struct Restaurant: Equatable {
     let resId: Int
     let name: String
     let rating: Double

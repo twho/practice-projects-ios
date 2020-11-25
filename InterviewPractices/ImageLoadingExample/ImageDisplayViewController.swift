@@ -16,12 +16,11 @@ class ImageDisplayViewController: UIViewController {
     private var restaurantData = [Restaurant]()
     // Constants
     private let collectionViewCellReuseIdentifier = "imageDisplayViewCell"
-    private let JSONFile = (name: "RestaurantSamples", directory: "restaurants")
     private let numberOfItemsInRow = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantData = JSONHelper.shared.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
         setupCollectionView()
     }
     
@@ -85,7 +84,7 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellReuseIdentifier, for: indexPath)
         if let displayCell = cell as? ImageDisplayViewCell {
             let dataIndex = indexPath.section * numberOfItemsInRow + (indexPath.item)
-            displayCell.restaurantImageView.loadImage(restaurantData[dataIndex].thumbnail)
+            displayCell.restaurantImageView.loadImage(restaurantData[dataIndex].thumbnail, ImageLoader.shared)
             displayCell.title.text = restaurantData[dataIndex].name
         }
         return cell
@@ -124,7 +123,7 @@ class ImageDisplayViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         restaurantImageView.image = nil
-        restaurantImageView.cancelImageLoad()
+        restaurantImageView.cancelImageLoad(ImageLoader.shared)
     }
     
     required init?(coder: NSCoder) {

@@ -1,0 +1,45 @@
+{
+    "restaurants": [{
+            "resId": 101,
+            "name": "Sample1",
+            "rating": 3.0,
+            "priceRange": "1,101",
+            "phoneNumber": "123-456-7890",
+            "thumbnail": "https://dummyimage.com/600x400/ff0000/ff0000"
+        },
+        {
+            "resId": 202,
+            "name": "Sample2",
+            "rating": 4.0,
+            "priceRange": "2,202",
+            "phoneNumber": "123-456-7891",
+            "thumbnail": "https://dummyimage.com/600x400/ffff00/ffff00"
+        },
+        {
+            "resId": 303,
+            "name": "Sample3",
+            "rating": 5.0,
+            "priceRange": "3,303",
+            "phoneNumber": "123-456-7892",
+            "thumbnail": "https://dummyimage.com/600x400/ffffff/ffffff"
+        }
+    ],
+    "cuisines": [{
+        "Sample1": [{
+                "cuisineId": 101,
+                "name": "ABCGrill",
+                "price": "1.00"
+            },
+            {
+                "cuisineId": 102,
+                "name": "ABCGrill",
+                "price": "2.00"
+            },
+            {
+                "cuisineId": 103,
+                "name": "ABCGrill",
+                "price": "3.00"
+            }
+        ]
+    }]
+}

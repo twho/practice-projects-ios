@@ -10,7 +10,7 @@ import Foundation
 class JSONHelper {
     // Singleton
     static let shared = JSONHelper()
-    private init() {}
+    init() {}
     /**
      Read a local JSON file in a specific format, e.g., RestaurantSamples.json.
      
@@ -22,7 +22,7 @@ class JSONHelper {
      */
     func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String) -> [T] {
         var array = [T]()
-        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+        if let path = getCurrentBundle().path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
@@ -41,5 +41,11 @@ class JSONHelper {
             }
         }
         return array
+    }
+    /**
+     
+     */
+    open func getCurrentBundle() -> Bundle {
+        return Bundle.main
     }
 }

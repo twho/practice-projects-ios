@@ -32,7 +32,7 @@ class ListTableViewCell: UITableViewCell {
     }
     
     func loadDataToView(_ restaurant: Restaurant) {
-        self.restaurantImageView.loadImage(restaurant.thumbnail)
+        self.restaurantImageView.loadImage(restaurant.thumbnail, ImageLoader.shared)
         self.title.text = restaurant.name
         self.rating.value = restaurant.rating
         self.priceLabel.text = "$\(restaurant.priceRange.components(separatedBy: ",")[0]) - \(restaurant.priceRange.components(separatedBy: ",")[1])"
@@ -63,7 +63,7 @@ class ListTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         restaurantImageView.image = nil
-        restaurantImageView.cancelImageLoad()
+        restaurantImageView.cancelImageLoad(ImageLoader.shared)
     }
     
     required init?(coder: NSCoder) {

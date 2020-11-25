@@ -15,11 +15,10 @@ class ListViewController: UIViewController {
     private var restaurantData = [Restaurant]()
     // Constants
     private let tableCellReuseIdentifier = "listTableViewCell"
-    private let JSONFile = (name: "RestaurantSamples", directory: "restaurants")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantData = JSONHelper.shared.readLocalJSONFile(JSONFile.name, Restaurant.self, JSONFile.directory)
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
         setupTableView()
     }
     
