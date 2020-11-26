@@ -9,8 +9,8 @@ import UIKit
 
 class ListViewController: UIViewController {
     // UI widgets
-    var tableView: UITableView!
-    var navbar: UINavigationBar!
+    private(set) var tableView: UITableView!
+    private(set) var navbar: UINavigationBar!
     // Data
     var restaurantData = [Restaurant]()
     // Constants
@@ -18,8 +18,12 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
+        loadInitialData()
         setupTableView()
+    }
+    
+    func loadInitialData() {
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
     }
     
     override func loadView() {

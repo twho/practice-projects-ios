@@ -10,10 +10,10 @@ import UIKit
 class ListTableViewCell: UITableViewCell {
     // UI widgets
     private var restaurantImageView: UIImageView!
-    private var title: UILabel!
-    private var rating: RatingView!
-    private var priceLabel: UILabel!
-    private var phoneLabel: UILabel!
+    private(set) var title: UILabel!
+    private(set) var rating: RatingView!
+    private(set) var priceLabel: UILabel!
+    private(set) var phoneLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

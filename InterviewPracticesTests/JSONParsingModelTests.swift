@@ -36,13 +36,13 @@ class JSONParsingExampleTests: XCTestCase {
     }
     
     func testJSONFileExistence() {
-        let testBundle = TestJSONHelper.sharedTestHelper.getCurrentBundle()
-        let filePath = testBundle.path(forResource: TestConstants.JSON.restaurants.name, ofType: "json")
+        let testBundle = MockJSONHelper.sharedMock.getCurrentBundle()
+        let filePath = testBundle.path(forResource: MockConstants.JSON.restaurants.name, ofType: "json")
         XCTAssertNotNil(filePath)
     }
     
     func testReadRestaurantJSON() {
-        let restaurantsData = TestJSONHelper.sharedTestHelper.readLocalJSONFile(TestConstants.JSON.restaurants.name, Restaurant.self, TestConstants.JSON.restaurants.directory)
+        let restaurantsData = MockJSONHelper.sharedMock.readLocalJSONFile(MockConstants.JSON.restaurants.name, Restaurant.self, MockConstants.JSON.restaurants.directory)
         XCTAssertEqual(restaurantsData.count, 3)
         let expected = Restaurant(202, "Sample2", 4.0, "2,202", "123-456-7891", "https://dummyimage.com/600x400/ffff00/ffff00")
         XCTAssertEqual(restaurantsData[1], expected)

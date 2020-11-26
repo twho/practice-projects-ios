@@ -8,7 +8,7 @@
 import UIKit
 
 @testable import InterviewPractices
-struct TestConstants {
+struct MockConstants {
     /**
      ImageLoadingExample
      */
@@ -18,6 +18,19 @@ struct TestConstants {
      */
     enum JSON {
         case restaurants, cuisines
+        
+        var dummyData: [Any] {
+            switch self {
+            case .restaurants:
+                return [
+                    Restaurant(00, "name0", 1.0, "1,10", "123-123", "abc.123"),
+                    Restaurant(11, "name0", 2.0, "1,10", "456-456", "abc.456"),
+                    Restaurant(22, "name0", 3.0, "1,10", "789-789", "abc.789")
+                ]
+            default:
+                return []
+            }
+        }
         
         var name: String {
             return "TestSample"
@@ -32,17 +45,17 @@ struct TestConstants {
     }
 }
 
-class TestJSONHelper: JSONHelper {
-    static let sharedTestHelper = TestJSONHelper()
+class MockJSONHelper: JSONHelper {
+    static let sharedMock = MockJSONHelper()
     override init() {}
     
     override func getCurrentBundle() -> Bundle {
         return Bundle(for: JSONParsingExampleTests.self)
     }
 }
-// MARK: Mock  URLSession
+// MARK: Mock URLSession
 // Reference: https://www.swiftbysundell.com/articles/mocking-in-swift/
-class TestURLSessionDataTask: URLSessionDataTask {
+class MockURLSessionDataTask: URLSessionDataTask {
     var closure: () -> Void
     
     init(closure: @escaping () -> Void) {
@@ -56,10 +69,10 @@ class TestURLSessionDataTask: URLSessionDataTask {
     }
 }
 
-class TestURLSession: URLSession {
-    static let sharedTestSession = TestURLSession()
+class MockURLSession: URLSession {
+    static let sharedMock = MockURLSession()
     override class var shared: URLSession {
-        return sharedTestSession
+        return sharedMock
     }
     typealias Completion = (Data?, URLResponse?, Error?) -> Void
     var data: Data?
@@ -71,33 +84,40 @@ class TestURLSession: URLSession {
         let data = self.data
         let error = self.error
 
-        return TestURLSessionDataTask { completionHandler(data, nil, error) }
+        return MockURLSessionDataTask { completionHandler(data, nil, error) }
     }
 }
 // MARK: TestImageLoader
-class TestImageLoader: ImageLoader {
-    static let sharedTestLoader = TestImageLoader()
+class MockImageLoader: ImageLoader {
+    static let sharedMock = MockImageLoader()
     override init() {}
-    var currentTask: TestURLSessionDataTask?
+    var currentTask: MockURLSessionDataTask?
     
     override func setImageOnMainThread(_ imageView: UIImageView, _ image: UIImage) {
         imageView.image = image
     }
     
     override func getURLSessionInContext() -> URLSession {
-        return TestURLSession.shared
+        return MockURLSession.shared
     }
     
     override func getImageLoader() -> ImageLoader {
-        return TestImageLoader.sharedTestLoader
+        return MockImageLoader.sharedMock
     }
     
     override func resumeTask(_ task: URLSessionDataTask, _ uuid: UUID) {
         // task.resume() will be called in the tests.
-        guard let testTask = task as? TestURLSessionDataTask else {
+        guard let testTask = task as? MockURLSessionDataTask else {
             preconditionFailure("Need to use TestURLSessionDataTask in test environment.")
         }
         currentTask = testTask
         queuedTasks[uuid] = task
+    }
+}
+
+class MockListViewController: ListViewController {
+    
+    override func loadInitialData() {
+        self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
     }
 }
