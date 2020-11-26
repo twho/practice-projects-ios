@@ -17,7 +17,7 @@ struct MockConstants {
      JSONParsingExample
      */
     enum JSON {
-        case restaurants, cuisines
+        case restaurants, cuisines(String?)
         
         var dummyData: [Any] {
             switch self {
@@ -39,7 +39,7 @@ struct MockConstants {
         var directory: String {
             switch self {
             case .restaurants: return "restaurants"
-            case .cuisines: return "cuisines"
+            case .cuisines(let restaurantName): return "cuisines" + (restaurantName != nil ? ",\(restaurantName!)" : "")
             }
         }
     }
@@ -71,9 +71,7 @@ class MockURLSessionDataTask: URLSessionDataTask {
 
 class MockURLSession: URLSession {
     static let sharedMock = MockURLSession()
-    override class var shared: URLSession {
-        return sharedMock
-    }
+    override class var shared: URLSession { return sharedMock }
     typealias Completion = (Data?, URLResponse?, Error?) -> Void
     var data: Data?
     var error: Error?

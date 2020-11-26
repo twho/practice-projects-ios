@@ -22,12 +22,23 @@ class JSONHelper {
      */
     func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String) -> [T] {
         var array = [T]()
+        let keyArr = key.components(separatedBy: ",")
         if let path = getCurrentBundle().path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let results = jsonResult[key] as? [Any] {
-                    for dictionary in results {
+                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
+                    var finalResults = [Any]()
+                    var tempResults: Any = jsonResult
+                    for (idx, key) in keyArr.enumerated() {
+                        if idx == keyArr.count - 1,
+                           let temp = tempResults as? Dictionary<String, AnyObject>, let results = temp[key] as? [Any] {
+                            finalResults = results
+                        } else if let temp = tempResults as? Dictionary<String, AnyObject>, let keyResult = temp[key] {
+                            tempResults = keyResult
+                        }
+                    }
+                    for dictionary in finalResults {
                         do {
                             let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
                             array.append(try JSONDecoder().decode(T.self, from: jsonData))
