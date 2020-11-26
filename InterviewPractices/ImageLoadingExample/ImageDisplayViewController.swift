@@ -13,14 +13,28 @@ class ImageDisplayViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var navbar: UINavigationBar!
     // Data
-    private var restaurantData = [Restaurant]()
+    var isAnimating = false
+    var restaurantData: [Restaurant] = [] {
+        didSet {
+            if self.isViewVisible, !self.isAnimating {
+                self.runInAnimation { [weak self] in
+                    guard let self = self else { return }
+                    self.collectionView.reloadData()
+                    self.isAnimating = true
+                } completion: { _ in
+                    self.isAnimating = false
+                }
+            } else {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     // Constants
     private let collectionViewCellReuseIdentifier = String(describing: self) + "CollectionViewCell"
     private let numberOfItemsInRow = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
         setupCollectionView()
     }
     
@@ -49,7 +63,7 @@ class ImageDisplayViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.collectionView.reloadData()
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
     }
 }
 

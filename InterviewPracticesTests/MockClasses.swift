@@ -17,19 +17,36 @@ struct MockConstants {
      JSONParsingExample
      */
     enum JSON {
-        case restaurants, cuisines(String?)
+        case shared, restaurants, cuisines(String?)
+        
+        var dummyImageURLs: [String] {
+            return [
+                "https://dummyimage.com/0",
+                "https://dummyimage.com/1",
+                "https://dummyimage.com/2"
+            ]
+        }
         
         var dummyData: [Any] {
             switch self {
             case .restaurants:
                 return [
-                    Restaurant(00, "name0", 1.0, "1,10", "123-123", "abc.123"),
-                    Restaurant(11, "name0", 2.0, "1,10", "456-456", "abc.456"),
-                    Restaurant(22, "name0", 3.0, "1,10", "789-789", "abc.789")
+                    Restaurant(00, "name0", 1.0, "1,10", "123-123", dummyImageURLs[0]),
+                    Restaurant(11, "name0", 2.0, "1,10", "456-456", dummyImageURLs[1]),
+                    Restaurant(22, "name0", 3.0, "1,10", "789-789", dummyImageURLs[2])
                 ]
             default:
                 return []
             }
+        }
+        
+        var dummyDataMap: [URL : Data] {
+            let map = [
+                URL(string: dummyImageURLs[0])! : UIImage(color: UIColor(red: 0, green: 0, blue: 0, alpha: 1.0))!.pngData()!,
+                URL(string: dummyImageURLs[1])! : UIImage(color: UIColor(red: 1, green: 1, blue: 1, alpha: 1.0))!.pngData()!,
+                URL(string: dummyImageURLs[2])! : UIImage(color: UIColor(red: 2, green: 2, blue: 2, alpha: 1.0))!.pngData()!
+            ]
+            return map
         }
         
         var name: String {
@@ -40,11 +57,12 @@ struct MockConstants {
             switch self {
             case .restaurants: return "restaurants"
             case .cuisines(let restaurantName): return "cuisines" + (restaurantName != nil ? ",\(restaurantName!)" : "")
+            default: return ""
             }
         }
     }
 }
-
+// MARK: - Helpers and Utilities
 class MockJSONHelper: JSONHelper {
     static let sharedMock = MockJSONHelper()
     override init() {}
@@ -53,7 +71,6 @@ class MockJSONHelper: JSONHelper {
         return Bundle(for: JSONParsingExampleTests.self)
     }
 }
-// MARK: Mock URLSession
 // Reference: https://www.swiftbysundell.com/articles/mocking-in-swift/
 class MockURLSessionDataTask: URLSessionDataTask {
     var closure: () -> Void
@@ -79,13 +96,16 @@ class MockURLSession: URLSession {
     private override init() {}
 
     override func dataTask(with url: URL, completionHandler: @escaping Completion) -> URLSessionDataTask {
-        let data = self.data
         let error = self.error
+        var data = self.data
+        if let validData = MockConstants.JSON.shared.dummyDataMap[url] {
+            data = validData
+        }
 
         return MockURLSessionDataTask { completionHandler(data, nil, error) }
     }
 }
-// MARK: TestImageLoader
+
 class MockImageLoader: ImageLoader {
     static let sharedMock = MockImageLoader()
     override init() {}
@@ -99,7 +119,7 @@ class MockImageLoader: ImageLoader {
         return MockURLSession.shared
     }
     
-    override func getImageLoader() -> ImageLoader {
+    override func getImageLoaderInContext() -> ImageLoader {
         return MockImageLoader.sharedMock
     }
     
@@ -113,9 +133,24 @@ class MockImageLoader: ImageLoader {
     }
 }
 
+// MARK: View Controllers
 class MockListViewController: ListViewController {
-    
     override func loadInitialData() {
         self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
+    }
+    
+//    override func registerTableViewCell() {
+//        tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: String(describing: self) + "TableViewCell")
+//    }
+    
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.prepareForReuse()
+//    }
+}
+
+class MockListTableViewCell: ListTableViewCell {
+    
+    override func getImageLoaderInContext() -> ImageLoader {
+        return MockImageLoader.sharedMock
     }
 }

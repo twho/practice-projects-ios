@@ -11,6 +11,12 @@ import UIKit
 
 extension UIViewController {
     /**
+     A boolean indicate whether the view is currently visible.
+     */
+    public var isViewVisible: Bool {
+        return self.isViewLoaded && self.view.window != nil
+    }
+    /**
      Hide keyboard when tapping the parent view under current view controller.
      */
     public func hideKeyboardWhenTappedAround() {
@@ -98,13 +104,12 @@ extension UIViewController {
     /**
      Load view with animation. The background will be loaded before the primary views.
      
-     - Parameter loadFunc: The loading function used to load primary views.
+     - Parameter function:   The function to rnu within the animation block.
+     - Parameter completion: The completion handler.
      */
-    public func loadViewWithAnimation(loadFunc: @escaping (()->())) {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.transitionCrossDissolve], animations: {
-            self.view.backgroundColor = .white
-        }, completion: { _ in
-            loadFunc()
-        })
+    public func runInAnimation(_ function: @escaping (()->()), completion: ((Bool) -> Void)? = nil) {
+        UIView.transition(with: self.view, duration: 0.2, options: .transitionCrossDissolve, animations: {
+            function()
+        }, completion: completion)
     }
 }

@@ -124,7 +124,7 @@ class ImageLoader {
      
      - Returns: The correct image loader to be used in the environment.
      */
-    func getImageLoader() -> ImageLoader {
+    func getImageLoaderInContext() -> ImageLoader {
         return ImageLoader.shared
     }
     /**

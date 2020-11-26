@@ -9,7 +9,7 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
     // UI widgets
-    private var restaurantImageView: UIImageView!
+    private(set) var restaurantImageView: UIImageView!
     private(set) var title: UILabel!
     private(set) var rating: RatingView!
     private(set) var priceLabel: UILabel!
@@ -32,7 +32,7 @@ class ListTableViewCell: UITableViewCell {
     }
     
     func loadDataToView(_ restaurant: Restaurant) {
-        self.restaurantImageView.loadImage(restaurant.thumbnail, ImageLoader.shared)
+        self.restaurantImageView.loadImage(restaurant.thumbnail, getImageLoaderInContext())
         self.title.text = restaurant.name
         self.rating.value = restaurant.rating
         self.priceLabel.text = "$\(restaurant.priceRange.components(separatedBy: ",")[0]) - \(restaurant.priceRange.components(separatedBy: ",")[1])"
@@ -70,7 +70,8 @@ class ListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    // Override for testing
+    func getImageLoaderInContext() -> ImageLoader {
+        return ImageLoader.shared.getImageLoaderInContext()
     }
 }

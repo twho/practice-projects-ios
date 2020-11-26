@@ -9,16 +9,32 @@ import UIKit
 
 class ListViewController: UIViewController {
     // UI widgets
-    private(set) var tableView: UITableView!
+    var tableView: UITableView!
     private(set) var navbar: UINavigationBar!
     // Data
-    var restaurantData = [Restaurant]()
+    var isAnimating = false
+    var restaurantData: [Restaurant] = [] {
+        didSet {
+            if self.isViewVisible, !self.isAnimating {
+                self.runInAnimation { [weak self] in
+                    guard let self = self else { return }
+                    self.tableView.reloadData()
+                    self.isAnimating = true
+                } completion: { _ in
+                    self.isAnimating = false
+                }
+            } else {
+                self.tableView.reloadData()
+            }
+        }
+    }
     // Constants
-    private let tableCellReuseIdentifier = String(describing: self) + "TableViewCell"
+    var tableCellReuseIdentifier = {
+        return String(describing: self) + "TableViewCell"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadInitialData()
         setupTableView()
     }
     
@@ -34,10 +50,14 @@ class ListViewController: UIViewController {
     
     private func setupTableView() {
         tableView = UITableView()
-        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier)
+        registerTableViewCell()
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubViews([tableView])
+    }
+    
+    func registerTableViewCell() {
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier())
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,7 +68,7 @@ class ListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.reloadData()
+        loadInitialData()
     }
 }
 
@@ -73,7 +93,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier) as UITableViewCell?
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier())
         if let listCell = cell as? ListTableViewCell {
             listCell.loadDataToView(restaurantData[indexPath.row])
         }
