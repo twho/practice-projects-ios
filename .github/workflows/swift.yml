@@ -1,19 +1,19 @@
 name: Swift
 
-on:
+on: 
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
 
 jobs:
   build:
 
-    runs-on: macos-latest
-
+    runs-on: macOS-latest
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - uses: actions/checkout@main
+    - name: Start xcodebuild test
+      run: xcodebuild clean test -project InterviewPractices.xcodeproj -scheme InterviewPractices -destination "platform=iOS Simulator,name=iPhone 12 Pro"
