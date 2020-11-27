@@ -8,10 +8,11 @@
 import UIKit
 
 // implement state clear loading by raywanderich
+
 class ImageDisplayViewController: UIViewController {
     // UI widgets
-    private var collectionView: UICollectionView!
-    private var navbar: UINavigationBar!
+    var collectionView: UICollectionView!
+    private(set) var navbar: UINavigationBar!
     // Data
     var isAnimating = false
     var restaurantData: [Restaurant] = [] {
@@ -30,7 +31,9 @@ class ImageDisplayViewController: UIViewController {
         }
     }
     // Constants
-    private let collectionViewCellReuseIdentifier = String(describing: self) + "CollectionViewCell"
+    var collectionCellReuseIdentifier: String = {
+        return String(describing: self) + "CollectionViewCell"
+    }()
     private let numberOfItemsInRow = 3
     
     override func viewDidLoad() {
@@ -48,7 +51,7 @@ class ImageDisplayViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         (flowLayout.minimumLineSpacing, flowLayout.minimumInteritemSpacing) = (0, 0)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: collectionViewCellReuseIdentifier)
+        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: collectionCellReuseIdentifier)
         (collectionView.delegate, collectionView.dataSource) = (self, self)
         collectionView.backgroundColor = .lightGray
         collectionView.canCancelContentTouches = false
@@ -63,6 +66,10 @@ class ImageDisplayViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        loadInitialData()
+    }
+    // Override for testing
+    func loadInitialData() {
         restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
     }
 }
@@ -95,7 +102,7 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellReuseIdentifier, for: indexPath)
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellReuseIdentifier, for: indexPath)
         if let displayCell = cell as? ImageDisplayViewCell {
             let dataIndex = indexPath.section * numberOfItemsInRow + (indexPath.item)
             displayCell.restaurantImageView.loadImage(restaurantData[dataIndex].thumbnail, ImageLoader.shared)

@@ -29,17 +29,13 @@ class ListViewController: UIViewController {
         }
     }
     // Constants
-    var tableCellReuseIdentifier = {
+    var tableCellReuseIdentifier: String = {
         return String(describing: self) + "TableViewCell"
-    }
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-    }
-    
-    func loadInitialData() {
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
     }
     
     override func loadView() {
@@ -56,10 +52,6 @@ class ListViewController: UIViewController {
         self.view.addSubViews([tableView])
     }
     
-    func registerTableViewCell() {
-        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier())
-    }
-    
     override func viewDidLayoutSubviews() {
         self.tableView.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
         self.tableView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
@@ -69,6 +61,14 @@ class ListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadInitialData()
+    }
+    // Override for testing
+    func loadInitialData() {
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
+    }
+    
+    func registerTableViewCell() {
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier)
     }
 }
 
@@ -93,7 +93,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier())
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier)
         if let listCell = cell as? ListTableViewCell {
             listCell.loadDataToView(restaurantData[indexPath.row])
         }

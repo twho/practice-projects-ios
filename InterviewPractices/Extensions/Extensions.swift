@@ -14,7 +14,7 @@ extension NSObject {
     /**
      We assume the AppDelegate exists in the entire life cycle of the app.
      */
-    var appDelegate: AppDelegate {
+    var appDelegate: UIApplicationDelegate {
         return (UIApplication.shared.delegate as? AppDelegate).unsafelyUnwrapped
     }
 }

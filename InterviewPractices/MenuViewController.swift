@@ -10,15 +10,14 @@ import UIKit
 class MenuViewController: UIViewController {
     // UI
     private var navbar: UINavigationBar!
-    private var stackView: UIStackView!
+    private(set) var stackView: UIStackView!
     // Data
     private let examples: [Constants.Example] = [.imageLoader, .jsonParser]
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        let title = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Interview Practices"
-        navbar = self.addNavigationBar(title: title)
+        navbar = self.addNavigationBar(title: Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "")
         stackView = UIStackView(axis: .vertical, distribution: .fillEqually, spacing: 0.025 * self.view.frame.height)
         self.view.addSubViews([stackView])
     }
@@ -52,7 +51,7 @@ class MenuViewController: UIViewController {
      
      - Parameter sender: The button clicked by the user.
      */
-    @objc private func buttonClicked(_ sender: UIButton) {
+    @objc func buttonClicked(_ sender: UIButton) {
         if let exampleButton = sender as? MHButton {
             let vcToPresent = exampleButton.example.viewController
             vcToPresent.modalPresentationStyle = .fullScreen

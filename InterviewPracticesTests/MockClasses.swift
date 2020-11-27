@@ -1,5 +1,5 @@
 //
-//  TestClasses.swift
+//  MockClasses.swift
 //  InterviewPracticesTests
 //
 //  Created by Michael Ho on 11/24/20.
@@ -134,23 +134,44 @@ class MockImageLoader: ImageLoader {
 }
 
 // MARK: View Controllers
+@objc(MockAppDelegate)
+class MockAppDelegate: UIResponder, UIApplicationDelegate {}
+
 class MockListViewController: ListViewController {
+    override var tableCellReuseIdentifier: String {
+        get {
+            String(describing: self) + "TableViewCell"
+        }
+        set {}
+    }
+    
     override func loadInitialData() {
+        // Use test date resources since we have a model test for JSON reading capabilities.
         self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
     }
     
-//    override func registerTableViewCell() {
-//        tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: String(describing: self) + "TableViewCell")
-//    }
-    
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.prepareForReuse()
-//    }
+    override func registerTableViewCell() {
+        tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier)
+    }
 }
 
 class MockListTableViewCell: ListTableViewCell {
     
     override func getImageLoaderInContext() -> ImageLoader {
         return MockImageLoader.sharedMock
+    }
+}
+
+class MockImageDisplayViewController: ImageDisplayViewController {
+    override var collectionCellReuseIdentifier: String {
+        get {
+            String(describing: self) + "CollectionViewCell"
+        }
+        set {}
+    }
+    
+    override func loadInitialData() {
+        // Use test date resources since we have a model test for JSON reading capabilities.
+        self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
     }
 }

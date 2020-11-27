@@ -10,11 +10,17 @@ import XCTest
 @testable import InterviewPractices
 class JSONParsingControllerTests: XCTestCase {
     var listVC: MockListViewController!
+    let window: UIWindow = UIWindow(frame: UIScreen.main.bounds)
     
     override func setUpWithError() throws {
+        // Add the view controller to the hierarchy
         listVC = MockListViewController()
-        // Load view
+        window.makeKeyAndVisible()
+        window.rootViewController = listVC
+        _ = listVC.view
+        // Run view controller life cycle
         listVC.viewDidLoad()
+        listVC.viewDidLayoutSubviews()
         listVC.viewDidAppear(false)
     }
 
@@ -22,11 +28,11 @@ class JSONParsingControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    private func getCell(forRow row: Int) -> ListTableViewCell {
-        return listVC.tableView(listVC.tableView, cellForRowAt: IndexPath(row: row, section: 0)) as! ListTableViewCell
+    private func getCell(forRow row: Int) -> MockListTableViewCell {
+        return listVC.tableView(listVC.tableView, cellForRowAt: IndexPath(row: row, section: 0)) as! MockListTableViewCell
     }
     
-    func testUIShouldNotBeNil() {
+    func testInitialState() {
         XCTAssertNotNil(listVC.navbar)
         XCTAssertNotNil(listVC.tableView)
     }
@@ -69,22 +75,8 @@ class JSONParsingControllerTests: XCTestCase {
         XCTAssertEqual(0, listVC.tableView.numberOfRows(inSection: 0))
     }
     
-    func testTablViewCellImageFreeUpBeforeReuse() {
-        
-        let newData = listVC.restaurantData
-        listVC.restaurantData = newData + newData + newData
-        // Setup test
-        XCTAssertEqual(9, listVC.tableView.numberOfRows(inSection: 0))
-        XCTAssertNotNil(getCell(forRow: 0).restaurantImageView.image)
-        // When scroll down to the bottom
-        
-//        listVC.tableView.scrollToRow(at: IndexPath(row: 8, section: 0), at: .bottom, animated: false)
-//        listVC.tableView.reloadData()
-//        let _ = getCell(forRow: 5)
-//        let _ = getCell(forRow: 6)
-//        let _ = getCell(forRow: 7)
-//        
-//        // The image inside the cell should be cleaned up since the cell is reused.
-//        XCTAssertNil(getCell(forRow: 0).restaurantImageView.image)
+    func testTableViewCellPresentDetailViewController() {
+        listVC.tableView(listVC.tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
+        XCTAssertTrue(window.rootViewController?.presentedViewController is ListDetailViewController)
     }
 }

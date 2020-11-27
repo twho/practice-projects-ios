@@ -42,7 +42,7 @@ struct Constants {
         /// The JSON file stores cuisine data.
         case cuisines
         /**
-         
+         The name of the JSON files.
          */
         var name: String {
             switch self {
@@ -51,7 +51,7 @@ struct Constants {
             }
         }
         /**
-         
+         The name of the key to query in the JSON files.
          */
         var directory: String {
             switch self {

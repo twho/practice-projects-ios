@@ -9,7 +9,7 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
     // UI widgets
-    private(set) var restaurantImageView: UIImageView!
+    var restaurantImageView: UIImageView!
     private(set) var title: UILabel!
     private(set) var rating: RatingView!
     private(set) var priceLabel: UILabel!
@@ -62,8 +62,8 @@ class ListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        restaurantImageView.image = nil
         restaurantImageView.cancelImageLoad(ImageLoader.shared)
+        restaurantImageView.image = nil
     }
     
     required init?(coder: NSCoder) {

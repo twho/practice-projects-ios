@@ -13,7 +13,7 @@ class ImageLoader {
     static let shared = ImageLoader()
     init() {}
     // Testables properties
-    var loadedImages = [URL: UIImage]()
+    var storedImages = [URL: UIImage]()
     var uuidMap = [UIImageView : UUID]()
     var queuedTasks = [UUID : URLSessionDataTask]()
     // Private properties
@@ -64,7 +64,7 @@ class ImageLoader {
      */
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
         // If the image is loaded before, just return it from local storage.
-        if let image = loadedImages[url] {
+        if let image = storedImages[url] {
             completion(.success(image))
             return nil
         }
@@ -76,7 +76,7 @@ class ImageLoader {
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
-                self.loadedImages[url] = image
+                self.storedImages[url] = image
                 completion(.success(image))
                 return
             }
