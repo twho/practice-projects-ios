@@ -54,8 +54,7 @@ class MenuViewController: UIViewController {
     @objc func buttonClicked(_ sender: UIButton) {
         if let exampleButton = sender as? MHButton {
             let vcToPresent = exampleButton.example.viewController
-            vcToPresent.modalPresentationStyle = .fullScreen
-            self.present(vcToPresent, animated: true, completion: nil)
+            self.presentInFullscreen(vcToPresent)
         }
     }
 }

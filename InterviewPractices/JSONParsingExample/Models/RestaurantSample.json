@@ -35,7 +35,7 @@
             "resId": 5,
             "name": "National Fast Food",
             "rating": 3.9,
-            "priceRange": "5,30",
+            "priceRange": "1.99,30",
             "phoneNumber": "123-456-7894",
             "thumbnail": "https://i.ibb.co/qYrWkXZ/pexels-foodie-factor-551991.jpg"
         },
@@ -58,7 +58,7 @@
         {
             "resId": 8,
             "name": "Coco 3.0",
-            "rating": 3.8,
+            "rating": 3.7,
             "priceRange": "9,50",
             "phoneNumber": "123-456-7897",
             "thumbnail": "https://i.ibb.co/b5HXjY1/pexels-buenosia-carol-674574.jpg"
@@ -167,5 +167,701 @@
             "phoneNumber": "123-456-7810",
             "thumbnail": "https://i.ibb.co/84DtRXw/pexels-jonathan-borba-2878712.jpg"
         }
-    ]
+
+    ],
+    "meals": {
+        "ABC Grill": [{
+                "mealId": 1,
+                "name": "Calamari",
+                "category": "Starters",
+                "price": 12.00
+            },
+            {
+                "mealId": 2,
+                "name": "Grilled Top Sirloin",
+                "category": "Entrees",
+                "price": 24.00
+            },
+            {
+                "mealId": 3,
+                "name": "Fish & Chips",
+                "category": "Entrees",
+                "price": 16.00
+            },
+            {
+                "mealId": 4,
+                "name": "Chicken Fingers",
+                "category": "Entrees",
+                "price": 12.00
+            },
+            {
+                "mealId": 5,
+                "name": "Steak Fries",
+                "category": "Sides",
+                "price": 12.00
+            }
+        ],
+        "24hrs Cuisine of Asia": [{
+                "mealId": 1,
+                "name": "Crispy Spring Rows",
+                "category": "Starters",
+                "price": "9.95"
+            },
+            {
+                "mealId": 2,
+                "name": "Phad Thai",
+                "category": "Entrees",
+                "price": 12.95
+            },
+            {
+                "mealId": 3,
+                "name": "How Mok Curry",
+                "category": "Entrees",
+                "price": 13.95
+            },
+            {
+                "mealId": 4,
+                "name": "Red Curry",
+                "category": "Entrees",
+                "price": 12.95
+            },
+            {
+                "mealId": 5,
+                "name": "Green Curry",
+                "category": "Entrees",
+                "price": 12.95
+            }
+        ],
+        "9to5 Pizza": [{
+                "mealId": 1,
+                "name": "12 Cheesy Bread Sticks",
+                "category": "Starters",
+                "price": 6.99
+            },
+            {
+                "mealId": 2,
+                "name": "Pepperoni Classic Pizza",
+                "category": "Entrees",
+                "price": 15.99
+            },
+            {
+                "mealId": 3,
+                "name": "The Hawaiian Pizza",
+                "category": "Entrees",
+                "price": 15.99
+            },
+            {
+                "mealId": 4,
+                "name": "The Italian Pizza",
+                "category": "Entrees",
+                "price": 15.99
+            }
+        ],
+        "Frozen Icen Cream Shop": [{
+                "mealId": 1,
+                "name": "Small Cup",
+                "category": "Ice Cream",
+                "price": 5.99
+            },
+            {
+                "mealId": 2,
+                "name": "Large Cup",
+                "category": "Ice Cream",
+                "price": 6.99
+            },
+            {
+                "mealId": 3,
+                "name": "Vanilla Shake",
+                "category": "Shakes",
+                "price": 7.99
+            }
+        ],
+        "National Fast Food": [{
+                "mealId": 1,
+                "name": "Soda",
+                "category": "Beverages",
+                "price": 1.99
+            },
+            {
+                "mealId": 2,
+                "name": "Cheeseburger",
+                "category": "Meals",
+                "price": 6.09
+            },
+            {
+                "mealId": 3,
+                "name": "Hamburger",
+                "category": "Meals",
+                "price": 5.09
+            },
+            {
+                "mealId": 4,
+                "name": "Chicken Nuggets",
+                "category": "Meals",
+                "price": 6.49
+            },
+            {
+                "mealId": 5,
+                "name": "Crispy Onion Cheeseburger",
+                "category": "Meals",
+                "price": 7.49
+            },
+            {
+                "mealId": 6,
+                "name": "French Fries",
+                "category": "Sides",
+                "price": 1.99
+            },
+            {
+                "mealId": 7,
+                "name": "Iced Tea",
+                "category": "Beverages",
+                "price": 1.99
+            }
+        ],
+        "Burger Queen": [{
+                "mealId": 1,
+                "name": "Whooper Meal",
+                "category": "Meals",
+                "price": 10.99
+            },
+            {
+                "mealId": 2,
+                "name": "Big Queen XL Meal",
+                "category": "Meals",
+                "price": 13.89
+            },
+            {
+                "mealId": 3,
+                "name": "Frozen Coke",
+                "category": "Beverages",
+                "price": 2.19
+            },
+            {
+                "mealId": 4,
+                "name": "Soft Drink",
+                "category": "Beverages",
+                "price": 2.79
+            },
+            {
+                "mealId": 5,
+                "name": "French Fries",
+                "category": "Sides",
+                "price": 2.79
+            },
+            {
+                "mealId": 6,
+                "name": "Onion Rings",
+                "category": "Sides",
+                "price": 3.09
+            }
+        ],
+        "Formosa": [{
+                "mealId": 1,
+                "name": "Popcorn Chicken",
+                "category": "Appetizers",
+                "price": 8.50
+            },
+            {
+                "mealId": 2,
+                "name": "Chicken with Special Sauce",
+                "category": "Chef Specials",
+                "price": 13.50
+            },
+            {
+                "mealId": 3,
+                "name": "King Oyster Mushrooms with Special Sauce",
+                "category": "Chef Specials",
+                "price": 15.95
+            },
+            {
+                "mealId": 4,
+                "name": "Sizzling Platter with Steak",
+                "category": "Entrees",
+                "price": 17.95
+            },
+            {
+                "mealId": 5,
+                "name": "Spiced Pork over Rice",
+                "category": "Entrees",
+                "price": 11.95
+            }
+        ],
+        "Coco 3.0": [{
+                "mealId": 1,
+                "name": "Pan Fried Gyoza",
+                "category": "Starters",
+                "price": 8.00
+            },
+            {
+                "mealId": 2,
+                "name": "Chicken Katsu Curry",
+                "category": "Entrees",
+                "price": 14.95
+            },
+            {
+                "mealId": 3,
+                "name": "Pork Katsu Curry",
+                "category": "Entrees",
+                "price": 14.95
+            },
+            {
+                "mealId": 4,
+                "name": "Shio Tonkotsu Ramen",
+                "category": "Entrees",
+                "price": 14.50
+            },
+            {
+                "mealId": 5,
+                "name": "Beef Teriyaki",
+                "category": "Entrees",
+                "price": 13.95
+            },
+            {
+                "mealId": 6,
+                "name": "Pork Teriyaki",
+                "category": "Entrees",
+                "price": 13.95
+            }
+        ],
+        "Ron's Steakhouse EST. 1995": [{
+                "mealId": 1,
+                "name": "12 oz. Ribeye",
+                "category": "Entrees",
+                "price": 25.99
+            },
+            {
+                "mealId": 2,
+                "name": "6 oz. Top Sirloin",
+                "category": "Entrees",
+                "price": 20.29
+            },
+            {
+                "mealId": 3,
+                "name": "Double-Glazed Baby Back Ribs",
+                "category": "Entrees",
+                "price": 19.49
+            },
+            {
+                "mealId": 4,
+                "name": "Grilled Chicken Breast",
+                "category": "Entrees",
+                "price": 14.99
+            },
+            {
+                "mealId": 5,
+                "name": "Steak Burger",
+                "category": "Entrees",
+                "price": 14.50
+            }
+        ],
+        "The Cake Company": [{
+                "mealId": 1,
+                "name": "Oreo Cupcakes",
+                "category": "Cupcakes",
+                "price": 3.75
+            },
+            {
+                "mealId": 2,
+                "name": "Maple Bacon Cupcakes",
+                "category": "Cupcakes",
+                "price": 4.75
+            },
+            {
+                "mealId": 3,
+                "name": "Chocolate Cupcakes",
+                "category": "Cupcakes",
+                "price": 16.00
+            },
+            {
+                "mealId": 4,
+                "name": "Plain Cheesecake",
+                "category": "Cheesecakes",
+                "price": 7.75
+            },
+            {
+                "mealId": 5,
+                "name": "Raspberry Cheesecake",
+                "category": "Cheesecakes",
+                "price": 9.75
+            }
+        ],
+        "N Coffee Co.": [{
+                "mealId": 1,
+                "name": "Seafood Bisque",
+                "category": "Small Bites",
+                "price": 7.35
+            },
+            {
+                "mealId": 2,
+                "name": "Sambal Shrimp",
+                "category": "Small Bites",
+                "price": 15.25
+            },
+            {
+                "mealId": 3,
+                "name": "Americano",
+                "category": "Drinks",
+                "price": 2.99
+            },
+            {
+                "mealId": 4,
+                "name": "Cappuccino",
+                "category": "Drinks",
+                "price": 3.99
+            },
+            {
+                "mealId": 5,
+                "name": "Latte",
+                "category": "Drinks",
+                "price": 4.99
+            }
+        ],
+        "Jack's BBQ Place": [{
+                "mealId": 1,
+                "name": "6 oz. Smoked BBQ Sandwich",
+                "category": "Entrees",
+                "price": 18.95
+            },
+            {
+                "mealId": 2,
+                "name": "St. Louis-Style Smoked Pork Ribs",
+                "category": "Entrees",
+                "price": 19.95
+            },
+            {
+                "mealId": 3,
+                "name": "Prime Beef Ribs",
+                "category": "Drinks",
+                "price": 19.95
+            },
+            {
+                "mealId": 4,
+                "name": "The Great Salad",
+                "category": "Entrees",
+                "price": 12.95
+            },
+            {
+                "mealId": 5,
+                "name": "12 oz. Smoked BBQ Sandwich",
+                "category": "Entrees",
+                "price": 28.95
+            }
+        ],
+        "Anna's Bakery Since 1980": [{
+                "mealId": 1,
+                "name": "Sweet Crunchy Bread",
+                "category": "House Specialities",
+                "price": 6.99
+            },
+            {
+                "mealId": 2,
+                "name": "Chocolate Temptation (per slice)",
+                "category": "House Specialities",
+                "price": 7.99
+            },
+            {
+                "mealId": 3,
+                "name": "Black Forest (per slice)",
+                "category": "House Specialities",
+                "price": 7.99
+            },
+            {
+                "mealId": 4,
+                "name": "Tiramisu (per slice)",
+                "category": "House Specialities",
+                "price": 7.99
+            },
+            {
+                "mealId": 5,
+                "name": "Strawberry Strip (per slice)",
+                "category": "House Specialities",
+                "price": 6.99
+            }
+        ],
+        "Seoul Street Bar": [{
+                "mealId": 1,
+                "name": "Chicken BBQ",
+                "category": "Entrees",
+                "price": 13.95
+            },
+            {
+                "mealId": 2,
+                "name": "Spicy Chicken Dak-Bulgogi BBQ",
+                "category": "Entrees",
+                "price": 21.95
+            },
+            {
+                "mealId": 3,
+                "name": "BiBimBap",
+                "category": "Entrees",
+                "price": 15.95
+            },
+            {
+                "mealId": 4,
+                "name": "Marinated Short Rib Kalbi BBQ",
+                "category": "Entrees",
+                "price": 19.95
+            },
+            {
+                "mealId": 5,
+                "name": "Soft Drinks",
+                "category": "Beverages",
+                "price": 3.95
+            }
+        ],
+        "Dim Sum Champion": [{
+                "mealId": 1,
+                "name": "Beef Ball",
+                "category": "Dim Sum",
+                "price": 5.75
+            },
+            {
+                "mealId": 2,
+                "name": "Spare Rib",
+                "category": "Dim Sum",
+                "price": 4.95
+            },
+            {
+                "mealId": 3,
+                "name": "Shrimp Shui Mai",
+                "category": "Dim Sum",
+                "price": 4.95
+            },
+            {
+                "mealId": 4,
+                "name": "B.B.Q. Pork Buns Lunch",
+                "category": "Dim Sum",
+                "price": 5.75
+            },
+            {
+                "mealId": 5,
+                "name": "Beef Tendon",
+                "category": "Dim Sum",
+                "price": 5.75
+            },
+            {
+                "mealId": 6,
+                "name": "Radish Cakes",
+                "category": "Dim Sum",
+                "price": 4.95
+            },
+            {
+                "mealId": 7,
+                "name": "Pork Potstickers",
+                "category": "Dim Sum",
+                "price": 4.95
+            }
+        ],
+        "Mike Ho's Brewery Co.": [{
+                "mealId": 1,
+                "name": "Katsu Burger",
+                "category": "Entrees",
+                "price": 10.35
+            },
+            {
+                "mealId": 2,
+                "name": "Teriyaki Chicken Burger",
+                "category": "Entrees",
+                "price": 10.25
+            },
+            {
+                "mealId": 3,
+                "name": "Miso Tofu Burger",
+                "category": "Entrees",
+                "price": 9.75
+            },
+            {
+                "mealId": 4,
+                "name": "Fries",
+                "category": "Sides",
+                "price": 5.75
+            },
+            {
+                "mealId": 5,
+                "name": "Wasabi Coleslaw",
+                "category": "Sides",
+                "price": 4.75
+            }
+        ],
+        "Boston Delicious Seafood": [{
+                "mealId": 1,
+                "name": "Crab Cake",
+                "category": "Starters",
+                "price": 16.90
+            },
+            {
+                "mealId": 2,
+                "name": "Clam Chowder",
+                "category": "Starters",
+                "price": 11.90
+            },
+            {
+                "mealId": 3,
+                "name": "Fish and Chips",
+                "category": "Entrees",
+                "price": 19.90
+            },
+            {
+                "mealId": 4,
+                "name": "Chopped Seafood Salad",
+                "category": "Entrees",
+                "price": 22.90
+            },
+            {
+                "mealId": 5,
+                "name": "Sharp Cheddar Cheeseburger",
+                "category": "Entrees",
+                "price": 19.90
+            }
+        ],
+        "The Toast Place": [{
+                "mealId": 1,
+                "name": "Buttermilk Pancakes",
+                "category": "Pancakes",
+                "price": 7.95
+            },
+            {
+                "mealId": 2,
+                "name": "Strawberry Pancakes",
+                "category": "Pancakes",
+                "price": 8.95
+            },
+            {
+                "mealId": 3,
+                "name": "Banana Pancakes",
+                "category": "Pancakes",
+                "price": 8.95
+            },
+            {
+                "mealId": 4,
+                "name": "Sausage and Eggs",
+                "category": "Eggs",
+                "price": 14.45
+            },
+            {
+                "mealId": 5,
+                "name": "Bacon and Eggs",
+                "category": "Eggs",
+                "price": 14.45
+            }
+        ],
+        "Krish's Burger Kitchen": [{
+                "mealId": 1,
+                "name": "Blazing Onion Petals",
+                "category": "Appetizers",
+                "price": 9.99
+            },
+            {
+                "mealId": 2,
+                "name": "Blazing Onion Burger",
+                "category": "Entrees",
+                "price": 16.59
+            },
+            {
+                "mealId": 3,
+                "name": "Jalapeno Bacon Burger",
+                "category": "Entrees",
+                "price": 18.29
+            },
+            {
+                "mealId": 4,
+                "name": "Teriyaki Chicken",
+                "category": "Entrees",
+                "price": 16.59
+            },
+            {
+                "mealId": 5,
+                "name": "Grilled Chicken Avocado",
+                "category": "Entrees",
+                "price": 17.29
+            },
+            {
+                "mealId": 6,
+                "name": "Homemade Vegan Burger",
+                "category": "Entrees",
+                "price": 15.59
+            }
+        ],
+        "The Great Steak": [{
+                "mealId": 1,
+                "name": "Cowboy Ribeye",
+                "category": "Entrees",
+                "price": 33.75
+            },
+            {
+                "mealId": 2,
+                "name": "New York Steak",
+                "category": "Entrees",
+                "price": 32.75
+            },
+            {
+                "mealId": 3,
+                "name": "Roasted Chicken",
+                "category": "Entrees",
+                "price": 20.75
+            },
+            {
+                "mealId": 4,
+                "name": "Margherita Pizza",
+                "category": "Entrees",
+                "price": 14.75
+            },
+            {
+                "mealId": 5,
+                "name": "Cauliflower Steak",
+                "category": "Entrees",
+                "price": 18.25
+            }
+        ],
+        "Northeast Coffee": [{
+                "mealId": 1,
+                "name": "Classic Roll",
+                "category": "Baked Goods",
+                "price": 6.99
+            },
+            {
+                "mealId": 2,
+                "name": "Churros",
+                "category": "Baked Goods",
+                "price": 4.49
+            },
+            {
+                "mealId": 3,
+                "name": "Cold Brew Iced Coffee",
+                "category": "Beverages",
+                "price": 3.99
+            },
+            {
+                "mealId": 4,
+                "name": "Lemonades",
+                "category": "Beverages",
+                "price": 3.99
+            },
+            {
+                "mealId": 5,
+                "name": "Hot Cocoa",
+                "category": "Beverages",
+                "price": 3.49
+            },
+            {
+                "mealId": 6,
+                "name": "Hot Coffee",
+                "category": "Beverages",
+                "price": 3.49
+            },
+            {
+                "mealId": 7,
+                "name": "Classic Roll and a Cold Brew",
+                "category": "Pairs",
+                "price": 10.99
+            },
+            {
+                "mealId": 8,
+                "name": "Churros and a Cold Brew",
+                "category": "Pairs",
+                "price": 9.99
+            }
+        ]
+    }
 }

@@ -24,44 +24,38 @@
             "thumbnail": "https://dummyimage.com/600x400/ffffff/ffffff"
         }
     ],
-    "cuisines": {
+    "meals": {
         "Sample1": [
             {
-                "cuiId": 101,
-                "name": "cuisine101",
-                "restaurant": "Sample1",
+                "mealId": 101,
+                "name": "meal101",
                 "price": 1.00
             },
             {
-                "cuiId": 102,
-                "name": "cuisine102",
-                "restaurant": "Sample1",
+                "mealId": 102,
+                "name": "meal102",
                 "price": 2.00
             },
             {
-                "cuiId": 103,
-                "name": "cuisine103",
-                "restaurant": "Sample1",
+                "mealId": 103,
+                "name": "meal103",
                 "price": 3.00
             }
         ],
         "Sample2": [
             {
-                "cuiId": 202,
-                "name": "cuisine202",
-                "restaurant": "Sample2",
+                "mealId": 202,
+                "name": "meal202",
                 "price": 4.00
             },
             {
-                "cuiId": 203,
-                "name": "cuisine203",
-                "restaurant": "Sample2",
+                "mealId": 203,
+                "name": "meal203",
                 "price": 5.00
             },
             {
-                "cuiId": 204,
-                "name": "cuisine204",
-                "restaurant": "Sample2",
+                "mealId": 204,
+                "name": "meal204",
                 "price": 6.00
             }
         ]

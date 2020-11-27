@@ -28,10 +28,6 @@ class ListViewController: UIViewController {
             }
         }
     }
-    // Constants
-    var tableCellReuseIdentifier: String = {
-        return String(describing: self) + "TableViewCell"
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +60,11 @@ class ListViewController: UIViewController {
     }
     // Override for testing
     func loadInitialData() {
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
     }
     
     func registerTableViewCell() {
-        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier)
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 }
 
@@ -81,7 +77,7 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = ListDetailViewController()
         detailVC.restaurant = restaurantData[indexPath.row]
-        self.present(detailVC, animated: true, completion: nil)
+        self.presentInFullscreen(detailVC)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -93,7 +89,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: tableCellReuseIdentifier)
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)
         if let listCell = cell as? ListTableViewCell {
             listCell.loadDataToView(restaurantData[indexPath.row])
         }

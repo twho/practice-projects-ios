@@ -16,8 +16,8 @@ struct MockConstants {
     /**
      JSONParsingExample
      */
-    enum JSON {
-        case shared, restaurants, cuisines(String?)
+    enum TestJSON {
+        case shared, restaurants, meals(String?)
         
         var dummyImageURLs: [String] {
             return [
@@ -56,7 +56,7 @@ struct MockConstants {
         var directory: String {
             switch self {
             case .restaurants: return "restaurants"
-            case .cuisines(let restaurantName): return "cuisines" + (restaurantName != nil ? ",\(restaurantName!)" : "")
+            case .meals(let restaurantName): return "meals" + (restaurantName != nil ? ",\(restaurantName!)" : "")
             default: return ""
             }
         }
@@ -98,7 +98,7 @@ class MockURLSession: URLSession {
     override func dataTask(with url: URL, completionHandler: @escaping Completion) -> URLSessionDataTask {
         let error = self.error
         var data = self.data
-        if let validData = MockConstants.JSON.shared.dummyDataMap[url] {
+        if let validData = MockConstants.TestJSON.shared.dummyDataMap[url] {
             data = validData
         }
 
@@ -138,20 +138,14 @@ class MockImageLoader: ImageLoader {
 class MockAppDelegate: UIResponder, UIApplicationDelegate {}
 
 class MockListViewController: ListViewController {
-    override var tableCellReuseIdentifier: String {
-        get {
-            String(describing: self) + "TableViewCell"
-        }
-        set {}
-    }
     
     override func loadInitialData() {
         // Use test date resources since we have a model test for JSON reading capabilities.
-        self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
+        self.restaurantData = MockConstants.TestJSON.restaurants.dummyData as! [Restaurant]
     }
     
     override func registerTableViewCell() {
-        tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: tableCellReuseIdentifier)
+        tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 }
 
@@ -163,15 +157,9 @@ class MockListTableViewCell: ListTableViewCell {
 }
 
 class MockImageDisplayViewController: ImageDisplayViewController {
-    override var collectionCellReuseIdentifier: String {
-        get {
-            String(describing: self) + "CollectionViewCell"
-        }
-        set {}
-    }
     
     override func loadInitialData() {
         // Use test date resources since we have a model test for JSON reading capabilities.
-        self.restaurantData = MockConstants.JSON.restaurants.dummyData as! [Restaurant]
+        self.restaurantData = MockConstants.TestJSON.restaurants.dummyData as! [Restaurant]
     }
 }

@@ -25,6 +25,12 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
     /**
+     Get a cell reuse identifier tied with the class name.
+     */
+    public var cellReuseIdentifier: String {
+        return String(describing: self) + "TableViewCell"
+    }
+    /**
      Dismiss keyboard.
      */
     @objc func dismissKeyboard() {
@@ -101,6 +107,11 @@ extension UIViewController {
     @objc public func backToPreviousVC() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    public func presentInFullscreen(_ vc: UIViewController, _ animated: Bool = true) {
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
     /**
      Load view with animation. The background will be loaded before the primary views.
      
@@ -108,7 +119,7 @@ extension UIViewController {
      - Parameter completion: The completion handler.
      */
     public func runInAnimation(_ function: @escaping (()->()), completion: ((Bool) -> Void)? = nil) {
-        UIView.transition(with: self.view, duration: 0.2, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
             function()
         }, completion: completion)
     }

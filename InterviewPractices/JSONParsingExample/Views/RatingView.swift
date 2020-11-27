@@ -64,7 +64,7 @@ class StarView: UIView {
     }
     
     private func create(_ rating: Double) {
-        guard rating < 5 else { return }
+        guard rating <= 5 else { return }
         stack.removeAllSubviews()
         var remaining = rating
         var count = 0
@@ -75,13 +75,17 @@ class StarView: UIView {
             remaining -= 1
             count += 1
         }
-        if remaining > 0 {
-            stack.addArrangedSubview(createPartialRating(remaining))
-            count += 1
-        }
-        if count < 5 {
-            for _ in count..<5 {
-                stack.addArrangedSubview(UIImageView(image: StarView.outlineStar))
+        // Need to run this asynchronously since it may take time
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if remaining > 0 {
+                self.stack.addArrangedSubview(self.createPartialRating(remaining))
+                count += 1
+            }
+            if count < 5 {
+                for _ in count..<5 {
+                    self.stack.addArrangedSubview(UIImageView(image: StarView.outlineStar))
+                }
             }
         }
     }
@@ -101,6 +105,7 @@ class StarView: UIView {
         filled.layer.mask = layer
         // Combine two views.
         outline.addSubview(filled)
+        outline.layoutIfNeeded()
         return outline
     }
     

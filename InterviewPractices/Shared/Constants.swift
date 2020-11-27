@@ -36,19 +36,16 @@ struct Constants {
         }
     }
 
-    enum JSONFileName {
+    enum JSON {
         /// The JSON file stores restaurant data.
         case restaurants
-        /// The JSON file stores cuisine data.
-        case cuisines
+        /// The JSON file stores meal data.
+        case meals(String? = nil)
         /**
          The name of the JSON files.
          */
         var name: String {
-            switch self {
-            case .restaurants: return "RestaurantSample"
-            case .cuisines: return "CuisineSample"
-            }
+            return "RestaurantSample"
         }
         /**
          The name of the key to query in the JSON files.
@@ -56,7 +53,7 @@ struct Constants {
         var directory: String {
             switch self {
             case .restaurants: return "restaurants"
-            case .cuisines: return "cuisines"
+            case .meals(let restaurantName): return "meals" + (restaurantName != nil ? ",\(restaurantName!)" : "")
             }
         }
     }

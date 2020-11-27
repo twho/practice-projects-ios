@@ -31,9 +31,6 @@ class ImageDisplayViewController: UIViewController {
         }
     }
     // Constants
-    var collectionCellReuseIdentifier: String = {
-        return String(describing: self) + "CollectionViewCell"
-    }()
     private let numberOfItemsInRow = 3
     
     override func viewDidLoad() {
@@ -51,7 +48,7 @@ class ImageDisplayViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         (flowLayout.minimumLineSpacing, flowLayout.minimumInteritemSpacing) = (0, 0)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: collectionCellReuseIdentifier)
+        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         (collectionView.delegate, collectionView.dataSource) = (self, self)
         collectionView.backgroundColor = .lightGray
         collectionView.canCancelContentTouches = false
@@ -70,7 +67,7 @@ class ImageDisplayViewController: UIViewController {
     }
     // Override for testing
     func loadInitialData() {
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSONFileName.restaurants.name, Restaurant.self, Constants.JSONFileName.restaurants.directory)
+        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
     }
 }
 
@@ -102,7 +99,7 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellReuseIdentifier, for: indexPath)
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath)
         if let displayCell = cell as? ImageDisplayViewCell {
             let dataIndex = indexPath.section * numberOfItemsInRow + (indexPath.item)
             displayCell.restaurantImageView.loadImage(restaurantData[dataIndex].thumbnail, ImageLoader.shared)
