@@ -32,8 +32,14 @@ struct MockConstants {
             case .restaurants:
                 return [
                     Restaurant(00, "name0", 1.0, "1,10", "123-123", dummyImageURLs[0]),
-                    Restaurant(11, "name0", 2.0, "1,10", "456-456", dummyImageURLs[1]),
-                    Restaurant(22, "name0", 3.0, "1,10", "789-789", dummyImageURLs[2])
+                    Restaurant(11, "name1", 2.0, "2,20", "456-456", dummyImageURLs[1]),
+                    Restaurant(22, "name2", 3.0, "3,30", "789-789", dummyImageURLs[2])
+                ]
+            case .meals(_):
+                return [
+                    Meal(001, "meal001", 0.5, "cat01"),
+                    Meal(002, "meal002", 1.5, "cat02"),
+                    Meal(003, "meal003", 2.5, "cat03")
                 ]
             default:
                 return []
@@ -146,6 +152,14 @@ class MockListViewController: ListViewController {
     
     override func registerTableViewCell() {
         tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+    }
+}
+
+class MockListDetailViewController: ListDetailViewController {
+    
+    override func loadInitialData() {
+        // Use test date resources since we have a model test for JSON reading capabilities.
+        self.mealData = MockConstants.TestJSON.meals(nil).dummyData as! [Meal]
     }
 }
 

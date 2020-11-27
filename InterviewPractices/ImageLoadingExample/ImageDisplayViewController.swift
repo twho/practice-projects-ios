@@ -74,11 +74,11 @@ class ImageDisplayViewController: UIViewController {
 extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return restaurantData.count / numberOfItemsInRow
+        return max(1, restaurantData.count / numberOfItemsInRow)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItemsInRow
+        return min(numberOfItemsInRow, restaurantData.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -132,7 +132,7 @@ class ImageDisplayViewCell: UICollectionViewCell {
         let height = self.frame.size.height
         let width = self.frame.size.width
         self.restaurantImageView.setConstraintsToView(top: self, tConst: 0.1 * height, left: self, lConst: 0.1 * width, right: self, rConst: -0.1 * width)
-        self.restaurantImageView.setSquareBasedOnWidth()
+        self.restaurantImageView.setSquareUseWidthReference()
         self.title.topAnchor.constraint(equalTo: self.restaurantImageView.bottomAnchor, constant: 0.05 * height).isActive = true
         self.title.setConstraintsToView(bottom: self, bConst: -0.05 * height, left: restaurantImageView, right: restaurantImageView)
         self.layoutIfNeeded()

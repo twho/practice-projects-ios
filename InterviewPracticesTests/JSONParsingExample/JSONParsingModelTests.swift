@@ -52,23 +52,25 @@ class JSONParsingExampleTests: XCTestCase {
         let id = 100
         let name = "ABCDEFG"
         let price = 1000.0
-        let meal = Meal(id, name, price)
+        let cat = "HIJKL"
+        let meal = Meal(id, name, price, cat)
         XCTAssertNotNil(meal)
         XCTAssertEqual(id, meal.mealId)
         XCTAssertEqual(name, meal.name)
         XCTAssertEqual(price, meal.price)
+        XCTAssertEqual(cat, meal.category)
     }
     
     func testReadCuisineJSON() {
         // Check the first data sample
         let data1 = MockJSONHelper.sharedMock.readLocalJSONFile(MockConstants.TestJSON.restaurants.name, Meal.self, MockConstants.TestJSON.meals("Sample1").directory)
-        XCTAssertEqual(Meal(101, "meal101", 1.0), data1[0])
-        XCTAssertEqual(Meal(102, "meal102", 2.0), data1[1])
-        XCTAssertEqual(Meal(103, "meal103", 3.0), data1[2])
+        XCTAssertEqual(Meal(101, "meal101", 1.0, "cat11"), data1[0])
+        XCTAssertEqual(Meal(102, "meal102", 2.0, "cat12"), data1[1])
+        XCTAssertEqual(Meal(103, "meal103", 3.0, "cat13"), data1[2])
         // Check another data sample
         let data2 = MockJSONHelper.sharedMock.readLocalJSONFile(MockConstants.TestJSON.restaurants.name, Meal.self, MockConstants.TestJSON.meals("Sample2").directory)
-        XCTAssertEqual(Meal(202, "meal202", 4.0), data2[0])
-        XCTAssertEqual(Meal(203, "meal203", 5.0), data2[1])
-        XCTAssertEqual(Meal(204, "meal204", 6.0), data2[2])
+        XCTAssertEqual(Meal(202, "meal202", 4.0, "cat21"), data2[0])
+        XCTAssertEqual(Meal(203, "meal203", 5.0, "cat22"), data2[1])
+        XCTAssertEqual(Meal(204, "meal204", 6.0, "cat23"), data2[2])
     }
 }

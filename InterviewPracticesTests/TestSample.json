@@ -29,16 +29,19 @@
             {
                 "mealId": 101,
                 "name": "meal101",
+                "category": "cat11",
                 "price": 1.00
             },
             {
                 "mealId": 102,
                 "name": "meal102",
+                "category": "cat12",
                 "price": 2.00
             },
             {
                 "mealId": 103,
                 "name": "meal103",
+                "category": "cat13",
                 "price": 3.00
             }
         ],
@@ -46,16 +49,19 @@
             {
                 "mealId": 202,
                 "name": "meal202",
+                "category": "cat21",
                 "price": 4.00
             },
             {
                 "mealId": 203,
                 "name": "meal203",
+                "category": "cat22",
                 "price": 5.00
             },
             {
                 "mealId": 204,
                 "name": "meal204",
+                "category": "cat23",
                 "price": 6.00
             }
         ]

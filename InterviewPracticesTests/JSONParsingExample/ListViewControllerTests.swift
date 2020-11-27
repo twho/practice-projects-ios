@@ -8,15 +8,15 @@
 import XCTest
 
 @testable import InterviewPractices
-class JSONParsingControllerTests: XCTestCase {
+class ListViewControllerTests: XCTestCase {
     var listVC: MockListViewController!
-    let window: UIWindow = UIWindow(frame: UIScreen.main.bounds)
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     
     override func setUpWithError() throws {
         // Add the view controller to the hierarchy
         listVC = MockListViewController()
-        window.makeKeyAndVisible()
-        window.rootViewController = listVC
+        window?.makeKeyAndVisible()
+        window?.rootViewController = listVC
         _ = listVC.view
         // Run view controller life cycle
         listVC.viewDidLoad()
@@ -25,7 +25,8 @@ class JSONParsingControllerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        window?.removeSubviews()
+        window = nil
     }
     
     private func getCell(forRow row: Int) -> MockListTableViewCell {
@@ -75,8 +76,25 @@ class JSONParsingControllerTests: XCTestCase {
         XCTAssertEqual(0, listVC.tableView.numberOfRows(inSection: 0))
     }
     
-    func testTableViewCellPresentDetailViewController() {
+    func testSelectCellPresentDetailViewController() {
         listVC.tableView(listVC.tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
-        XCTAssertTrue(window.rootViewController?.presentedViewController is ListDetailViewController)
+        XCTAssertTrue(window?.rootViewController?.presentedViewController is ListDetailViewController)
+    }
+    
+    func testPresentedDetailViewControllerHasDataSetup() {
+        listVC.tableView(listVC.tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
+        let detailVC = window?.rootViewController?.presentedViewController as! ListDetailViewController
+        XCTAssertEqual(listVC.restaurantData[1], detailVC.restaurant)
+    }
+    
+    func testPresentedDetailViewControllerHasImageSetup() {
+        let cellImage = getCell(forRow: 1).restaurantImageView.image
+        // Setup test
+        XCTAssertNotNil(cellImage)
+        listVC.tableView(listVC.tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
+        let detailVC = window?.rootViewController?.presentedViewController as! ListDetailViewController
+        // Check image in detail view controller
+        XCTAssertNotNil(detailVC.imageView.image)
+        XCTAssertTrue(cellImage!.cropToWideRatio()!.isContentEqualTo(detailVC.imageView.image!))
     }
 }
