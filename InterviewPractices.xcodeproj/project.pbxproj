@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		499694DB2571A48B0046FF23 /* ListDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499694DA2571A48B0046FF23 /* ListDetailViewControllerTests.swift */; };
 		49AC5F7525706B990012052F /* ImageDisplayControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC5F7425706B990012052F /* ImageDisplayControllerTests.swift */; };
 		49E1D14325707B0900741F61 /* MenuViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */; };
 		49E1D14925707F0E00741F61 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1D14825707F0E00741F61 /* main.swift */; };
@@ -32,7 +33,7 @@
 		68EFB92C256D9896006037A3 /* MockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFB92B256D9896006037A3 /* MockClasses.swift */; };
 		68EFB934256D9978006037A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFB933256D9978006037A3 /* Constants.swift */; };
 		68EFBA8D256DB62C006037A3 /* ImageDisplayModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFBA8C256DB62C006037A3 /* ImageDisplayModelTests.swift */; };
-		68EFBAA3256E1D07006037A3 /* JSONParsingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFBAA2256E1D07006037A3 /* JSONParsingControllerTests.swift */; };
+		68EFBAA3256E1D07006037A3 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFBAA2256E1D07006037A3 /* ListViewControllerTests.swift */; };
 		68F772992567A05F001FA363 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772982567A05F001FA363 /* ListTableViewCell.swift */; };
 		68F772A22567A256001FA363 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772A12567A256001FA363 /* JSONHelper.swift */; };
 		68F772BE2567A77F001FA363 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F772BD2567A77F001FA363 /* Restaurant.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		499694DA2571A48B0046FF23 /* ListDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewControllerTests.swift; sourceTree = "<group>"; };
 		49AC5F7425706B990012052F /* ImageDisplayControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDisplayControllerTests.swift; sourceTree = "<group>"; };
 		49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewControllerTests.swift; sourceTree = "<group>"; };
 		49E1D14825707F0E00741F61 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		68EFB92B256D9896006037A3 /* MockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClasses.swift; sourceTree = "<group>"; };
 		68EFB933256D9978006037A3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		68EFBA8C256DB62C006037A3 /* ImageDisplayModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDisplayModelTests.swift; sourceTree = "<group>"; };
-		68EFBAA2256E1D07006037A3 /* JSONParsingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParsingControllerTests.swift; sourceTree = "<group>"; };
+		68EFBAA2256E1D07006037A3 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		68F772982567A05F001FA363 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		68F772A12567A256001FA363 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		68F772BD2567A77F001FA363 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
@@ -110,6 +112,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		499694D82571A4500046FF23 /* JSONParsingExample */ = {
+			isa = PBXGroup;
+			children = (
+				68EFB7DF256C76CF006037A3 /* JSONParsingModelTests.swift */,
+				68EFBAA2256E1D07006037A3 /* ListViewControllerTests.swift */,
+				499694DA2571A48B0046FF23 /* ListDetailViewControllerTests.swift */,
+			);
+			path = JSONParsingExample;
+			sourceTree = "<group>";
+		};
+		499694D92571A4620046FF23 /* ImageLoadingExample */ = {
+			isa = PBXGroup;
+			children = (
+				68EFBA8C256DB62C006037A3 /* ImageDisplayModelTests.swift */,
+				49AC5F7425706B990012052F /* ImageDisplayControllerTests.swift */,
+			);
+			path = ImageLoadingExample;
+			sourceTree = "<group>";
+		};
 		6816E8AF25661821007166CB = {
 			isa = PBXGroup;
 			children = (
@@ -148,12 +169,10 @@
 		6816E8D125661822007166CB /* InterviewPracticesTests */ = {
 			isa = PBXGroup;
 			children = (
+				499694D92571A4620046FF23 /* ImageLoadingExample */,
+				499694D82571A4500046FF23 /* JSONParsingExample */,
 				68EFB92B256D9896006037A3 /* MockClasses.swift */,
 				49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */,
-				68EFB7DF256C76CF006037A3 /* JSONParsingModelTests.swift */,
-				68EFBAA2256E1D07006037A3 /* JSONParsingControllerTests.swift */,
-				68EFBA8C256DB62C006037A3 /* ImageDisplayModelTests.swift */,
-				49AC5F7425706B990012052F /* ImageDisplayControllerTests.swift */,
 				68EFB923256D984A006037A3 /* TestSample.json */,
 				6816E8D425661822007166CB /* Info.plist */,
 			);
@@ -374,11 +393,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				49AC5F7525706B990012052F /* ImageDisplayControllerTests.swift in Sources */,
-				68EFBAA3256E1D07006037A3 /* JSONParsingControllerTests.swift in Sources */,
+				68EFBAA3256E1D07006037A3 /* ListViewControllerTests.swift in Sources */,
 				68EFBA8D256DB62C006037A3 /* ImageDisplayModelTests.swift in Sources */,
 				49E1D14325707B0900741F61 /* MenuViewControllerTests.swift in Sources */,
 				68EFB92C256D9896006037A3 /* MockClasses.swift in Sources */,
 				68EFB7E0256C76CF006037A3 /* JSONParsingModelTests.swift in Sources */,
+				499694DB2571A48B0046FF23 /* ListDetailViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

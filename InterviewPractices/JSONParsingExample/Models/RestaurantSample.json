@@ -370,7 +370,7 @@
             },
             {
                 "mealId": 3,
-                "name": "King Oyster Mushrooms with Special Sauce",
+                "name": "King Oyster Mushrooms",
                 "category": "Chef Specials",
                 "price": 15.95
             },
@@ -452,7 +452,7 @@
                 "mealId": 5,
                 "name": "Steak Burger",
                 "category": "Entrees",
-                "price": 14.50
+                "price": 14.49
             }
         ],
         "The Cake Company": [{
@@ -532,7 +532,7 @@
             {
                 "mealId": 3,
                 "name": "Prime Beef Ribs",
-                "category": "Drinks",
+                "category": "Entrees",
                 "price": 19.95
             },
             {
@@ -546,6 +546,12 @@
                 "name": "12 oz. Smoked BBQ Sandwich",
                 "category": "Entrees",
                 "price": 28.95
+            },
+            {
+                "mealId": 6,
+                "name": "Soda",
+                "category": "Drinks",
+                "price": 2.99
             }
         ],
         "Anna's Bakery Since 1980": [{

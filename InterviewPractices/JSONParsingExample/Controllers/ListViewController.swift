@@ -77,6 +77,10 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = ListDetailViewController()
         detailVC.restaurant = restaurantData[indexPath.row]
+        if let cell = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
+            detailVC.imageView.image = cell.restaurantImageView.image?.cropToWideRatio()
+        }
+        // Present the detail view controller
         self.presentInFullscreen(detailVC)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
