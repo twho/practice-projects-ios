@@ -17,7 +17,7 @@
                BlueprintIdentifier = "6816E8B725661821007166CB"
                BuildableName = "InterviewPractices.app"
                BlueprintName = "InterviewPractices"
-               ReferencedContainer = "container:InterviewPractices.xcodeproj">
+               ReferencedContainer = "container:PracticeProjects.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
                BlueprintIdentifier = "6816E8CD25661822007166CB"
                BuildableName = "InterviewPracticesTests.xctest"
                BlueprintName = "InterviewPracticesTests"
-               ReferencedContainer = "container:InterviewPractices.xcodeproj">
+               ReferencedContainer = "container:PracticeProjects.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "6816E8B725661821007166CB"
             BuildableName = "InterviewPractices.app"
             BlueprintName = "InterviewPractices"
-            ReferencedContainer = "container:InterviewPractices.xcodeproj">
+            ReferencedContainer = "container:PracticeProjects.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -75,7 +75,7 @@
             BlueprintIdentifier = "6816E8B725661821007166CB"
             BuildableName = "InterviewPractices.app"
             BlueprintName = "InterviewPractices"
-            ReferencedContainer = "container:InterviewPractices.xcodeproj">
+            ReferencedContainer = "container:PracticeProjects.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

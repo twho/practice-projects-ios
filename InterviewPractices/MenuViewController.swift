@@ -28,7 +28,7 @@ class MenuViewController: UIViewController {
         let height = self.view.frame.height
         stackView.topAnchor.constraint(equalTo: navbar.bottomAnchor, constant: 0.1 * height).isActive = true
         stackView.setConstraintsToView(left: self.view, lConst: 0.1 * width, right: self.view, rConst: -0.1 * width)
-        stackView.setHeightConstraint(CGFloat(self.examples.count + 1) * 100.0)
+        stackView.setHeightConstraint(CGFloat(self.examples.count + 1) * 80)
         self.view.layoutIfNeeded()
     }
     // viewDidAppear

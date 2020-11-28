@@ -21,10 +21,14 @@ class JSONHelper {
      - Returns: An array of the given data type.
      */
     func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String) -> [T] {
+        // Initial array to collect data
         var array = [T]()
+        // The input keys to query fetched JSON data.
         let keyArr = key.components(separatedBy: ",")
+        // Start fetching
         if let path = getCurrentBundle().path(forResource: fileName, ofType: "json") {
             do {
+                // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                 if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
@@ -51,6 +55,15 @@ class JSONHelper {
                 print(error.localizedDescription)
             }
         }
+        return array
+    }
+    /**
+     
+     */
+    func decodeJSONData<T: Decodable>(_ jsonData: Data) -> [T] {
+        // Initial array to collect data
+        var array = [T]()
+        
         return array
     }
     /**

@@ -25,7 +25,7 @@ struct Restaurant: Equatable {
 
 extension Restaurant: Decodable {
     
-    private enum CodingKeys : String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case resId, name, rating, priceRange, phoneNumber, thumbnail
     }
     

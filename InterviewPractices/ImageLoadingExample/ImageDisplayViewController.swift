@@ -11,7 +11,7 @@ class ImageDisplayViewController: UIViewController {
     // UI widgets
     var collectionView: UICollectionView!
     private(set) var navbar: UINavigationBar!
-    // Necessary properties for state driven collectionView
+    // Properties for state driven collectionView
     private(set) var stackView: UIStackView!
     private(set) var activityIndicator: UIActivityIndicatorView!
     private(set) var loadingView: UIView!
@@ -42,7 +42,7 @@ class ImageDisplayViewController: UIViewController {
     }
     // Constants
     private let numberOfItemsInRow = 3
-    private let rowHeight: CGFloat = 60.0
+    private let stateViewHeight: CGFloat = 60.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,22 +56,35 @@ class ImageDisplayViewController: UIViewController {
         setupStateViews()
     }
     /**
+     Set up collectionView.
+     */
+    private func setupCollectionView() {
+        let flowLayout = UICollectionViewFlowLayout()
+        (flowLayout.minimumLineSpacing, flowLayout.minimumInteritemSpacing) = (0, 0)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        (collectionView.delegate, collectionView.dataSource) = (self, self)
+        collectionView.backgroundColor = .lightGray
+        collectionView.canCancelContentTouches = false
+        self.view.addSubViews([collectionView])
+    }
+    /**
      Setup for state driven collectionView. (This part is not must-have for the example)
      */
     private func setupStateViews() {
         // Loading view
         activityIndicator = UIActivityIndicatorView()
-        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.stateViewHeight))
         loadingView.addSubViews([activityIndicator])
         loadingView.centerSubView(activityIndicator)
         // Empty view
-        emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.stateViewHeight))
         let noResultLabel = UILabel(title: "No results! Try searching for something else.", size: 17.0, bold: false, color: .black)
         emptyView.addSubViews([noResultLabel])
         noResultLabel.setConstraintsToView(left: emptyView, right: emptyView)
         emptyView.centerSubView(noResultLabel)
         // Error view
-        errorView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        errorView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.stateViewHeight))
         errorLabel = UILabel(title: "There is an error.", size: 17.0, bold: false, color: .black)
         errorView.addSubViews([errorLabel])
         errorLabel.setConstraintsToView(left: errorView, right: errorView)
@@ -82,16 +95,6 @@ class ImageDisplayViewController: UIViewController {
         stackView = UIStackView(arrangedSubviews: [loadingView, emptyView, errorView], axis: .vertical, distribution: .fillEqually, spacing: 0.0)
         self.view.addSubViews([stackView])
         self.displayStateView()
-    }
-    private func setupCollectionView() {
-        let flowLayout = UICollectionViewFlowLayout()
-        (flowLayout.minimumLineSpacing, flowLayout.minimumInteritemSpacing) = (0, 0)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        (collectionView.delegate, collectionView.dataSource) = (self, self)
-        collectionView.backgroundColor = .lightGray
-        collectionView.canCancelContentTouches = false
-        self.view.addSubViews([collectionView])
     }
     
     func displayStateView() {
@@ -118,7 +121,7 @@ class ImageDisplayViewController: UIViewController {
         collectionView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
         stackView.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
         stackView.setConstraintsToView(left: self.view, right: self.view)
-        stackView.setHeightConstraint(self.rowHeight)
+        stackView.setHeightConstraint(self.stateViewHeight)
     }
     
     override func viewDidAppear(_ animated: Bool) {
