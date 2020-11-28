@@ -26,7 +26,7 @@ class JSONHelper {
         if let path = getCurrentBundle().path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                 if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
                     var finalResults = [Any]()
                     var tempResults: Any = jsonResult
@@ -54,7 +54,9 @@ class JSONHelper {
         return array
     }
     /**
+     Get the bundle reference in the current context.
      
+     - Returns: A bundle reference.
      */
     open func getCurrentBundle() -> Bundle {
         return Bundle.main

@@ -35,7 +35,7 @@ struct Constants {
             switch self {
             case .jsonParser: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
-            case .restAPI: return ImageDisplayViewController()
+            case .restAPI: return ContactsViewController()
             }
         }
     }

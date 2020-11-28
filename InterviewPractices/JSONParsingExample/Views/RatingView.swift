@@ -76,7 +76,8 @@ class StarView: UIView {
             count += 1
         }
         // Need to run this asynchronously since it may take time
-        DispatchQueue.main.async { [weak self] in
+        getGCDHelperInContext().runOnMainThread {
+            [weak self] in
             guard let self = self else { return }
             if remaining > 0 {
                 self.stack.addArrangedSubview(self.createPartialRating(remaining))
@@ -120,5 +121,14 @@ class StarView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    // Test Functions
+    /**
+     Method to provide GCD helper based on the current context, used for test override.
+     
+     - Returns: An GCD helper used in current context.
+     */
+    func getGCDHelperInContext() -> GCDHelper {
+        return GCDHelper.shared
     }
 }

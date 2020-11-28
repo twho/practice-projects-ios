@@ -91,7 +91,7 @@ class MockURLSessionDataTask: URLSessionDataTask {
         self.closure = closure
     }
     /**
-     Override the 'resume' method and call its closure instead of actually resuming any task.
+     Override the resume method and call its closure instead of actually resuming any task.
      */
     override func resume() {
         closure()
@@ -113,7 +113,6 @@ class MockURLSession: URLSession {
         if let validData = MockConstants.TestJSON.shared.dummyDataMap[url] {
             data = validData
         }
-
         return MockURLSessionDataTask { completionHandler(data, nil, error) }
     }
 }
@@ -123,8 +122,8 @@ class MockImageLoader: ImageLoader {
     override init() {}
     var currentTask: MockURLSessionDataTask?
     
-    override func setImageOnMainThread(_ imageView: UIImageView, _ image: UIImage) {
-        imageView.image = image
+    override func getGCDHelperInContext() -> GCDHelper {
+        return MockGCDHelper.sharedMock
     }
     
     override func getURLSessionInContext() -> URLSession {
@@ -142,6 +141,37 @@ class MockImageLoader: ImageLoader {
         }
         currentTask = testTask
         queuedTasks[uuid] = task
+    }
+}
+
+class MockGCDHelper: GCDHelper {
+    static let sharedMock = MockGCDHelper()
+    override init() {}
+    private var taskQueue = [Block]()
+    
+    override func runOnMainThread(_ block: @escaping Block) {
+        taskQueue.append(block)
+    }
+    
+    override func runOnMainThreadAfter(delay: Double, _ block: @escaping Block) {
+        taskQueue.append(block)
+    }
+    
+    func dequeueAndRunTask() {
+        if taskQueue.count > 0 {
+            let block = taskQueue.removeFirst()
+            block()
+        }
+    }
+    
+    func runAllTasksInQueue() {
+        taskQueue.forEach {
+            $0()
+        }
+    }
+    
+    func removeAllTasks() {
+        taskQueue.removeAll()
     }
 }
 
@@ -177,9 +207,17 @@ class MockListTableViewCell: ListTableViewCell {
 }
 
 class MockImageDisplayViewController: ImageDisplayViewController {
+    var testData: [Restaurant] {
+        return self.state.elements as? [Restaurant] ?? []
+    }
     
     override func loadInitialData() {
         // Use test date resources since we have a model test for JSON reading capabilities.
-        self.restaurantData = MockConstants.TestJSON.restaurants.dummyData as! [Restaurant]
+        let data = MockConstants.TestJSON.restaurants.dummyData as! [Restaurant]
+        self.state = .populated(data)
+    }
+    
+    override func getGCDHelperInContext() -> GCDHelper {
+        return MockGCDHelper.sharedMock
     }
 }

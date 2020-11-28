@@ -2,7 +2,7 @@
 //  CollectionState.swift
 //  InterviewPractices
 //
-//  Created by Amy Shih on 11/27/20.
+//  Created by Michael Ho on 11/27/20.
 //
 
 enum CollectionState {

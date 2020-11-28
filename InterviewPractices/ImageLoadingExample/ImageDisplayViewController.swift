@@ -20,11 +20,10 @@ class ImageDisplayViewController: UIViewController {
     private(set) var errorLabel: UILabel!
     // Data
     var isAnimating = false
-    var restaurantData: [Restaurant] = []
     var state = CollectionState.loading {
         didSet {
             // Add the delay intentionally to show loading state
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            getGCDHelperInContext().runOnMainThreadAfter(delay: 2.0) { [weak self] in
                 guard let self = self else { return }
                 self.displayStateView()
                 if self.isViewVisible, !self.isAnimating {
@@ -47,13 +46,12 @@ class ImageDisplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func loadView() {
         super.loadView()
         navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
-                                            rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                       rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         setupCollectionView()
         setupStateViews()
     }
@@ -128,20 +126,31 @@ class ImageDisplayViewController: UIViewController {
         loadInitialData()
     }
     // Override for testing
+    /**
+     Load initial data to display.
+     */
     func loadInitialData() {
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
-        state = .populated(restaurantData)
+        let data = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
+        state = .populated(data)
+    }
+    /**
+     Method to provide GCD helper based on the current context, used for test override.
+     
+     - Returns: An GCD helper used in current context.
+     */
+    func getGCDHelperInContext() -> GCDHelper {
+        return GCDHelper.shared
     }
 }
 
 extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return max(1, restaurantData.count / numberOfItemsInRow)
+        return max(1, state.elements.count / numberOfItemsInRow)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(numberOfItemsInRow, restaurantData.count)
+        return min(numberOfItemsInRow, state.elements.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -163,10 +172,10 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath)
-        if let displayCell = cell as? ImageDisplayViewCell {
+        if let displayCell = cell as? ImageDisplayViewCell, let restaurants = state.elements as? [Restaurant] {
             let dataIndex = indexPath.section * numberOfItemsInRow + (indexPath.item)
-            displayCell.restaurantImageView.loadImage(restaurantData[dataIndex].thumbnail, ImageLoader.shared)
-            displayCell.title.text = restaurantData[dataIndex].name
+            displayCell.restaurantImageView.loadImage(restaurants[dataIndex].thumbnail, ImageLoader.shared)
+            displayCell.title.text = restaurants[dataIndex].name
         }
         return cell
     }

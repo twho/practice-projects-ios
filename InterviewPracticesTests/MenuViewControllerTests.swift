@@ -2,7 +2,7 @@
 //  MenuViewControllerTests.swift
 //  InterviewPracticesTests
 //
-//  Created by Amy Shih on 11/26/20.
+//  Created by Michael Ho on 11/26/20.
 //
 
 import XCTest
@@ -46,5 +46,15 @@ class MenuViewControllerTests: XCTestCase {
             }
         }
         XCTAssertTrue(window.rootViewController?.presentedViewController is ImageDisplayViewController)
+    }
+    
+    func testRestAPIExampleAccessible() {
+        for view in menuVC.stackView.arrangedSubviews {
+            if let button = view as? UIButton, button.titleLabel?.text == Constants.Example.restAPI.title {
+                menuVC.buttonClicked(button)
+                break
+            }
+        }
+        XCTAssertTrue(window.rootViewController?.presentedViewController is ContactsViewController)
     }
 }

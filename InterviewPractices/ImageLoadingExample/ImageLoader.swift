@@ -32,7 +32,9 @@ class ImageLoader {
             defer { self.uuidMap[imageView] = nil } // Clean up no matter what
             do {
                 let image = try result.get()
-                self.setImageOnMainThread(imageView, image)
+                self.getGCDHelperInContext().runOnMainThread {
+                    imageView.image = image
+                }
             } catch {
                 print(self.logtag + error.localizedDescription)
             }
@@ -46,7 +48,7 @@ class ImageLoader {
      Cancel the loading task. Since the loading tasks are asynchronous, we have to cancel it properly if
      they are no longer needed. This way, they don't queue up and make the app slow.
      
-     - Parameter: The image view that is no longer needed.
+     - Parameter imageView: The image view that is no longer needed.
      */
     func cancel(for imageView: UIImageView) {
         if let uuid = uuidMap[imageView] {
@@ -60,7 +62,7 @@ class ImageLoader {
      - Parameter url:       The url location that stores the image.
      - Parameter imageView: The image view to load image to and display image.
      
-     - Returns: An uuid 
+     - Returns: An uuid represents the current loading task.
      */
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
         // If the image is loaded before, just return it from local storage.
@@ -104,12 +106,12 @@ class ImageLoader {
     }
     // MARK: Test Functions
     /**
+     Method to provide GCD helper based on the current context, used for test override.
      
+     - Returns: An GCD helper used in current context.
      */
-    func setImageOnMainThread(_ imageView: UIImageView, _ image: UIImage) {
-        DispatchQueue.main.async {
-            imageView.image = image
-        }
+    func getGCDHelperInContext() -> GCDHelper {
+        return GCDHelper.shared
     }
     /**
      Method to provide right URL session based on the current context, used for test override.

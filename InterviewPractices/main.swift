@@ -2,7 +2,7 @@
 //  main.swift
 //  InterviewPractices
 //
-//  Created by Amy Shih on 11/26/20.
+//  Created by Michael Ho on 11/26/20.
 //
 
 import UIKit

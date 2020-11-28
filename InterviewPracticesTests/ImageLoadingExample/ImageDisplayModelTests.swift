@@ -19,6 +19,7 @@ class ImageDisplayModelTests: XCTestCase {
         MockURLSession.sharedMock.data = nil
         MockImageLoader.sharedMock.storedImages.removeAll()
         MockImageLoader.sharedMock.queuedTasks.removeAll()
+        MockGCDHelper.sharedMock.removeAllTasks()
     }
     
     func testImageLoaderInContext() {
@@ -36,6 +37,7 @@ class ImageDisplayModelTests: XCTestCase {
         // Continue the loading task
         XCTAssertNotNil(MockImageLoader.sharedMock.currentTask)
         MockImageLoader.sharedMock.currentTask!.resume()
+        MockGCDHelper.sharedMock.dequeueAndRunTask()
         // Check the loaded image
         XCTAssertNotNil(imageView.image?.pngData())
         XCTAssertTrue(imageView.image!.isContentEqualTo(singleImage))

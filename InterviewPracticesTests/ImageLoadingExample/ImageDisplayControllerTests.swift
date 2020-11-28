@@ -2,7 +2,7 @@
 //  ImageDisplayControllerTests.swift
 //  InterviewPracticesTests
 //
-//  Created by Amy Shih on 11/26/20.
+//  Created by Michael Ho on 11/26/20.
 //
 
 import XCTest
@@ -27,6 +27,7 @@ class ImageDisplayControllerTests: XCTestCase {
     override func tearDownWithError() throws {
         window?.removeSubviews()
         window = nil
+        MockGCDHelper.sharedMock.removeAllTasks()
     }
     
     private func getCell(forItem item: Int) -> ImageDisplayViewCell {
@@ -40,11 +41,11 @@ class ImageDisplayControllerTests: XCTestCase {
         XCTAssertTrue(imageDisplayVC.collectionView.delegate is MockImageDisplayViewController)
         XCTAssertTrue(imageDisplayVC.collectionView.dataSource is MockImageDisplayViewController)
         // Check initial load
-        XCTAssertEqual(imageDisplayVC.restaurantData.count, imageDisplayVC.collectionView(imageDisplayVC.collectionView, numberOfItemsInSection: 0))
+        XCTAssertEqual(imageDisplayVC.testData.count, imageDisplayVC.collectionView(imageDisplayVC.collectionView, numberOfItemsInSection: 0))
     }
     
     func testCollectionCellLoaded() {
-        let data = imageDisplayVC.restaurantData
+        let data = imageDisplayVC.testData
         // Test first cell
         let cell1 = getCell(forItem: 0)
         XCTAssertEqual(cell1.title.text, data[0].name)
@@ -60,13 +61,15 @@ class ImageDisplayControllerTests: XCTestCase {
         // Setup test
         XCTAssertEqual(3, imageDisplayVC.collectionView.numberOfItems(inSection: 0))
         // Update with another data set
-        var newData = [imageDisplayVC.restaurantData[1]]
-        imageDisplayVC.restaurantData = newData
+        var newData = [imageDisplayVC.testData[1]]
+        imageDisplayVC.state = .populated(newData)
+        MockGCDHelper.sharedMock.dequeueAndRunTask()
         XCTAssertEqual(getCell(forItem: 0).title.text, newData[0].name)
         XCTAssertEqual(1, imageDisplayVC.collectionView.numberOfItems(inSection: 0))
         // Update with empty data set
         newData = []
-        imageDisplayVC.restaurantData = newData
+        imageDisplayVC.state = .populated(newData)
+        MockGCDHelper.sharedMock.dequeueAndRunTask()
         XCTAssertEqual(0, imageDisplayVC.collectionView.numberOfItems(inSection: 0))
     }
 }
