@@ -66,13 +66,12 @@ class ListViewControllerTests: XCTestCase {
         // Setup test
         XCTAssertEqual(3, listVC.tableView.numberOfRows(inSection: 0))
         // Update with another data set
-        var newData = [listVC.restaurantData[1]]
+        let newData = [listVC.restaurantData[1]]
         listVC.restaurantData = newData
         XCTAssertEqual(getCell(forRow: 0).title.text, newData[0].name)
         XCTAssertEqual(1, listVC.tableView.numberOfRows(inSection: 0))
         // Update with empty data set
-        newData = []
-        listVC.restaurantData = newData
+        listVC.restaurantData = []
         XCTAssertEqual(0, listVC.tableView.numberOfRows(inSection: 0))
     }
     

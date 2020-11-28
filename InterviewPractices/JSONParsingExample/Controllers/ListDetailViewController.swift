@@ -20,6 +20,7 @@ class ListDetailViewController: UIViewController {
     private(set) var keyArray = [String]()
     var mealData = [Meal]() {
         didSet {
+            mealMap.removeAll()
             for meal in mealData {
                 if mealMap[meal.category] == nil {
                     mealMap[meal.category] = []
@@ -99,7 +100,7 @@ extension ListDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mealMap[keyArray[section]]!.count
+        return mealMap[keyArray[section]] != nil ? mealMap[keyArray[section]].unsafelyUnwrapped.count : 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

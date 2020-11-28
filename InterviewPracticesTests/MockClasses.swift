@@ -38,8 +38,14 @@ struct MockConstants {
             case .meals(_):
                 return [
                     Meal(001, "meal001", 0.5, "cat01"),
-                    Meal(002, "meal002", 1.5, "cat02"),
-                    Meal(003, "meal003", 2.5, "cat03")
+                    Meal(002, "meal002", 0.6, "cat02"),
+                    Meal(003, "meal003", 0.7, "cat03"),
+                    Meal(004, "meal004", 0.8, "cat01"),
+                    Meal(005, "meal005", 0.9, "cat01"),
+                    Meal(006, "meal006", 1.5, "cat01"),
+                    Meal(007, "meal007", 1.6, "cat02"),
+                    Meal(008, "meal008", 1.7, "cat02"),
+                    Meal(009, "meal009", 1.8, "cat03")
                 ]
             default:
                 return []

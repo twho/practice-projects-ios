@@ -7,43 +7,84 @@
 
 import UIKit
 
-// implement state clear loading by raywanderich
-
 class ImageDisplayViewController: UIViewController {
     // UI widgets
     var collectionView: UICollectionView!
     private(set) var navbar: UINavigationBar!
+    // Necessary properties for state driven collectionView
+    private(set) var stackView: UIStackView!
+    private(set) var activityIndicator: UIActivityIndicatorView!
+    private(set) var loadingView: UIView!
+    private(set) var emptyView: UIView!
+    private(set) var errorView: UIView!
+    private(set) var errorLabel: UILabel!
     // Data
     var isAnimating = false
-    var restaurantData: [Restaurant] = [] {
+    var restaurantData: [Restaurant] = []
+    var state = CollectionState.loading {
         didSet {
-            if self.isViewVisible, !self.isAnimating {
-                self.runInAnimation { [weak self] in
-                    guard let self = self else { return }
+            // Add the delay intentionally to show loading state
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                guard let self = self else { return }
+                self.displayStateView()
+                if self.isViewVisible, !self.isAnimating {
+                    self.runInAnimation { [weak self] in
+                        guard let self = self else { return }
+                        self.collectionView.reloadData()
+                        self.isAnimating = true
+                    } completion: { _ in
+                        self.isAnimating = false
+                    }
+                } else {
                     self.collectionView.reloadData()
-                    self.isAnimating = true
-                } completion: { _ in
-                    self.isAnimating = false
                 }
-            } else {
-                self.collectionView.reloadData()
             }
         }
     }
     // Constants
     private let numberOfItemsInRow = 3
+    private let rowHeight: CGFloat = 60.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
+        
     }
     
     override func loadView() {
         super.loadView()
-        self.navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
+        navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
                                             rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+        setupCollectionView()
+        setupStateViews()
     }
-    
+    /**
+     Setup for state driven collectionView. (This part is not must-have for the example)
+     */
+    private func setupStateViews() {
+        // Loading view
+        activityIndicator = UIActivityIndicatorView()
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        loadingView.addSubViews([activityIndicator])
+        loadingView.centerSubView(activityIndicator)
+        // Empty view
+        emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        let noResultLabel = UILabel(title: "No results! Try searching for something else.", size: 17.0, bold: false, color: .black)
+        emptyView.addSubViews([noResultLabel])
+        noResultLabel.setConstraintsToView(left: emptyView, right: emptyView)
+        emptyView.centerSubView(noResultLabel)
+        // Error view
+        errorView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
+        errorLabel = UILabel(title: "There is an error.", size: 17.0, bold: false, color: .black)
+        errorView.addSubViews([errorLabel])
+        errorLabel.setConstraintsToView(left: errorView, right: errorView)
+        errorView.centerSubView(errorLabel)
+        [errorLabel, noResultLabel].forEach({
+            $0!.numberOfLines = 2
+        })
+        stackView = UIStackView(arrangedSubviews: [loadingView, emptyView, errorView], axis: .vertical, distribution: .fillEqually, spacing: 0.0)
+        self.view.addSubViews([stackView])
+        self.displayStateView()
+    }
     private func setupCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
         (flowLayout.minimumLineSpacing, flowLayout.minimumInteritemSpacing) = (0, 0)
@@ -55,10 +96,31 @@ class ImageDisplayViewController: UIViewController {
         self.view.addSubViews([collectionView])
     }
     
+    func displayStateView() {
+        stackView.arrangedSubviews.forEach {
+            $0.isHidden = true
+        }
+        switch state {
+        case .error(let error):
+            errorLabel.text = error.localizedDescription
+            errorView.isHidden = false
+        case .loading:
+            activityIndicator.startAnimating()
+            loadingView.isHidden = false
+        case .empty:
+            emptyView.isHidden = false
+        case .populated:
+            break
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
         collectionView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
+        stackView.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
+        stackView.setConstraintsToView(left: self.view, right: self.view)
+        stackView.setHeightConstraint(self.rowHeight)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +130,7 @@ class ImageDisplayViewController: UIViewController {
     // Override for testing
     func loadInitialData() {
         restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
+        state = .populated(restaurantData)
     }
 }
 

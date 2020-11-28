@@ -30,19 +30,43 @@
                 "mealId": 101,
                 "name": "meal101",
                 "category": "cat11",
-                "price": 1.00
+                "price": 0.10
             },
             {
                 "mealId": 102,
                 "name": "meal102",
                 "category": "cat12",
-                "price": 2.00
+                "price": 0.20
             },
             {
                 "mealId": 103,
                 "name": "meal103",
                 "category": "cat13",
-                "price": 3.00
+                "price": 0.30
+            },
+            {
+                "mealId": 104,
+                "name": "meal104",
+                "category": "cat11",
+                "price": 0.40
+            },
+            {
+                "mealId": 105,
+                "name": "meal105",
+                "category": "cat11",
+                "price": 0.50
+            },
+            {
+                "mealId": 106,
+                "name": "meal106",
+                "category": "cat11",
+                "price": 0.60
+            },
+            {
+                "mealId": 107,
+                "name": "meal107",
+                "category": "cat12",
+                "price": 0.70
             }
         ],
         "Sample2": [
@@ -50,19 +74,49 @@
                 "mealId": 202,
                 "name": "meal202",
                 "category": "cat21",
-                "price": 4.00
+                "price": 1.10
             },
             {
                 "mealId": 203,
                 "name": "meal203",
                 "category": "cat22",
-                "price": 5.00
+                "price": 1.20
             },
             {
                 "mealId": 204,
                 "name": "meal204",
                 "category": "cat23",
-                "price": 6.00
+                "price": 1.30
+            },
+            {
+                "mealId": 205,
+                "name": "meal205",
+                "category": "cat23",
+                "price": 1.40
+            },
+            {
+                "mealId": 206,
+                "name": "meal206",
+                "category": "cat23",
+                "price": 1.50
+            },
+            {
+                "mealId": 207,
+                "name": "meal207",
+                "category": "cat22",
+                "price": 1.60
+            },
+            {
+                "mealId": 208,
+                "name": "meal208",
+                "category": "cat22",
+                "price": 1.70
+            },
+            {
+                "mealId": 209,
+                "name": "meal209",
+                "category": "cat21",
+                "price": 1.80
             }
         ]
     }

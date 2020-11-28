@@ -16,6 +16,8 @@ struct Constants {
         case jsonParser
         /// Image loading example.
         case imageLoader
+        /// Rest API example.
+        case restAPI
         /**
          The title of the example to display in navigation bar.
          */
@@ -23,6 +25,7 @@ struct Constants {
             switch self {
             case .jsonParser: return "JSON Parsing Example"
             case .imageLoader: return "Image Loading Example"
+            case .restAPI: return "Rest API Example"
             }
         }
         /**
@@ -32,6 +35,7 @@ struct Constants {
             switch self {
             case .jsonParser: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
+            case .restAPI: return ImageDisplayViewController()
             }
         }
     }
