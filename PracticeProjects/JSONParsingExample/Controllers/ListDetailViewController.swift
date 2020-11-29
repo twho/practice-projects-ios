@@ -51,7 +51,7 @@ class ListDetailViewController: UIViewController {
         super.loadView()
         navbar = self.addNavigationBar(title: "Menu",
                                        leftBarItem: nil,
-                                       rightBarItem: UIBarButtonItem(image: Constants.closeIcon, style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                       rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         self.view.backgroundColor = .systemBackground
         imageView.addBlurryEffect()
         headerTitle = UILabel(title: "", size: 18.0, color: .label)

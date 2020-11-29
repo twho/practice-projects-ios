@@ -22,6 +22,8 @@
 		49D70CAA257315EA008BBE80 /* MenuViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */; };
 		49D70CB8257317B3008BBE80 /* TestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 68EFB923256D984A006037A3 /* TestSample.json */; };
 		49D70D5825736478008BBE80 /* UserCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70D5725736478008BBE80 /* UserCardViewController.swift */; };
+		49D70D5F25737CF3008BBE80 /* InfoPairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70D5E25737CF3008BBE80 /* InfoPairView.swift */; };
+		49D70D662573887F008BBE80 /* ContactsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70D652573887F008BBE80 /* ContactsViewControllerTests.swift */; };
 		49E1D14925707F0E00741F61 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1D14825707F0E00741F61 /* main.swift */; };
 		6816E8BC25661821007166CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6816E8BB25661821007166CB /* AppDelegate.swift */; };
 		6816E8BE25661821007166CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6816E8BD25661821007166CB /* SceneDelegate.swift */; };
@@ -72,6 +74,8 @@
 		49D70C842573155B008BBE80 /* PracticeProjectsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PracticeProjectsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D70C882573155B008BBE80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49D70D5725736478008BBE80 /* UserCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewController.swift; sourceTree = "<group>"; };
+		49D70D5E25737CF3008BBE80 /* InfoPairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPairView.swift; sourceTree = "<group>"; };
+		49D70D652573887F008BBE80 /* ContactsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewControllerTests.swift; sourceTree = "<group>"; };
 		49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewControllerTests.swift; sourceTree = "<group>"; };
 		49E1D14825707F0E00741F61 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6816E8B825661821007166CB /* PracticeProjects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeProjects.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				497AD90F2572E56E008F801B /* Models */,
+				49D70D5D25737C97008BBE80 /* Views */,
 				497AD9182572E58D008F801B /* Controllers */,
 			);
 			path = RestAPIExample;
@@ -178,12 +183,29 @@
 			children = (
 				499694D92571A4620046FF23 /* ImageLoadingExample */,
 				499694D82571A4500046FF23 /* JSONParsingExample */,
+				49D70D6425738855008BBE80 /* RestAPIExample */,
 				68EFB92B256D9896006037A3 /* MockClasses.swift */,
 				49E1D14225707B0900741F61 /* MenuViewControllerTests.swift */,
 				68EFB923256D984A006037A3 /* TestSample.json */,
 				49D70C882573155B008BBE80 /* Info.plist */,
 			);
 			path = PracticeProjectsTests;
+			sourceTree = "<group>";
+		};
+		49D70D5D25737C97008BBE80 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49D70D5E25737CF3008BBE80 /* InfoPairView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		49D70D6425738855008BBE80 /* RestAPIExample */ = {
+			isa = PBXGroup;
+			children = (
+				49D70D652573887F008BBE80 /* ContactsViewControllerTests.swift */,
+			);
+			path = RestAPIExample;
 			sourceTree = "<group>";
 		};
 		6816E8AF25661821007166CB = {
@@ -415,6 +437,7 @@
 				49D70CA8257315EA008BBE80 /* ListDetailViewControllerTests.swift in Sources */,
 				49D70CA9257315EA008BBE80 /* MockClasses.swift in Sources */,
 				49D70CAA257315EA008BBE80 /* MenuViewControllerTests.swift in Sources */,
+				49D70D662573887F008BBE80 /* ContactsViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +447,7 @@
 			files = (
 				68F772F22569F697001FA363 /* ImageDisplayViewController.swift in Sources */,
 				499694E52571CA370046FF23 /* ContactsViewController.swift in Sources */,
+				49D70D5F25737CF3008BBE80 /* InfoPairView.swift in Sources */,
 				68F772BE2567A77F001FA363 /* Restaurant.swift in Sources */,
 				68F772992567A05F001FA363 /* ListTableViewCell.swift in Sources */,
 				68F772CF25685925001FA363 /* ImageLoader.swift in Sources */,

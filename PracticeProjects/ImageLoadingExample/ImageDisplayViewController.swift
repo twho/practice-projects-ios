@@ -51,7 +51,7 @@ class ImageDisplayViewController: UIViewController {
     override func loadView() {
         super.loadView()
         navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
-                                       rightBarItem: UIBarButtonItem(image: Constants.closeIcon, style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                       rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         setupCollectionView()
         setupStateViews()
     }

@@ -17,7 +17,7 @@ struct MockConstants {
      JSONParsingExample
      */
     enum TestJSON {
-        case shared, restaurants, meals(String?)
+        case shared, restaurants, meals(String?), people
         
         var dummyImageURLs: [String] {
             return [
@@ -37,15 +37,24 @@ struct MockConstants {
                 ]
             case .meals(_):
                 return [
-                    Meal(001, "meal001", 0.5, "cat01"),
-                    Meal(002, "meal002", 0.6, "cat02"),
-                    Meal(003, "meal003", 0.7, "cat03"),
-                    Meal(004, "meal004", 0.8, "cat01"),
-                    Meal(005, "meal005", 0.9, "cat01"),
-                    Meal(006, "meal006", 1.5, "cat01"),
-                    Meal(007, "meal007", 1.6, "cat02"),
-                    Meal(008, "meal008", 1.7, "cat02"),
-                    Meal(009, "meal009", 1.8, "cat03")
+                    Meal(101, "meal001", 0.5, "cat01"),
+                    Meal(202, "meal002", 0.6, "cat02"),
+                    Meal(303, "meal003", 0.7, "cat03"),
+                    Meal(404, "meal004", 0.8, "cat01"),
+                    Meal(505, "meal005", 0.9, "cat01"),
+                    Meal(606, "meal006", 1.5, "cat01"),
+                    Meal(707, "meal007", 1.6, "cat02"),
+                    Meal(808, "meal008", 1.7, "cat02"),
+                    Meal(909, "meal009", 1.8, "cat03")
+                ]
+            case .people:
+                let company1 = Company("101 Company", "", "")
+                let company2 = Company("202 Company", "", "")
+                let company3 = Company("303 Company", "", "")
+                return [
+                    People(101, "name01", "user01", "user01@mail.com", "123-456-78901", company1, "user01.com"),
+                    People(202, "name02", "user02", "user02@mail.com", "123-456-78902", company2, "user02.com"),
+                    People(303, "name03", "user03", "user03@mail.com", "123-456-78903", company3, "user03.com")
                 ]
             default:
                 return []
@@ -219,5 +228,13 @@ class MockImageDisplayViewController: ImageDisplayViewController {
     
     override func getGCDHelperInContext() -> GCDHelper {
         return MockGCDHelper.sharedMock
+    }
+}
+
+class MockContactsViewController: ContactsViewController {
+    
+    override func loadInitialData() {
+        // Use test date and let the model tests to check JSON reading from API.
+        self.peopleData = MockConstants.TestJSON.people.dummyData as! [People]
     }
 }

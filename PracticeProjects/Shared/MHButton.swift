@@ -25,8 +25,8 @@ class MHButton: UIButton {
     }
     
     public convenience init(frame: CGRect = .zero, icon: UIImage? = nil,
-                text: String? = nil, textColor: UIColor? = .label, font: UIFont? = nil,
-                bgColor: UIColor, cornerRadius: CGFloat = 12.0) {
+                            text: String? = nil, textColor: UIColor? = .label, font: UIFont? = nil,
+                            bgColor: UIColor, cornerRadius: CGFloat = 12.0) {
         self.init(frame: frame)
         // Set the icon of the button
         if let icon = icon {

@@ -31,7 +31,7 @@ class ContactsViewController: UIViewController {
             }
         }
     }
-    private var peopleData = [People]()
+    var peopleData = [People]()
     private var searchTask: DispatchWorkItem?
     private let rowHeight: CGFloat = 60.0
     /**
@@ -42,13 +42,14 @@ class ContactsViewController: UIViewController {
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
     }
     // loadView
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = .systemBackground
         navbar = addNavigationBar(title: Constants.Example.restAPI.title,
-                                  rightBarItem: UIBarButtonItem(image: Constants.closeIcon, style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                  rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         setupTableView()
         setupStateViews()
         searchBar = UISearchBar()
@@ -166,6 +167,9 @@ extension ContactsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userCardVC = UserCardViewController()
+        userCardVC.people = self.peopleData[indexPath.row]
+        self.present(userCardVC, animated: true, completion: nil)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }

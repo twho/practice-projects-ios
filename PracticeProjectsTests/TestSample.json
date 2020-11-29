@@ -119,5 +119,76 @@
                 "price": 1.80
             }
         ]
-    }
+    },
+    "people": [
+        {
+          "id": 101,
+          "name": "First1 Last1",
+          "username": "FirstLast101",
+          "email": "FirstLast101@michaelho.com",
+          "address": {
+            "street": "The 101th Street",
+            "suite": "Apt. 101",
+            "city": "The 101 City",
+            "zipcode": "92998-3874",
+            "geo": {
+              "lat": "-37.3159",
+              "lng": "81.1496"
+            }
+          },
+          "phone": "123-456-7891",
+          "website": "FirstLast101.org",
+          "company": {
+            "name": "Company101",
+            "catchPhrase": "Multi-layered client-server neural-net",
+            "bs": "harness real-time e-markets"
+          }
+        },
+        {
+          "id": 202,
+          "name": "First2 Last2",
+          "username": "FirstLast202",
+          "email": "FirstLast202@michaelho.com",
+          "address": {
+            "street": "The 202th Street",
+            "suite": "Suite 202",
+            "city": "The 202 City",
+            "zipcode": "90566-7771",
+            "geo": {
+              "lat": "-43.9509",
+              "lng": "-34.4618"
+            }
+          },
+          "phone": "123-456-7892",
+          "website": "FirstLast202.net",
+          "company": {
+            "name": "Company202",
+            "catchPhrase": "Proactive didactic contingency",
+            "bs": "synergize scalable supply-chains"
+          }
+        },
+        {
+          "id": 303,
+          "name": "First3 Last3",
+          "username": "FirstLast303",
+          "email": "FirstLast303@michaelho.com",
+          "address": {
+            "street": "The 303th Street",
+            "suite": "Suite 303",
+            "city": "The 303 City",
+            "zipcode": "59590-4157",
+            "geo": {
+              "lat": "-68.6102",
+              "lng": "-47.0653"
+            }
+          },
+          "phone": "123-456-7892",
+          "website": "FirstLast303.info",
+          "company": {
+            "name": "Company303",
+            "catchPhrase": "Face to face bifurcated interface",
+            "bs": "e-enable strategic applications"
+          }
+        }
+    ]
 }

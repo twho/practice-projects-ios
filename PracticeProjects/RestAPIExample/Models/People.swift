@@ -5,25 +5,29 @@
 //  Created by Michael Ho on 11/28/20.
 //
 
-struct People {
+struct People: Equatable {
     let id: Int
     let name: String
+    let username: String
     let email: String
     let phone: String
     let company: Company
+    let website: String
     
-    init(_ id: Int, _ name: String, _ email: String, _ phone: String, _ company: Company) {
+    init(_ id: Int, _ name: String, _ username: String, _ email: String, _ phone: String, _ company: Company, _ website: String) {
         self.id = id
         self.name = name
+        self.username = username
         self.email = email
         self.phone = phone
         self.company = company
+        self.website = website
     }
 }
 
 extension People: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id, name, email, phone, company
+        case id, name, username, email, phone, company, website
     }
     
     init(from decoder: Decoder) throws {
@@ -32,19 +36,17 @@ extension People: Decodable {
         // extracting the data
         let id: Int = try container.decode(Int.self, forKey: .id)
         let name: String = try container.decode(String.self, forKey: .name)
+        let username: String = try container.decode(String.self, forKey: .username)
         let email: String = try container.decode(String.self, forKey: .email)
         let phone: String = try container.decode(String.self, forKey: .phone)
         let company: Company = try container.decode(Company.self, forKey: .company)
+        let website: String = try container.decode(String.self, forKey: .website)
         // Init the object
-        self.init(id, name, email, phone, company)
+        self.init(id, name, username, email, phone, company, website)
     }
 }
 
-//extension People: Encodable {
-//
-//}
-
-struct Company {
+struct Company: Equatable {
     let name: String
     let catchPhrase: String
     let bs: String
