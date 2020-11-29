@@ -8,6 +8,7 @@
 import UIKit
 
 struct Constants {
+    static let closeIcon =  #imageLiteral(resourceName: "ic_close").colored(.label)
     /**
      Practice examples in the current project scope.
      */

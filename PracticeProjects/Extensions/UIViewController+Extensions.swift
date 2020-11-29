@@ -69,7 +69,7 @@ extension UIViewController {
      - Returns: A navigation bar that is added to the view controller.
      */
     public func addNavigationBar(title: String, leftBarItem: UIBarButtonItem? = nil, rightBarItem: UIBarButtonItem? = nil,
-                                 titleColor: UIColor = .white, backgroundColor: UIColor = .black) -> UINavigationBar {
+                                 titleColor: UIColor = .label, backgroundColor: UIColor = .secondarySystemBackground) -> UINavigationBar {
         // Accomodate iOS 13 API for status bar height.
         let window = UIApplication.shared.windows[0]
         var statusBarHeight = window.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
@@ -80,20 +80,19 @@ extension UIViewController {
         navbar.barTintColor = backgroundColor
         navbar.backgroundColor = backgroundColor
         navbar.isTranslucent = false
+        // Remove lines in navigation bar
+        navbar.shadowImage = UIImage()
         // Set up navigation bar items.
         let navItem = UINavigationItem()
-        let titleLabel = UILabel(title: title, size: 20.0, color: .white)
+        let titleLabel = UILabel(title: title, size: 20.0, color: titleColor)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = titleColor
         navbar.tintColor = titleColor
         navItem.titleView = titleLabel
         navItem.leftBarButtonItem = leftBarItem
         navItem.rightBarButtonItem = rightBarItem
         navbar.items = [navItem]
         // Set up background view
-        let view = UIView()
-        view.backgroundColor = backgroundColor
-        
+        let view = UIView(color: backgroundColor)
         // Navigation is well defined, no need to set translating auto mask
         self.view.addSubview(navbar)
         self.view.addSubViews([view])

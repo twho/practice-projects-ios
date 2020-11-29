@@ -8,7 +8,7 @@
 import UIKit
 
 class MHButton: UIButton {
-    private var bgColor: UIColor = .darkGray {
+    private var bgColor: UIColor = .systemFill {
         didSet {
             self.backgroundColor = self.bgColor
         }
@@ -20,12 +20,12 @@ class MHButton: UIButton {
     }
     
     public convenience init(frame: CGRect = .zero, example: Constants.Example) {
-        self.init(text: example.title, textColor: .white, bgColor: .darkGray)
+        self.init(text: example.title, textColor: .label, bgColor: .systemFill)
         self.example = example
     }
     
     public convenience init(frame: CGRect = .zero, icon: UIImage? = nil,
-                text: String? = nil, textColor: UIColor? = .white, font: UIFont? = nil,
+                text: String? = nil, textColor: UIColor? = .label, font: UIFont? = nil,
                 bgColor: UIColor, cornerRadius: CGFloat = 12.0) {
         self.init(frame: frame)
         // Set the icon of the button
@@ -42,7 +42,7 @@ class MHButton: UIButton {
         self.titleLabel?.font = font
         self.bgColor = bgColor
         self.backgroundColor = bgColor
-        self.setBackgroundImage(UIImage(color: .lightGray), for: .disabled)
+        self.setBackgroundImage(UIImage(color: .tertiarySystemFill), for: .disabled)
         self.setCornerBorder(cornerRadius: cornerRadius)
     }
     
@@ -53,7 +53,7 @@ class MHButton: UIButton {
     // touchesBegan
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .systemFill : self.bgColor.getColorTint()
     }
     // touchesEnded
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,6 +68,6 @@ class MHButton: UIButton {
     // touchesMoved
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .systemFill : self.bgColor.getColorTint()
     }
 }

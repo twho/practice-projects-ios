@@ -51,7 +51,7 @@ class ImageDisplayViewController: UIViewController {
     override func loadView() {
         super.loadView()
         navbar = self.addNavigationBar(title: Constants.Example.imageLoader.title,
-                                       rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
+                                       rightBarItem: UIBarButtonItem(image: Constants.closeIcon, style: .done, target: self, action: #selector(self.backToPreviousVC)))
         setupCollectionView()
         setupStateViews()
     }
@@ -64,7 +64,7 @@ class ImageDisplayViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(ImageDisplayViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         (collectionView.delegate, collectionView.dataSource) = (self, self)
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = .secondarySystemBackground
         collectionView.canCancelContentTouches = false
         self.view.addSubViews([collectionView])
     }
@@ -79,13 +79,13 @@ class ImageDisplayViewController: UIViewController {
         loadingView.centerSubView(activityIndicator)
         // Empty view
         emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.stateViewHeight))
-        let noResultLabel = UILabel(title: "No results! Try searching for something else.", size: 17.0, bold: false, color: .black)
+        let noResultLabel = UILabel(title: "No results! Try searching for something else.", size: 17.0, bold: false, color: .label)
         emptyView.addSubViews([noResultLabel])
         noResultLabel.setConstraintsToView(left: emptyView, right: emptyView)
         emptyView.centerSubView(noResultLabel)
         // Error view
         errorView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.stateViewHeight))
-        errorLabel = UILabel(title: "There is an error.", size: 17.0, bold: false, color: .black)
+        errorLabel = UILabel(title: "There is an error.", size: 17.0, bold: false, color: .label)
         errorView.addSubViews([errorLabel])
         errorLabel.setConstraintsToView(left: errorView, right: errorView)
         errorView.centerSubView(errorLabel)
@@ -165,13 +165,13 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = .lightGray
+            cell.backgroundColor = .systemFill
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = .white
+            cell.backgroundColor = .systemBackground
         }
     }
     
@@ -198,7 +198,7 @@ class ImageDisplayViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         restaurantImageView = UIImageView()
         restaurantImageView.setCornerBorder()
         title = UILabel()
