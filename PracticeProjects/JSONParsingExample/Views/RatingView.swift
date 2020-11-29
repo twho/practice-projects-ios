@@ -48,8 +48,6 @@ class StarView: UIView {
     private static let outlineStar = #imageLiteral(resourceName: "ic_star_outline").colored(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
     // UI
     private var stack: UIStackView!
-    // Constants
-    private let logtag = "[StarView] "
     
     var value: Double = 0.0 {
         didSet {

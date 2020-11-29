@@ -17,6 +17,12 @@ extension NSObject {
     var appDelegate: UIApplicationDelegate {
         return (UIApplication.shared.delegate as? AppDelegate).unsafelyUnwrapped
     }
+    /**
+     The log tag used for debugging. 
+     */
+    public var logtag: String {
+        return String(describing: self) + ": "
+    }
 }
 // MARK: - UIApplication
 extension UIApplication {

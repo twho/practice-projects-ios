@@ -8,16 +8,14 @@
 
 import UIKit
 
-class ImageLoader {
+class ImageLoader: NSObject {
     // Singleton
     static let shared = ImageLoader()
-    init() {}
+    override init() {}
     // Testables properties
     var storedImages = [URL: UIImage]()
     var uuidMap = [UIImageView : UUID]()
     var queuedTasks = [UUID : URLSessionDataTask]()
-    // Private properties
-    private let logtag = "[ImageLoader] "
     /**
      Load image from URL resource.
      

@@ -20,51 +20,65 @@ class JSONHelper {
      
      - Returns: An array of the given data type.
      */
-    func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String) -> [T] {
-        // Initial array to collect data
-        var array = [T]()
-        // The input keys to query fetched JSON data.
-        let keyArr = key.components(separatedBy: ",")
-        // Start fetching
+    func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String?, _ completion: @escaping (Result<[T], Error>) -> Void) {
+        // Check if the path to the file exists.
         if let path = getCurrentBundle().path(forResource: fileName, ofType: "json") {
             do {
                 // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
-                    var finalResults = [Any]()
-                    var tempResults: Any = jsonResult
-                    for (idx, key) in keyArr.enumerated() {
-                        if idx == keyArr.count - 1,
-                           let temp = tempResults as? Dictionary<String, AnyObject>, let results = temp[key] as? [Any] {
-                            finalResults = results
-                        } else if let temp = tempResults as? Dictionary<String, AnyObject>, let keyResult = temp[key] {
-                            tempResults = keyResult
-                        }
-                    }
-                    for dictionary in finalResults {
-                        do {
-                            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-                            array.append(try JSONDecoder().decode(T.self, from: jsonData))
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }
+                self.decodeJSONData(data, T.self, key) { result in
+                    completion(result)
                 }
             } catch {
                 print(error.localizedDescription)
             }
         }
-        return array
     }
     /**
      
      */
-    func decodeJSONData<T: Decodable>(_ jsonData: Data) -> [T] {
+    func decodeJSONData<T: Decodable>(_ data: Data, _ dataType: T.Type, _ key: String?, _ completion: @escaping (Result<[T], Error>) -> Void) {
+        // The input keys to query fetched JSON data.
+        var keyArray = [String]()
+        if let key = key {
+            keyArray = key.components(separatedBy: ",")
+        }
         // Initial array to collect data
         var array = [T]()
+        do {
+            // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
+            let primitiveResult = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            //
+            var finalResults = primitiveResult
+            if keyArray.count > 0, let jsonResult = primitiveResult as? Dictionary<String, AnyObject> {
+                var tempResults: Any = jsonResult
+                for (idx, key) in keyArray.enumerated() {
+                    if idx == keyArray.count - 1,
+                       let temp = tempResults as? Dictionary<String, AnyObject>, let results = temp[key] as? [Any] {
+                        finalResults = results
+                    } else if let temp = tempResults as? Dictionary<String, AnyObject>, let keyResult = temp[key] {
+                        tempResults = keyResult
+                    }
+                }
+            }
+            
+            if let jsonResult = finalResults as? [Any] {
+                for dictionary in jsonResult {
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+                        array.append(try JSONDecoder().decode(T.self, from: jsonData))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        } catch {
+            completion(.failure(error))
+        }
         
-        return array
+        if !array.isEmpty {
+            completion(.success(array))
+        }
     }
     /**
      Get the bundle reference in the current context.

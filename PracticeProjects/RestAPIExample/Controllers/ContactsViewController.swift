@@ -7,7 +7,6 @@
 
 import UIKit
 
-// https://jsonplaceholder.typicode.com/
 class ContactsViewController: UIViewController {
     // UI widgets
     var searchBar: UISearchBar!
@@ -32,19 +31,29 @@ class ContactsViewController: UIViewController {
             }
         }
     }
+    private var peopleData = [People]()
+    private var searchTask: DispatchWorkItem?
     private let rowHeight: CGFloat = 60.0
-    
+    /**
+     The URL we are using to fetch data for this demo. The original JSON file is also included
+     at the path - RestAPIExample/PeopleSample.json in case the web service is not working.
+     */
+    private let urlString = "https://jsonplaceholder.typicode.com/users"
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    // loadView
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = .white
         navbar = addNavigationBar(title: Constants.Example.restAPI.title,
                                   rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close").colored(.white), style: .done, target: self, action: #selector(self.backToPreviousVC)))
-        searchBar = UISearchBar()
         setupTableView()
+        setupStateViews()
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        self.view.addSubViews([searchBar])
     }
     /**
      Set up tableView.
@@ -82,6 +91,18 @@ class ContactsViewController: UIViewController {
         self.setFooterView()
     }
     
+    func updateTableViewResults(_ newData: [People]?, error: Error?) {
+        if let error = error {
+            state = .error(error)
+            return
+        }
+        guard let newData = newData, !newData.isEmpty else {
+            state = .empty
+            return
+        }
+        state = .populated(newData)
+    }
+    
     private func setFooterView() {
         switch state {
         case .error(let error):
@@ -96,27 +117,37 @@ class ContactsViewController: UIViewController {
             tableView.tableFooterView = nil
         }
     }
-    
+    // viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchBar.topAnchor.constraint(equalTo: navbar.bottomAnchor).isActive = true
         searchBar.setConstraintsToView(left: self.view, right: self.view)
         tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
-        tableView.setConstraintsToView(left: self.view, right: self.view)
+        tableView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
         self.view.layoutIfNeeded()
     }
     // viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        loadInitialData()
     }
     // Override for testing
     /**
      Load initial data to display.
      */
     func loadInitialData() {
-        let data = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
-        state = .populated(data)
+        RestAPIHelper.shared.fetch(urlString, People.self, nil, { [weak self] result in
+            guard let self = self else { return }
+            do {
+                self.peopleData = try result.get()
+                self.getGCDHelperInContext().runOnMainThread {
+                    self.updateTableViewResults(self.peopleData, error: nil)
+                }
+            } catch {
+                self.state = .error(error)
+                print(self.logtag + error.localizedDescription)
+            }
+        })
     }
     /**
      Method to provide GCD helper based on the current context, used for test override.
@@ -135,7 +166,7 @@ extension ContactsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -146,8 +177,31 @@ extension ContactsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)
-        
-        return cell!
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: cellReuseIdentifier)
+        if let people = state.elements as? [People] {
+            cell.textLabel?.text = people[indexPath.row].name
+            cell.detailTextLabel?.text = people[indexPath.row].phone
+        }
+        return cell
+    }
+}
+
+extension ContactsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let startSearch = self.searchTask {
+            startSearch.cancel()
+        }
+        self.searchTask = DispatchWorkItem { [weak self] in
+            guard let self = self, let searchTask = self.searchTask, !searchTask.isCancelled else { return }
+            if searchText.isEmpty {
+                self.updateTableViewResults(self.peopleData, error: nil)
+            } else if !self.peopleData.isEmpty {
+                self.updateTableViewResults(self.peopleData.filter { $0.name.contains(searchText) }, error: nil)
+            }
+        }
+        getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {
+            self.searchTask?.perform()
+        }
     }
 }

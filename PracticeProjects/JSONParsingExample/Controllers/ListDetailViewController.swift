@@ -77,7 +77,14 @@ class ListDetailViewController: UIViewController {
     }
     // Override for testing
     func loadInitialData() {
-        mealData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.meals(restaurant?.name).name, Meal.self, Constants.JSON.meals(restaurant?.name).directory)
+        JSONHelper.shared.readLocalJSONFile(Constants.JSON.meals(restaurant?.name).name, Meal.self, Constants.JSON.meals(restaurant?.name).directory) { [weak self] result in
+            guard let self = self else { return }
+            do {
+                self.mealData = try result.get()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func getImageLoaderInContext() -> ImageLoader {

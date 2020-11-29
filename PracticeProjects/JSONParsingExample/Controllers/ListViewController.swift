@@ -62,7 +62,14 @@ class ListViewController: UIViewController {
     }
     // Override for testing
     func loadInitialData() {
-        restaurantData = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
+        JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory) { [weak self] result in
+            guard let self = self else { return }
+            do {
+                self.restaurantData = try result.get()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func registerTableViewCell() {

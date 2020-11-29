@@ -133,8 +133,15 @@ class ImageDisplayViewController: UIViewController {
      Load initial data to display.
      */
     func loadInitialData() {
-        let data = JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory)
-        state = .populated(data)
+        JSONHelper.shared.readLocalJSONFile(Constants.JSON.restaurants.name, Restaurant.self, Constants.JSON.restaurants.directory) { [weak self] result in
+            guard let self = self else { return }
+            do {
+                let data = try result.get()
+                self.state = .populated(data)
+            } catch {
+                self.state = .error(error)
+            }
+        }
     }
     /**
      Method to provide GCD helper based on the current context, used for test override.

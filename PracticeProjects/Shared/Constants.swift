@@ -25,7 +25,7 @@ struct Constants {
             switch self {
             case .jsonParser: return "JSON Parsing Example"
             case .imageLoader: return "Image Loading Example"
-            case .restAPI: return "Rest API Example"
+            case .restAPI: return "RESTful API Example"
             }
         }
         /**
