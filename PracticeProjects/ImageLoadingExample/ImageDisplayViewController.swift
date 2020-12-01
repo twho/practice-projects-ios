@@ -66,6 +66,7 @@ class ImageDisplayViewController: UIViewController {
         (collectionView.delegate, collectionView.dataSource) = (self, self)
         collectionView.backgroundColor = .secondarySystemBackground
         collectionView.canCancelContentTouches = false
+        collectionView.allowsMultipleSelection = false
         self.view.addSubViews([collectionView])
     }
     /**
@@ -163,16 +164,8 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
         return min(numberOfItemsInRow, state.elements.count)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = .systemFill
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = .systemBackground
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -195,6 +188,11 @@ class ImageDisplayViewCell: UICollectionViewCell {
     // UI widgets
     var restaurantImageView: UIImageView!
     var title: UILabel!
+    override var isSelected: Bool {
+        didSet {
+            self.backgroundColor = isSelected ? .systemFill : .systemBackground
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

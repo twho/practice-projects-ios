@@ -25,13 +25,21 @@ class ContactsViewController: UIViewController {
                 guard let self = self else { return }
                 self.setFooterView()
                 // Reload table with animations
-                let range = NSMakeRange(0, self.tableView.numberOfSections)
-                let sections = NSIndexSet(indexesIn: range)
-                self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                if self.isViewVisible {
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                } else {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
-    var peopleData = [People]()
+    /**
+     The poeple data is used to keep track of the original data loaded from JSON. It has
+     difference purpose from state.elements. It should be in sync with JSON.
+     */
+    var peopleData: [People]?
     private var searchTask: DispatchWorkItem?
     private let rowHeight: CGFloat = 60.0
     /**
@@ -168,8 +176,12 @@ extension ContactsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userCardVC = UserCardViewController()
-        userCardVC.people = self.peopleData[indexPath.row]
-        self.present(userCardVC, animated: true, completion: nil)
+        if let data = self.peopleData {
+            userCardVC.people = data[indexPath.row]
+            self.present(userCardVC, animated: true, completion: nil)
+        } else {
+            // TODO: Error handling
+        }
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -200,8 +212,8 @@ extension ContactsViewController: UISearchBarDelegate {
             guard let self = self, let searchTask = self.searchTask, !searchTask.isCancelled else { return }
             if searchText.isEmpty {
                 self.updateTableViewResults(self.peopleData, error: nil)
-            } else if !self.peopleData.isEmpty {
-                self.updateTableViewResults(self.peopleData.filter { $0.name.contains(searchText) }, error: nil)
+            } else if let data = self.peopleData, !data.isEmpty {
+                self.updateTableViewResults(data.filter { $0.name.contains(searchText) }, error: nil)
             }
         }
         getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {

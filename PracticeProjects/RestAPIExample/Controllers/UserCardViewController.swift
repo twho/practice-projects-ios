@@ -12,6 +12,7 @@ class UserCardViewController: UIViewController {
     private var realBackground: UIView!
     private var stackView: UIStackView!
     private var closeButton: UIButton!
+    private var titleLabel: UILabel!
     // Data
     var people: People?
     var isAnimating = false
@@ -25,11 +26,12 @@ class UserCardViewController: UIViewController {
         super.loadView()
         realBackground = UIView(color: .secondarySystemBackground)
         realBackground.setCornerBorder()
+        titleLabel = UILabel(title: "", size: 18.0, color: .label)
         closeButton = MHButton(icon: #imageLiteral(resourceName: "ic_close").withRenderingMode(.alwaysTemplate), bgColor: .secondarySystemBackground)
         closeButton.tintColor = .label
         closeButton.addTarget(self, action: #selector(self.backToPreviousVC), for: .touchUpInside)
         stackView = UIStackView(arrangedSubviews: nil, axis: .vertical, distribution: .fillEqually, spacing: 5.0)
-        self.view.addSubViews([realBackground, closeButton, stackView])
+        self.view.addSubViews([realBackground, titleLabel, closeButton, stackView])
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,6 +43,7 @@ class UserCardViewController: UIViewController {
         self.view.centerSubView(realBackground)
         closeButton.setConstraintsToView(top: realBackground, tConst: 5, right: realBackground, rConst: -5)
         closeButton.heightAnchor.constraint(equalTo: realBackground.heightAnchor, multiplier: 0.1).isActive = true
+        titleLabel.setConstraintsToView(top: closeButton, bottom: closeButton, left: self.view, right: self.view)
         closeButton.setSquarUseHeightReference()
         stackView.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
         stackView.setConstraintsToView(bottom: realBackground, bConst: -10, left: realBackground, lConst: 0.05 * width, right: realBackground, rConst: -0.05 * width)
@@ -60,12 +63,12 @@ class UserCardViewController: UIViewController {
             } else {
                 self.reloadStackData(people)
             }
+            titleLabel.text = people.name
         }
     }
     
     private func reloadStackData(_ data: People) {
         stackView.removeAllSubviews()
-        stackView.addArrangedSubview(InfoPairView(parameter: "Name", value: data.name))
         stackView.addArrangedSubview(InfoPairView(parameter: "Username", value: data.username))
         stackView.addArrangedSubview(InfoPairView(parameter: "Email", value: data.email))
         stackView.addArrangedSubview(InfoPairView(parameter: "Phone", value: data.phone))

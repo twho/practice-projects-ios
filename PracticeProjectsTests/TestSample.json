@@ -140,8 +140,8 @@
           "website": "FirstLast101.org",
           "company": {
             "name": "Company101",
-            "catchPhrase": "Multi-layered client-server neural-net",
-            "bs": "harness real-time e-markets"
+            "catchPhrase": "Company101 is good",
+            "bs": "Company101 makes money"
           }
         },
         {
@@ -163,8 +163,8 @@
           "website": "FirstLast202.net",
           "company": {
             "name": "Company202",
-            "catchPhrase": "Proactive didactic contingency",
-            "bs": "synergize scalable supply-chains"
+            "catchPhrase": "Company202 is good",
+            "bs": "Company202 makes money"
           }
         },
         {
@@ -182,12 +182,12 @@
               "lng": "-47.0653"
             }
           },
-          "phone": "123-456-7892",
+          "phone": "123-456-7893",
           "website": "FirstLast303.info",
           "company": {
             "name": "Company303",
-            "catchPhrase": "Face to face bifurcated interface",
-            "bs": "e-enable strategic applications"
+            "catchPhrase": "Company303 is good",
+            "bs": "Company303 makes money"
           }
         }
     ]

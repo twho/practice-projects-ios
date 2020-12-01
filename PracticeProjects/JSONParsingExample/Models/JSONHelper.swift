@@ -63,13 +63,11 @@ class JSONHelper {
             }
             
             if let jsonResult = finalResults as? [Any] {
-                for dictionary in jsonResult {
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-                        array.append(try JSONDecoder().decode(T.self, from: jsonData))
-                    } catch {
-                        completion(.failure(error))
-                    }
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
+                    array.append(contentsOf: try JSONDecoder().decode([T].self, from: jsonData))
+                } catch {
+                    completion(.failure(error))
                 }
             }
         } catch {

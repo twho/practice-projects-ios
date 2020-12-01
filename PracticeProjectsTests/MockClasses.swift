@@ -16,8 +16,8 @@ struct MockConstants {
     /**
      JSONParsingExample
      */
-    enum TestJSON {
-        case shared, restaurants, meals(String?), people
+    enum TestJSON: Equatable {
+        case shared, restaurants, meals(String?), people, companies
         
         var dummyImageURLs: [String] {
             return [
@@ -47,15 +47,18 @@ struct MockConstants {
                     Meal(808, "meal008", 1.7, "cat02"),
                     Meal(909, "meal009", 1.8, "cat03")
                 ]
-            case .people:
-                let company1 = Company("101 Company", "", "")
-                let company2 = Company("202 Company", "", "")
-                let company3 = Company("303 Company", "", "")
-                return [
-                    People(101, "name01", "user01", "user01@mail.com", "123-456-78901", company1, "user01.com"),
-                    People(202, "name02", "user02", "user02@mail.com", "123-456-78902", company2, "user02.com"),
-                    People(303, "name03", "user03", "user03@mail.com", "123-456-78903", company3, "user03.com")
+            case .people, .companies:
+                let companies = [
+                    Company("Company101", "Company101 is good", "Company101 makes money"),
+                    Company("Company202", "Company202 is good", "Company202 makes money"),
+                    Company("Company303", "Company303 is good", "Company303 makes money")
                 ]
+                let people = [
+                    People(101, "name01", "user01", "user01@mail.com", "123-456-78901", companies[0], "user01.com"),
+                    People(202, "name02", "user02", "user02@mail.com", "123-456-78902", companies[1], "user02.com"),
+                    People(303, "name03", "user03", "user03@mail.com", "123-456-78903", companies[2], "user03.com")
+                ]
+                return self == TestJSON.people ? people : companies
             default:
                 return []
             }
@@ -78,6 +81,7 @@ struct MockConstants {
             switch self {
             case .restaurants: return "restaurants"
             case .meals(let restaurantName): return "meals" + (restaurantName != nil ? ",\(restaurantName!)" : "")
+            case .people: return "people"
             default: return ""
             }
         }
@@ -174,8 +178,9 @@ class MockGCDHelper: GCDHelper {
     }
     
     func runAllTasksInQueue() {
-        taskQueue.forEach {
-            $0()
+        while !taskQueue.isEmpty {
+            let first = taskQueue.removeFirst()
+            first()
         }
     }
     
@@ -232,9 +237,18 @@ class MockImageDisplayViewController: ImageDisplayViewController {
 }
 
 class MockContactsViewController: ContactsViewController {
+    var testData: [People] {
+        return self.state.elements as? [People] ?? []
+    }
     
     override func loadInitialData() {
         // Use test date and let the model tests to check JSON reading from API.
-        self.peopleData = MockConstants.TestJSON.people.dummyData as! [People]
+        let data = MockConstants.TestJSON.people.dummyData as! [People]
+        self.peopleData = data
+        self.state = .populated(data)
+    }
+    
+    override func getGCDHelperInContext() -> GCDHelper {
+        return MockGCDHelper.sharedMock
     }
 }
