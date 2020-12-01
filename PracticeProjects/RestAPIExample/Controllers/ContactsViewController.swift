@@ -84,7 +84,7 @@ class ContactsViewController: UIViewController {
         loadingView.centerSubView(activityIndicator)
         // Empty view
         emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
-        let noResultLabel = UILabel(title: "No results! Try searching for something else.", size: 17.0, bold: false, color: .label)
+        let noResultLabel = UILabel(title: "No results have been found! Check if the data resource is valid.", size: 17.0, bold: false, color: .label, numOfLines: 2)
         emptyView.addSubViews([noResultLabel])
         noResultLabel.setConstraintsToView(left: emptyView, right: emptyView)
         emptyView.centerSubView(noResultLabel)
@@ -99,19 +99,21 @@ class ContactsViewController: UIViewController {
         })
         self.setFooterView()
     }
-    
-    func updateTableViewResults(_ newData: [People]?, error: Error?) {
-        if let error = error {
-            state = .error(error)
-            return
-        }
-        guard let newData = newData, !newData.isEmpty else {
+    /**
+     Update table view results.
+     
+     - Parameter newData: The new data to be updated to the table view. It can be an empty array.
+     */
+    private func updateTableViewResults(_ newData: [People]?) {
+        guard let data = newData, !data.isEmpty else {
             state = .empty
             return
         }
-        state = .populated(newData)
+        state = .populated(data)
     }
-    
+    /**
+     Set the footer view to display current state.
+     */
     private func setFooterView() {
         switch state {
         case .error(let error):
@@ -140,21 +142,20 @@ class ContactsViewController: UIViewController {
         super.viewDidAppear(animated)
         loadInitialData()
     }
-    // Override for testing
+    // MARK: Override for testing
     /**
      Load initial data to display.
      */
     func loadInitialData() {
-        RestAPIHelper.shared.fetch(urlString, People.self, nil, { [weak self] result in
+        RestAPIHelper.fetch(urlString, People.self, nil, { [weak self] result in
             guard let self = self else { return }
             do {
                 self.peopleData = try result.get()
                 self.getGCDHelperInContext().runOnMainThread {
-                    self.updateTableViewResults(self.peopleData, error: nil)
+                    self.updateTableViewResults(self.peopleData)
                 }
             } catch {
                 self.state = .error(error)
-                print(self.logtag + error.localizedDescription)
             }
         })
     }
@@ -211,9 +212,9 @@ extension ContactsViewController: UISearchBarDelegate {
         self.searchTask = DispatchWorkItem { [weak self] in
             guard let self = self, let searchTask = self.searchTask, !searchTask.isCancelled else { return }
             if searchText.isEmpty {
-                self.updateTableViewResults(self.peopleData, error: nil)
+                self.updateTableViewResults(self.peopleData)
             } else if let data = self.peopleData, !data.isEmpty {
-                self.updateTableViewResults(data.filter { $0.name.contains(searchText) }, error: nil)
+                self.updateTableViewResults(data.filter { $0.name.contains(searchText) })
             }
         }
         getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {

@@ -186,8 +186,8 @@ extension ImageDisplayViewController: UICollectionViewDelegateFlowLayout, UIColl
 
 class ImageDisplayViewCell: UICollectionViewCell {
     // UI widgets
-    var restaurantImageView: UIImageView!
-    var title: UILabel!
+    private(set) var restaurantImageView: UIImageView!
+    private(set) var title: UILabel!
     override var isSelected: Bool {
         didSet {
             self.backgroundColor = isSelected ? .systemFill : .systemBackground

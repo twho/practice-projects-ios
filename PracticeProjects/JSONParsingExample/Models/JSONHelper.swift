@@ -14,11 +14,10 @@ class JSONHelper {
     /**
      Read a local JSON file in a specific format, e.g., RestaurantSamples.json.
      
-     - Parameter fileName:  The JSON file name.
-     - Parameter dataType:  The object type to convert JSON data to.
-     - Parameter key:       The key used in JSON to read results.
-     
-     - Returns: An array of the given data type.
+     - Parameter fileName:   The JSON file name.
+     - Parameter dataType:   The object type to convert JSON data to.
+     - Parameter key:        The key used in JSON to query results.
+     - Parameter completion: The completion handler to return results or errors.
      */
     func readLocalJSONFile<T: Decodable>(_ fileName: String, _ dataType: T.Type, _ key: String?, _ completion: @escaping (Result<[T], Error>) -> Void) {
         // Check if the path to the file exists.
@@ -26,18 +25,23 @@ class JSONHelper {
             do {
                 // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                self.decodeJSONData(data, T.self, key) { result in
+                self.decodeJSONToArray(data, T.self, key) { result in
                     completion(result)
                 }
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
         }
     }
     /**
+     Decode the JSON data into the specified data array.
      
+     - Parameter jsonData:   The JSON data.
+     - Parameter dataType:   The object type to convert JSON data to.
+     - Parameter key:        The key used in JSON to query results.
+     - Parameter completion: The completion handler to return results or errors.
      */
-    func decodeJSONData<T: Decodable>(_ data: Data, _ dataType: T.Type, _ key: String?, _ completion: @escaping (Result<[T], Error>) -> Void) {
+    func decodeJSONToArray<T: Decodable>(_ jsonData: Data, _ dataType: T.Type, _ key: String?, _ completion: @escaping (Result<[T], Error>) -> Void) {
         // The input keys to query fetched JSON data.
         var keyArray = [String]()
         if let key = key {
@@ -47,7 +51,7 @@ class JSONHelper {
         var array = [T]()
         do {
             // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
-            let primitiveResult = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            let primitiveResult = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed)
             //
             var finalResults = primitiveResult
             if keyArray.count > 0, let jsonResult = primitiveResult as? Dictionary<String, AnyObject> {
@@ -64,8 +68,8 @@ class JSONHelper {
             
             if let jsonResult = finalResults as? [Any] {
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
-                    array.append(contentsOf: try JSONDecoder().decode([T].self, from: jsonData))
+                    let jsonObjects = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
+                    array.append(contentsOf: try JSONDecoder().decode([T].self, from: jsonObjects))
                 } catch {
                     completion(.failure(error))
                 }
@@ -73,10 +77,7 @@ class JSONHelper {
         } catch {
             completion(.failure(error))
         }
-        
-        if !array.isEmpty {
-            completion(.success(array))
-        }
+        completion(.success(array))
     }
     /**
      Get the bundle reference in the current context.

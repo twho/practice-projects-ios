@@ -2,7 +2,7 @@
 //  ContactsViewControllerTests.swift
 //  PracticeProjectsTests
 //
-//  Created by Amy Shih on 11/28/20.
+//  Created by Michael Ho on 11/28/20.
 //
 
 import XCTest

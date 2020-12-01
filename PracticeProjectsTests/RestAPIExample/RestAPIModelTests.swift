@@ -2,7 +2,7 @@
 //  RestAPIModelTests.swift
 //  PracticeProjectsTests
 //
-//  Created by Amy Shih on 11/30/20.
+//  Created by Michael Ho on 11/30/20.
 //
 
 import XCTest
