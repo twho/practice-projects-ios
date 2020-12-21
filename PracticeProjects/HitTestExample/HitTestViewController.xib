@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HitTestViewController" customModule="PracticeProjects" customModuleProvider="target">
+            <connections>
+                <outlet property="blueView" destination="ojc-xm-o7C" id="pQl-0f-O52"/>
+                <outlet property="button1" destination="qAe-Ic-Lrs" id="Cwc-wK-X6M"/>
+                <outlet property="button2" destination="SzY-Wx-4Xm" id="zD2-GG-Gja"/>
+                <outlet property="button3" destination="hXh-2J-CVc" id="P4F-aK-Sa3"/>
+                <outlet property="button4" destination="qhM-yt-fba" id="uJe-ax-rKD"/>
+                <outlet property="button5" destination="5xV-dS-VoB" id="WSf-tb-fo3"/>
+                <outlet property="button6" destination="j7f-rG-0wG" id="5o5-qb-F8P"/>
+                <outlet property="pinkView" destination="a5k-Ls-SZb" id="Xuq-5D-tqq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yellowView" destination="g5e-bj-U1F" id="eWL-Sm-4FH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch anywhere in the screen to see traversing order in console logs." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-y1-ehN">
+                    <rect key="frame" x="20" y="104" width="374" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojc-xm-o7C" customClass="HitTestView" customModule="PracticeProjects" customModuleProvider="target">
+                    <rect key="frame" x="20" y="165" width="374" height="200"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-7m-kBB">
+                            <rect key="frame" x="20" y="20" width="334" height="160"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAe-Ic-Lrs" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="162" height="160"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 1">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SzY-Wx-4Xm" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="172" y="0.0" width="162" height="160"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 2">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                    <constraints>
+                        <constraint firstItem="gXp-7m-kBB" firstAttribute="leading" secondItem="ojc-xm-o7C" secondAttribute="leading" constant="20" id="0Dj-3P-6uV"/>
+                        <constraint firstAttribute="bottom" secondItem="gXp-7m-kBB" secondAttribute="bottom" constant="20" id="0HE-Zn-jZ9"/>
+                        <constraint firstItem="gXp-7m-kBB" firstAttribute="top" secondItem="ojc-xm-o7C" secondAttribute="top" constant="20" id="JLx-LF-tnm"/>
+                        <constraint firstAttribute="height" constant="200" id="V1u-Jm-H2e"/>
+                        <constraint firstAttribute="trailing" secondItem="gXp-7m-kBB" secondAttribute="trailing" constant="20" id="eLQ-yF-lgx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5k-Ls-SZb" customClass="HitTestView" customModule="PracticeProjects" customModuleProvider="target">
+                    <rect key="frame" x="20" y="395" width="374" height="240"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="guv-LU-LcE">
+                            <rect key="frame" x="20" y="20" width="334" height="200"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXh-2J-CVc" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="334" height="95"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 3">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhM-yt-fba" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="105" width="334" height="95"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 4">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemPinkColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="240" id="Dvi-Xg-SQE"/>
+                        <constraint firstItem="guv-LU-LcE" firstAttribute="leading" secondItem="a5k-Ls-SZb" secondAttribute="leading" constant="20" id="U3X-Du-bQj"/>
+                        <constraint firstAttribute="bottom" secondItem="guv-LU-LcE" secondAttribute="bottom" constant="20" id="Yum-qg-Ta4"/>
+                        <constraint firstItem="guv-LU-LcE" firstAttribute="top" secondItem="a5k-Ls-SZb" secondAttribute="top" constant="20" id="fFj-dg-z38"/>
+                        <constraint firstAttribute="trailing" secondItem="guv-LU-LcE" secondAttribute="trailing" constant="20" id="zTW-pz-vNG"/>
+                    </constraints>
+                </view>
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-bj-U1F" customClass="HitTestView" customModule="PracticeProjects" customModuleProvider="target">
+                    <rect key="frame" x="20" y="515" width="374" height="240"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xNw-do-ys5">
+                            <rect key="frame" x="20" y="20" width="334" height="200"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xV-dS-VoB" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="162" height="200"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 5">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7f-rG-0wG" customClass="HitTestButton" customModule="PracticeProjects" customModuleProvider="target">
+                                    <rect key="frame" x="172" y="0.0" width="162" height="200"/>
+                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Button 6">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemYellowColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="xNw-do-ys5" secondAttribute="trailing" constant="20" id="2Eq-Uc-VNW"/>
+                        <constraint firstAttribute="height" constant="240" id="4Nj-7x-hQw"/>
+                        <constraint firstItem="xNw-do-ys5" firstAttribute="leading" secondItem="g5e-bj-U1F" secondAttribute="leading" constant="20" id="QVx-XF-UOe"/>
+                        <constraint firstAttribute="bottom" secondItem="xNw-do-ys5" secondAttribute="bottom" constant="20" id="UDE-dd-P5p"/>
+                        <constraint firstItem="xNw-do-ys5" firstAttribute="top" secondItem="g5e-bj-U1F" secondAttribute="top" constant="20" id="k5S-4K-8yQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="zE2-y1-ehN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="1b6-lJ-Hux"/>
+                <constraint firstItem="g5e-bj-U1F" firstAttribute="top" secondItem="ojc-xm-o7C" secondAttribute="bottom" constant="150" id="1vt-2N-DVf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ojc-xm-o7C" secondAttribute="trailing" constant="20" id="5HY-Xt-ih6"/>
+                <constraint firstItem="ojc-xm-o7C" firstAttribute="top" secondItem="zE2-y1-ehN" secondAttribute="bottom" constant="20" id="6eD-vb-4mu"/>
+                <constraint firstItem="ojc-xm-o7C" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Gr9-Yu-Ldr"/>
+                <constraint firstItem="g5e-bj-U1F" firstAttribute="trailing" secondItem="ojc-xm-o7C" secondAttribute="trailing" id="PMk-VJ-9fj"/>
+                <constraint firstItem="a5k-Ls-SZb" firstAttribute="top" secondItem="ojc-xm-o7C" secondAttribute="bottom" constant="30" id="YAS-ii-Q7h"/>
+                <constraint firstItem="a5k-Ls-SZb" firstAttribute="leading" secondItem="ojc-xm-o7C" secondAttribute="leading" id="Ydq-iI-d0l"/>
+                <constraint firstItem="ojc-xm-o7C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="eLL-Sh-pH7"/>
+                <constraint firstItem="a5k-Ls-SZb" firstAttribute="trailing" secondItem="ojc-xm-o7C" secondAttribute="trailing" id="h0L-KO-L6M"/>
+                <constraint firstItem="zE2-y1-ehN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="jzm-aR-SsS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zE2-y1-ehN" secondAttribute="trailing" constant="20" id="t0L-nw-4BX"/>
+                <constraint firstItem="g5e-bj-U1F" firstAttribute="leading" secondItem="ojc-xm-o7C" secondAttribute="leading" id="wA5-xZ-GJe"/>
+            </constraints>
+            <point key="canvasLocation" x="140.57971014492756" y="111.83035714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
