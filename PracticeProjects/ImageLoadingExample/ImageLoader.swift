@@ -4,6 +4,8 @@
 //
 //  Created by Michael Ho on 11/20/20.
 //  Reference: https://www.donnywals.com/efficiently-loading-images-in-table-views-and-collection-views/
+//  Reference: https://www.raywenderlich.com/5370-grand-central-dispatch-tutorial-for-swift-4-part-1-2
+//  Reference: https://www.raywenderlich.com/5371-grand-central-dispatch-tutorial-for-swift-4-part-2-2
 //
 
 import UIKit
@@ -12,8 +14,20 @@ class ImageLoader: NSObject {
     // Singleton
     static let shared = ImageLoader()
     override init() {}
+    // Thread safe operations
+    private var unsafeImages = [URL: UIImage]()
+    private let concurrentPhotoQueue =
+        DispatchQueue(
+            label: "com.michaelho.PracticeProjects.ImageLoader",
+            attributes: .concurrent)
+    var storedImages: [URL: UIImage] {
+        var imagesCopy = [URL: UIImage]()
+        concurrentPhotoQueue.sync {
+            imagesCopy = self.unsafeImages
+        }
+        return imagesCopy
+    }
     // Testables properties
-    var storedImages = [URL: UIImage]()
     var uuidMap = [UIImageView : UUID]()
     var queuedTasks = [UUID : URLSessionDataTask]()
     /**
@@ -76,7 +90,10 @@ class ImageLoader: NSObject {
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
-                self.storedImages[url] = image
+                self.concurrentPhotoQueue.async(flags: .barrier) {
+                    // Write data in barrier queue to prevent
+                    self.unsafeImages[url] = image
+                }
                 completion(.success(image))
                 return
             }
@@ -136,6 +153,14 @@ class ImageLoader: NSObject {
     func resumeTask(_ task: URLSessionDataTask, _ uuid: UUID) {
         task.resume()
         queuedTasks[uuid] = task
+    }
+    /**
+     Clean up all storage.
+     */
+    func cleanup() {
+        self.unsafeImages.removeAll()
+        self.queuedTasks.removeAll()
+        self.uuidMap.removeAll()
     }
 }
 

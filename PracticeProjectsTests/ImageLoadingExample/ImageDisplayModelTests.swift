@@ -17,8 +17,7 @@ class ImageDisplayModelTests: XCTestCase {
 
     override func tearDownWithError() throws {
         MockURLSession.sharedMock.data = nil
-        MockImageLoader.sharedMock.storedImages.removeAll()
-        MockImageLoader.sharedMock.queuedTasks.removeAll()
+        MockImageLoader.sharedMock.cleanup()
         MockGCDHelper.sharedMock.removeAllTasks()
     }
     
