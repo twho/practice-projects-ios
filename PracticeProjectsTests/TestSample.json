@@ -22,6 +22,14 @@
             "priceRange": "3,303",
             "phoneNumber": "123-456-7892",
             "thumbnail": "https://dummyimage.com/600x400/ffffff/ffffff"
+        },
+        {
+            "resId": null,
+            "name": null,
+            "rating": null,
+            "priceRange": null,
+            "phoneNumber": null,
+            "thumbnail": null
         }
     ],
     "meals": {
@@ -67,6 +75,12 @@
                 "name": "meal107",
                 "category": "cat12",
                 "price": 0.70
+            },
+            {
+                "mealId": null,
+                "name": null,
+                "category": null,
+                "price": null
             }
         ],
         "Sample2": [
@@ -188,6 +202,20 @@
             "name": "Company303",
             "catchPhrase": "Company303 is good",
             "bs": "Company303 makes money"
+          }
+        },
+        {
+          "id": null,
+          "name": null,
+          "username": null,
+          "email": null,
+          "address": null,
+          "phone": null,
+          "website": null,
+          "company": {
+            "name": null,
+            "catchPhrase": null,
+            "bs": null
           }
         }
     ]

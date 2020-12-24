@@ -52,7 +52,6 @@ class JSONHelper {
         do {
             // The data fetched from JSON file. (Note that when fetching from internet, this part stays the same.)
             let primitiveResult = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed)
-            //
             var finalResults = primitiveResult
             if keyArray.count > 0, let jsonResult = primitiveResult as? Dictionary<String, AnyObject> {
                 var tempResults: Any = jsonResult

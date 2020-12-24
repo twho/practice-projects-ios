@@ -33,12 +33,12 @@ extension Restaurant: Decodable {
         // defining our (keyed) container
         let container = try decoder.container(keyedBy: CodingKeys.self)
         // extracting the data
-        let resId: Int = try container.decode(Int.self, forKey: .resId)
-        let name: String = try container.decode(String.self, forKey: .name)
-        let rating: Double = try container.decode(Double.self, forKey: .rating)
-        let priceRange: String = try container.decode(String.self, forKey: .priceRange)
-        let phoneNumber: String = try container.decode(String.self, forKey: .phoneNumber)
-        let thumbnail: String = try container.decode(String.self, forKey: .thumbnail)
+        let resId: Int = try container.decodeIfPresent(Int.self, forKey: .resId) ?? -1
+        let name: String = try container.decodeIfPresent(String.self, forKey: .name) ?? "NULL"
+        let rating: Double = try container.decodeIfPresent(Double.self, forKey: .rating) ?? -1.0
+        let priceRange: String = try container.decodeIfPresent(String.self, forKey: .priceRange) ?? "NULL"
+        let phoneNumber: String = try container.decodeIfPresent(String.self, forKey: .phoneNumber) ?? "NULL"
+        let thumbnail: String = try container.decodeIfPresent(String.self, forKey: .thumbnail) ?? "NULL"
         // Init the object
         self.init(resId, name, rating, priceRange, phoneNumber, thumbnail)
     }

@@ -72,7 +72,7 @@ class UserCardViewController: UIViewController {
         stackView.addArrangedSubview(InfoPairView(parameter: "Username", value: data.username))
         stackView.addArrangedSubview(InfoPairView(parameter: "Email", value: data.email))
         stackView.addArrangedSubview(InfoPairView(parameter: "Phone", value: data.phone))
-        stackView.addArrangedSubview(InfoPairView(parameter: "Company", value: data.company.name))
+        stackView.addArrangedSubview(InfoPairView(parameter: "Company", value: data.company?.name ?? "N/A"))
         stackView.addArrangedSubview(InfoPairView(parameter: "Website", value: data.website))
     }
 }

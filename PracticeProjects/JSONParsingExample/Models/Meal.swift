@@ -28,10 +28,11 @@ extension Meal: Decodable {
         // defining our (keyed) container
         let container = try decoder.container(keyedBy: CodingKeys.self)
         // extracting the data
-        let mealId: Int = try container.decode(Int.self, forKey: .mealId)
-        let name: String = try container.decode(String.self, forKey: .name)
-        let price: Double = try container.decode(Double.self, forKey: .price)
-        let category: String = try container.decode(String.self, forKey: .category)
+        
+        let mealId: Int = try container.decodeIfPresent(Int.self, forKey: .mealId) ?? -1
+        let name: String = try container.decodeIfPresent(String.self, forKey: .name) ?? "NULL"
+        let price: Double = try container.decodeIfPresent(Double.self, forKey: .price) ?? -1.0
+        let category: String = try container.decodeIfPresent(String.self, forKey: .category) ?? "NULL"
         // Init the object
         self.init(mealId, name, price, category)
     }
