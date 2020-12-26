@@ -12,8 +12,8 @@ struct Constants {
      Practice examples in the current project scope.
      */
     enum Example {
-        /// JSON parser demo example.
-        case jsonParser
+        /// JSON decoding demo example.
+        case jsonDecoder
         /// Image loading example.
         case imageLoader
         /// Rest API example.
@@ -25,7 +25,7 @@ struct Constants {
          */
         var title: String {
             switch self {
-            case .jsonParser: return "JSON Parsing Example"
+            case .jsonDecoder: return "JSON Parsing Example"
             case .imageLoader: return "Image Loading Example"
             case .restAPI: return "RESTful API Example"
             case .hitTest: return "Hit Test Example"
@@ -36,7 +36,7 @@ struct Constants {
          */
         var viewController: UIViewController {
             switch self {
-            case .jsonParser: return ListViewController()
+            case .jsonDecoder: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
             case .restAPI: return ContactsViewController()
             case .hitTest: return HitTestViewController()

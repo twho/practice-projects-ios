@@ -186,6 +186,13 @@
 			path = RestAPIExample;
 			sourceTree = "<group>";
 		};
+		49A94CBE25971218003DE8C7 /* JSONEncodingExample */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JSONEncodingExample;
+			sourceTree = "<group>";
+		};
 		49D70C852573155B008BBE80 /* PracticeProjectsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,8 +255,9 @@
 		6816E8BA25661821007166CB /* PracticeProjects */ = {
 			isa = PBXGroup;
 			children = (
+				49A94CBE25971218003DE8C7 /* JSONEncodingExample */,
 				68F772C825683F18001FA363 /* ImageLoadingExample */,
-				6816E8EE25661842007166CB /* JSONParsingExample */,
+				6816E8EE25661842007166CB /* JSONDecodingExample */,
 				499694E32571C7E80046FF23 /* RestAPIExample */,
 				49FF6BD9259011C900138B0C /* HitTestExample */,
 				6845E36E256B1C3F002BF781 /* MenuViewController.swift */,
@@ -264,14 +272,14 @@
 			path = PracticeProjects;
 			sourceTree = "<group>";
 		};
-		6816E8EE25661842007166CB /* JSONParsingExample */ = {
+		6816E8EE25661842007166CB /* JSONDecodingExample */ = {
 			isa = PBXGroup;
 			children = (
 				68F772A02567A231001FA363 /* Models */,
 				68F772E12569F418001FA363 /* Views */,
 				68F772E22569F438001FA363 /* Controllers */,
 			);
-			path = JSONParsingExample;
+			path = JSONDecodingExample;
 			sourceTree = "<group>";
 		};
 		6845E379256B3C2A002BF781 /* Shared */ = {

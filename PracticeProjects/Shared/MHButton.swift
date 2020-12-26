@@ -13,7 +13,7 @@ class MHButton: UIButton {
             self.backgroundColor = self.bgColor
         }
     }
-    var example: Constants.Example = .jsonParser
+    var example: Constants.Example = .jsonDecoder
     // Init
     public override init(frame: CGRect) {
         super.init(frame: frame)
