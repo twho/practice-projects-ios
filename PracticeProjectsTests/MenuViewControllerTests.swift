@@ -30,7 +30,7 @@ class MenuViewControllerTests: XCTestCase {
     
     func testJSONParserExampleAccessible() {
         for view in menuVC.stackView.arrangedSubviews {
-            if let button = view as? UIButton, button.titleLabel?.text == Constants.Example.jsonParser.title {
+            if let button = view as? UIButton, button.titleLabel?.text == Constants.Example.jsonDecoding.title {
                 menuVC.buttonClicked(button)
                 break
             }

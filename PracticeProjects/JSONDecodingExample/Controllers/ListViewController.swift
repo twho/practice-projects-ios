@@ -36,7 +36,7 @@ class ListViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navbar = self.addNavigationBar(title: Constants.Example.jsonDecoder.title,
+        self.navbar = self.addNavigationBar(title: Constants.Example.jsonDecoding.title,
                                             rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     /**

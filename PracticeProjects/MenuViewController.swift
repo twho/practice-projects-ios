@@ -12,7 +12,7 @@ class MenuViewController: UIViewController {
     private var navbar: UINavigationBar!
     private(set) var stackView: UIStackView!
     // Data
-    private let examples: [Constants.Example] = [.imageLoader, .jsonDecoder, .restAPI, .hitTest]
+    private let examples: [Constants.Example] = [.imageLoader, .jsonDecoding, .restAPI, .hitTest]
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
