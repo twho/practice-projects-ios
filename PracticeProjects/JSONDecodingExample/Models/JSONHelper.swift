@@ -64,14 +64,10 @@ class JSONHelper {
                     }
                 }
             }
-            
+            // Convert the final result to output using JSONDecoder.
             if let jsonResult = finalResults as? [Any] {
-                do {
-                    let jsonObjects = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
-                    array.append(contentsOf: try JSONDecoder().decode([T].self, from: jsonObjects))
-                } catch {
-                    completion(.failure(error))
-                }
+                let jsonObjects = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
+                array = try JSONDecoder().decode([T].self, from: jsonObjects)
             }
         } catch {
             completion(.failure(error))

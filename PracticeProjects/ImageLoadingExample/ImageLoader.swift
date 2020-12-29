@@ -14,15 +14,17 @@ class ImageLoader: NSObject {
     // Singleton
     static let shared = ImageLoader()
     override init() {}
-    // Thread safe operations
+    // Thread safe operations. These two properties have to be PRIVATE.
     private var unsafeImages = [URL: UIImage]()
-    private let concurrentPhotoQueue =
+    private let concurrentImageQueue =
         DispatchQueue(
             label: "com.michaelho.PracticeProjects.ImageLoader",
-            attributes: .concurrent)
+            attributes: .concurrent
+        )
+    // Local cache accessible to all
     var storedImages: [URL: UIImage] {
         var imagesCopy = [URL: UIImage]()
-        concurrentPhotoQueue.sync {
+        concurrentImageQueue.sync {
             imagesCopy = self.unsafeImages
         }
         return imagesCopy
@@ -90,9 +92,9 @@ class ImageLoader: NSObject {
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
-                self.concurrentPhotoQueue.async(flags: .barrier) {
+                self.concurrentImageQueue.async(flags: .barrier) { [weak self] in
                     // Write data in barrier queue to prevent
-                    self.unsafeImages[url] = image
+                    self?.unsafeImages[url] = image
                 }
                 completion(.success(image))
                 return
@@ -108,6 +110,7 @@ class ImageLoader: NSObject {
             // the request was cancelled, no need to call the callback
         }
         resumeTask(task, uuid)
+        queuedTasks[uuid] = task
         return uuid
     }
     /**
@@ -152,7 +155,6 @@ class ImageLoader: NSObject {
      */
     func resumeTask(_ task: URLSessionDataTask, _ uuid: UUID) {
         task.resume()
-        queuedTasks[uuid] = task
     }
     /**
      Clean up all storage.

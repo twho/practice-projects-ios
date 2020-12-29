@@ -63,22 +63,21 @@ class RestAPIHelper {
          }
          ...
      ]
-     
-     static func decodeJSON(_ url: URL, _ completion: @escaping (Result<[People], Error>) -> Void) {
-         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-             if let error = error {
-                 completion(.failure(error))
-             } else if let data = data {
-                 // There are usually data returned, so check errors first.
-                 do {
-                     let array = try JSONDecoder().decode([People].self, from: data)
-                     completion(.success(array))
-                 } catch {
-                     completion(.failure(error))
-                 }
-             }
-         }
-         task.resume()
-     }
      */
+    static func decodeJSONFromURL(_ url: URL, _ completion: @escaping (Result<[People], Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let data = data {
+                // There are usually data returned, so check errors first.
+                do {
+                    let array = try JSONDecoder().decode([People].self, from: data)
+                    completion(.success(array))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+        task.resume()
+    }
 }

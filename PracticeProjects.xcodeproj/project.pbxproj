@@ -186,13 +186,6 @@
 			path = RestAPIExample;
 			sourceTree = "<group>";
 		};
-		49A94CBE25971218003DE8C7 /* JSONEncodingExample */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = JSONEncodingExample;
-			sourceTree = "<group>";
-		};
 		49D70C852573155B008BBE80 /* PracticeProjectsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +248,6 @@
 		6816E8BA25661821007166CB /* PracticeProjects */ = {
 			isa = PBXGroup;
 			children = (
-				49A94CBE25971218003DE8C7 /* JSONEncodingExample */,
 				68F772C825683F18001FA363 /* ImageLoadingExample */,
 				6816E8EE25661842007166CB /* JSONDecodingExample */,
 				499694E32571C7E80046FF23 /* RestAPIExample */,
