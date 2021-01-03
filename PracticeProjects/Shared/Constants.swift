@@ -18,8 +18,8 @@ struct Constants {
         case imageLoader
         /// Rest API example.
         case restAPI
-        /// Hit test example.
-        case hitTest
+        /// Hit test and responder chain example.
+        case hitTestResponder
         /**
          The title of the example to display in navigation bar.
          */
@@ -28,7 +28,7 @@ struct Constants {
             case .jsonDecoding: return "JSON Parsing Example"
             case .imageLoader: return "Image Loading Example"
             case .restAPI: return "RESTful API Example"
-            case .hitTest: return "Hit Test Example"
+            case .hitTestResponder: return "Hit Test and Responder Chain"
             }
         }
         /**
@@ -39,7 +39,7 @@ struct Constants {
             case .jsonDecoding: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
             case .restAPI: return ContactsViewController()
-            case .hitTest: return HitTestViewController()
+            case .hitTestResponder: return HitTestViewController()
             }
         }
     }

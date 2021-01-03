@@ -37,19 +37,32 @@ class HitTestViewController: UIViewController {
     @IBOutlet weak var button5: HitTestButton!
     @IBOutlet weak var button6: HitTestButton!
     
-    private var latest = 0
+    private var latestStack = 0
     private var visited = Set<String>()
     private var stackTrace = [String]() {
         didSet {
-            self.latest += 1
-            let timeStamp = self.latest
+            self.latestStack += 1
+            let timeStamp = self.latestStack
             DispatchQueue.main.async {[weak self] in
                 // Print out after the last element is appended to the stack trace.
-                guard let self = self, self.latest == timeStamp else { return }
+                guard let self = self, self.latestStack == timeStamp else { return }
                 print(self.stackTrace)
                 self.stackTrace = []
                 self.visited = []
-                self.latest = 0
+                self.latestStack = 0
+            }
+        }
+    }
+    private var latestOutput = 0
+    private var responderChain: String = "" {
+        didSet {
+            self.latestOutput += 1
+            let timeStamp = self.latestOutput
+            DispatchQueue.main.async {[weak self] in
+                // Print out after the last element is appended to the stack trace.
+                guard let self = self, self.latestOutput == timeStamp else { return }
+                print(self.responderChain)
+                self.latestOutput = 0
             }
         }
     }
@@ -57,7 +70,7 @@ class HitTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = self.addNavigationBar(title: Constants.Example.hitTest.title,
+        _ = self.addNavigationBar(title: Constants.Example.hitTestResponder.title,
                                   rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         [button1, button2, button3, button4, button5, button6].forEach {
             $0.hitTestVC = self
@@ -70,14 +83,15 @@ class HitTestViewController: UIViewController {
         yellowView.name = "yellowView"
     }
     /**
-     Add a log to stack trace.
+     Add a hit test log to stack trace.
      
      - Parameter log: The name of the view hit by hit test.
      */
-    func addLog(_ log: String) {
+    func addLog(_ log: String, _ responderChain: String) {
         if !visited.contains(log) {
             self.stackTrace.append(log)
             self.visited.insert(log)
+            self.responderChain = responderChain
         }
     }
 }
