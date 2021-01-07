@@ -44,7 +44,7 @@ class GCDHelper {
      1. sync means the function WILL BLOCK the current thread until it has completed,
      2. async means it will be handled in the background and the function WILL NOT BLOCK the current thread.
      */
-    private func deadlockExample() {
+    func deadlockExample() {
         /**
          Example 1
          
@@ -52,7 +52,7 @@ class GCDHelper {
          to complete before it can run, however, the first closure cannot complete until
          the second closure is run since its dispatched synchronously.
          */
-        let queue1 = DispatchQueue(label: "this-queue-1")
+        let queue1 = DispatchQueue(label: "this-is-queue-1")
         queue1.sync {
             print("This happens")
             // Submitting block synchously to the current queue results in deadlock.
@@ -68,7 +68,7 @@ class GCDHelper {
          The inner block is scheduled to be run on queue2 but it cannot run until current block (already in queue2)
          is done, while the current block is also waiting for the inner block to finish to return as we called it (inner block) synchronously.
          */
-        let queue2 = DispatchQueue(label: "this-queue-2")
+        let queue2 = DispatchQueue(label: "this-is-queue-2")
         print("Start")
         queue2.async {
             // Outer block
@@ -81,5 +81,30 @@ class GCDHelper {
             print("This never happens")
         }
         print("End")
+    }
+    /**
+     A barrier operation example. Used for thread safe properties or a read-write lock.
+     */
+    func barrierExample() {
+        let concurrentQueue = DispatchQueue(label: "this-is-queue-1", attributes: .concurrent)
+        // Number that stores the latest value
+        var _num = 0
+        // This is a readonly number
+        var readonlyNumber: Int {
+            var newNum = 0
+            // Sync the latest value after any operating queue is done
+            concurrentQueue.sync {
+                newNum = _num
+            }
+            return newNum
+        }
+        
+        while readonlyNumber < 10 {
+            print("Current number: \(readonlyNumber)")
+            // Change the number value in async barrier
+            concurrentQueue.async(flags: .barrier) {
+                _num += 1
+            }
+        }
     }
 }
