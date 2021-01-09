@@ -4,6 +4,7 @@
 //
 //  Created by Michael Ho on 12/20/20.
 //
+// Reference: https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/using_responders_and_the_responder_chain_to_handle_events
 
 import UIKit
 
@@ -14,16 +15,27 @@ class HitTestViewController: UIViewController {
         1.1. button1
         1.2. button2
      2. pinkView
-        2.1. button3
-        2.2. button4
+        2.1. textField
+        2.2. button3
+        2.3. button4
      3. yellowView
         3.1. button5
         3.2. button6
      (See xib file for view hierarchy.)
      
-     Example:
+     Hit test example:
          When we click button1, the traverse order is as the following:
          yellowView -> pinkView -> blueView -> Button2 -> Button1
+     
+     Responder chain example:
+         When we click textField, the responder chain looks like the following:
+         HitTestTextField -> UIStackView -> pinkView -> UIView -> HitTestViewController -> MenuViewController ->
+         UITransitionView -> UIWindow -> UIWindowScene -> UIApplication -> AppDelegate
+     
+     Explain: Since the textField does not handle the event, UIKit sends the event to its parent view, followed by the root
+     view of the window. From the root view, the responder chain diverts to the owning view controller before directing the
+     event to the window. If the window cannot handle the event, UIKit delivers the event to the UIApplication, and possibly
+     to the app delegate if that object is an instance of UIResponder and not already part of the responder chain.
      */
     // UIViews
     @IBOutlet weak var blueView: HitTestView!
@@ -36,6 +48,7 @@ class HitTestViewController: UIViewController {
     @IBOutlet weak var button4: HitTestButton!
     @IBOutlet weak var button5: HitTestButton!
     @IBOutlet weak var button6: HitTestButton!
+    @IBOutlet weak var textField: HitTestTextField!
     
     private var latestStack = 0
     private var visited = Set<String>()
@@ -61,7 +74,7 @@ class HitTestViewController: UIViewController {
             DispatchQueue.main.async {[weak self] in
                 // Print out after the last element is appended to the stack trace.
                 guard let self = self, self.latestOutput == timeStamp else { return }
-                print(self.responderChain)
+                print("Responder chain: \(self.responderChain)")
                 self.latestOutput = 0
             }
         }
@@ -78,6 +91,7 @@ class HitTestViewController: UIViewController {
         [blueView, pinkView, yellowView].forEach {
             $0?.hitTestVC = self
         }
+        textField.hitTestVC = self
         blueView.name = "blueView"
         pinkView.name = "pinkView"
         yellowView.name = "yellowView"

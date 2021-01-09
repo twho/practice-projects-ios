@@ -20,6 +20,18 @@ class HitTestButton: UIButton {
     }
 }
 
+class HitTestTextField: UITextField {
+    weak var hitTestVC: HitTestViewController?
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if hitTestVC != nil {
+            hitTestVC!.addLog("textField", self.responderChain())
+            
+        }
+        return super.hitTest(point, with: event)
+    }
+}
+
 class HitTestView: UIView {
     weak var hitTestVC: HitTestViewController?
     var name: String?

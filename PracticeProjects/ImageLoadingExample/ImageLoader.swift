@@ -3,6 +3,7 @@
 //  PracticeProjects
 //
 //  Created by Michael Ho on 11/20/20.
+// 
 //  Reference: https://www.donnywals.com/efficiently-loading-images-in-table-views-and-collection-views/
 //  Reference: https://www.raywenderlich.com/5370-grand-central-dispatch-tutorial-for-swift-4-part-1-2
 //  Reference: https://www.raywenderlich.com/5371-grand-central-dispatch-tutorial-for-swift-4-part-2-2
