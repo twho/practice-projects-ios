@@ -196,7 +196,7 @@ extension ContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: cellReuseIdentifier)
         if let people = state.elements as? [People] {
-            cell.textLabel?.text = people[indexPath.row].name
+            cell.textLabel?.text = people[indexPath.row].personName
             cell.detailTextLabel?.text = people[indexPath.row].phone
         }
         return cell
@@ -214,7 +214,7 @@ extension ContactsViewController: UISearchBarDelegate {
             if searchText.isEmpty {
                 self.updateTableViewResults(self.peopleData)
             } else if let data = self.peopleData, !data.isEmpty {
-                self.updateTableViewResults(data.filter { $0.name.contains(searchText) })
+                self.updateTableViewResults(data.filter { $0.personName.contains(searchText) })
             }
         }
         getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {

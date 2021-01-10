@@ -63,7 +63,7 @@ class UserCardViewController: UIViewController {
             } else {
                 self.reloadStackData(people)
             }
-            titleLabel.text = people.name
+            titleLabel.text = people.personName
         }
     }
     

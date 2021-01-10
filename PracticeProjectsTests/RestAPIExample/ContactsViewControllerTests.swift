@@ -51,28 +51,28 @@ class ContactsViewControllerTests: XCTestCase {
         // Test first cell
         let cell1 = getCell(forRow: 0)
         XCTAssertNotNil(cell1.textLabel)
-        XCTAssertEqual(cell1.textLabel?.text, data[0].name)
+        XCTAssertEqual(cell1.textLabel?.text, data[0].personName)
         XCTAssertEqual(cell1.detailTextLabel?.text, data[0].phone)
         // Test second cell
         let cell2 = getCell(forRow: 1)
         XCTAssertNotNil(cell2.textLabel)
-        XCTAssertEqual(cell2.textLabel?.text, data[1].name)
+        XCTAssertEqual(cell2.textLabel?.text, data[1].personName)
         XCTAssertEqual(cell2.detailTextLabel?.text, data[1].phone)
         // Test third cell
         let cell3 = getCell(forRow: 2)
         XCTAssertNotNil(cell3.textLabel)
-        XCTAssertEqual(cell3.textLabel?.text, data[2].name)
+        XCTAssertEqual(cell3.textLabel?.text, data[2].personName)
         XCTAssertEqual(cell3.detailTextLabel?.text, data[2].phone)
     }
     
     func testTableViewReloadCellWhenSearched() {
         let data = contactsVC.testData
-        contactsVC.searchBar(contactsVC.searchBar, textDidChange: data[0].name)
+        contactsVC.searchBar(contactsVC.searchBar, textDidChange: data[0].personName)
         // Don't load the result after 0.5 seconds so the search requests won't queue up.
         XCTAssertEqual(3, contactsVC.tableView.numberOfRows(inSection: 0))
         // After the time has passed.
         MockGCDHelper.sharedMock.runAllTasksInQueue()
         XCTAssertEqual(1, contactsVC.tableView.numberOfRows(inSection: 0))
-        XCTAssertEqual(data[0].name, getCell(forRow: 0).textLabel?.text)
+        XCTAssertEqual(data[0].personName, getCell(forRow: 0).textLabel?.text)
     }
 }

@@ -49,9 +49,9 @@ struct MockConstants {
                 ]
             case .people, .companies:
                 let companies = [
-                    Company("Company101", "Company101 is good", "Company101 makes money"),
-                    Company("Company202", "Company202 is good", "Company202 makes money"),
-                    Company("Company303", "Company303 is good", "Company303 makes money")
+                    Company(name: "Company101", catchPhrase: "Company101 is good", bs: "Company101 makes money"),
+                    Company(name: "Company202", catchPhrase: "Company202 is good", bs: "Company202 makes money"),
+                    Company(name: "Company303", catchPhrase: "Company303 is good", bs: "Company303 makes money")
                 ]
                 let people = [
                     People(101, "name01", "user01", "user01@mail.com", "123-456-78901", companies[0], "user01.com"),

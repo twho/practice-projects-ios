@@ -21,7 +21,7 @@ class RestAPIModelTests: XCTestCase {
         let people = People(id, name, username, email, phone, company, website)
         XCTAssertNotNil(people)
         XCTAssertEqual(id, people.id)
-        XCTAssertEqual(name, people.name)
+        XCTAssertEqual(name, people.personName)
         XCTAssertEqual(username, people.username)
         XCTAssertEqual(email, people.email)
         XCTAssertEqual(phone, people.phone)
@@ -45,14 +45,38 @@ class RestAPIModelTests: XCTestCase {
         XCTAssertEqual(People(303, "First3 Last3", "FirstLast303", "FirstLast303@michaelho.com", "123-456-7893", companies[2], "FirstLast303.info"), peopleData[2])
     }
     
+    func testPeopleEncoding() {
+        let people = (MockConstants.TestJSON.people.dummyData as! [People]).first!
+        var decoded: People?
+        do {
+            let data = try JSONEncoder().encode(people)
+            decoded = try JSONDecoder().decode(People.self, from: data)
+        } catch {
+            assertionFailure()
+        }
+        XCTAssertEqual(decoded, people)
+    }
+    
     func testCompanyStruct() {
         let name = "ABCDEFG"
         let phrase = "HIJKL"
         let bs = "MNOPQRS"
-        let company = Company(name, phrase, bs)
+        let company = Company(name: name, catchPhrase: phrase, bs: bs)
         XCTAssertNotNil(company)
         XCTAssertEqual(name, company.name)
         XCTAssertEqual(phrase, company.catchPhrase)
         XCTAssertEqual(bs, company.bs)
+    }
+    
+    func testCompanyEncoding() {
+        let company = (MockConstants.TestJSON.companies.dummyData as! [Company]).first!
+        var decoded: Company?
+        do {
+            let data = try JSONEncoder().encode(company)
+            decoded = try JSONDecoder().decode(Company.self, from: data)
+        } catch {
+            assertionFailure()
+        }
+        XCTAssertEqual(decoded, company)
     }
 }

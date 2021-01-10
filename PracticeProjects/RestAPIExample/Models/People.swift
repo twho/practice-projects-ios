@@ -7,7 +7,7 @@
 
 struct People: Equatable {
     let id: Int
-    let name: String
+    let personName: String
     let username: String
     let email: String
     let phone: String
@@ -16,7 +16,7 @@ struct People: Equatable {
     
     init(_ id: Int, _ name: String, _ username: String, _ email: String, _ phone: String, _ company: Company?, _ website: String) {
         self.id = id
-        self.name = name
+        self.personName = name
         self.username = username
         self.email = email
         self.phone = phone
@@ -26,6 +26,7 @@ struct People: Equatable {
 }
 
 extension People: Decodable {
+    // CodingKeys have to match JSON parameter names
     private enum CodingKeys: String, CodingKey {
         case id, name, username, email, phone, company, website
     }
@@ -46,31 +47,15 @@ extension People: Decodable {
     }
 }
 
-struct Company: Equatable {
-    let name: String
-    let catchPhrase: String
-    let bs: String
-    
-    init(_ name: String, _ catchPhrase: String, _ bs: String) {
-        self.name = name
-        self.catchPhrase = catchPhrase
-        self.bs = bs
-    }
-}
-
-extension Company: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case name, catchPhrase, bs
-    }
-    
-    init(from decoder: Decoder) throws {
-        // defining our (keyed) container
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        // extracting the data
-        let name: String = try container.decodeIfPresent(String.self, forKey: .name) ?? "NULL"
-        let catchPhrase: String = try container.decodeIfPresent(String.self, forKey: .catchPhrase) ?? "NULL"
-        let bs: String = try container.decodeIfPresent(String.self, forKey: .bs) ?? "NULL"
-        // Init the object
-        self.init(name, catchPhrase, bs)
+extension People: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(personName, forKey: .name)
+        try container.encode(username, forKey: .username)
+        try container.encode(email, forKey: .email)
+        try container.encode(phone, forKey: .phone)
+        try container.encode(company, forKey: .company)
+        try container.encode(website, forKey: .website)
     }
 }
