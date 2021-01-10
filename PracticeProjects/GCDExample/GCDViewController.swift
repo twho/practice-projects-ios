@@ -19,6 +19,10 @@ class GCDViewController: UIViewController {
          2. deadlockExample2()
          3. barrierExample()
          4. dispatchGroupExample()
+         5. dispatchGroupNotifyExample()
+        
+         Pending
+         1. Semaphores
          */
         print("Put a break point on this line to check out below examples.")
     }
@@ -101,7 +105,10 @@ class GCDViewController: UIViewController {
         print("All tasks are done.")
     }
     /**
+     Dispatch groups can group together multiple tasks and wait for them to complete.
+     Tasks can be asynchronous or synchronous and can even run on different queues.
      
+     Note: the number of enter() calls must be the same as the number of leave() calls or the app will crash.
      */
     private func dispatchGroupExample() {
         // Normally we can just do DispatchQueue.global(qos: .userInitiated).async. We use async and wait since
@@ -118,15 +125,38 @@ class GCDViewController: UIViewController {
                 }
                 
             }
+            // This synchronous wait method blocks the current thread.
             workGroup.wait()
             print("workGroup has completed all tasks")
-            /**
-             Use DispatchQueue.main.async if any UI needs update.
-             */
+            // Use for UI updates.
+            // DispatchQueue.main.async {}
         }))
     }
-    
-    func dummyWorkItem(_ completion: (() -> ())?) {
+    /**
+     In another way, dispatch groups can group together multiple tasks and receive a notification once they complete.
+     In this method, we don't need to put the code in async block.
+     */
+    private func dispatchGroupNotifyExample() {
+        let workGroup = DispatchGroup()
+        for i in 0..<10 {
+            workGroup.enter()
+            print("workGroup enters task \(i)")
+            self.dummyWorkItem {
+                workGroup.leave()
+                print("workGroup leaves task \(i)")
+            }
+            
+        }
+        workGroup.notify(queue: DispatchQueue.main) {
+            // Also Use for UI updates.
+            // Release the break point to see this block run.
+            print("workGroup has completed all tasks")
+        }
+    }
+    /**
+     Simulate network tasks with a delay of 1000ms.
+     */
+    private func dummyWorkItem(_ completion: (() -> ())?) {
         sleep(UInt32(1))
         completion?()
     }
