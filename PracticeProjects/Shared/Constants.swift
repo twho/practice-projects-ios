@@ -20,6 +20,8 @@ struct Constants {
         case restAPI
         /// Hit test and responder chain example.
         case hitTestResponder
+        /// GCD and lock/deadlock examples.
+        case GCDExample
         /**
          The title of the example to display in navigation bar.
          */
@@ -29,6 +31,7 @@ struct Constants {
             case .imageLoader: return "Image Loading Example"
             case .restAPI: return "RESTful API Example"
             case .hitTestResponder: return "Hit Test and Responder Chain"
+            case .GCDExample: return "GCD and Lock/Deadlock"
             }
         }
         /**
@@ -40,6 +43,7 @@ struct Constants {
             case .imageLoader: return ImageDisplayViewController()
             case .restAPI: return ContactsViewController()
             case .hitTestResponder: return HitTestViewController()
+            case .GCDExample: return GCDViewController()
             }
         }
     }
