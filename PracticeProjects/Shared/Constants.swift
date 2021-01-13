@@ -22,6 +22,8 @@ struct Constants {
         case hitTestResponder
         /// GCD and lock/deadlock examples.
         case GCDExample
+        /// Design of container controllers.
+        case containerController
         /**
          The title of the example to display in navigation bar.
          */
@@ -32,6 +34,7 @@ struct Constants {
             case .restAPI: return "RESTful API Example"
             case .hitTestResponder: return "Hit Test and Responder Chain"
             case .GCDExample: return "GCD and Lock/Deadlock"
+            case .containerController: return "Container Controllers"
             }
         }
         /**
@@ -44,6 +47,7 @@ struct Constants {
             case .restAPI: return ContactsViewController()
             case .hitTestResponder: return HitTestViewController()
             case .GCDExample: return GCDViewController()
+            case .containerController: return ReuseNavigationController(rootViewController: AFirstViewController())
             }
         }
     }
