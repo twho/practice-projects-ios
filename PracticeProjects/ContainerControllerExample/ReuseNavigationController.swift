@@ -12,6 +12,8 @@ class ReuseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let _ = self.addNavigationBar(title: Constants.Example.containerController.title,
+                                      rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
     }
     
     func pushReusableViewController(to viewControllerType: AnyClass, animated: Bool) {

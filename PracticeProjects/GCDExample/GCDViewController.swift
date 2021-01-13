@@ -13,6 +13,8 @@ class GCDViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let _ = self.addNavigationBar(title: Constants.Example.GCDExample.title,
+                                      rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         /**
          Examples
          1. deadlockExample1()
