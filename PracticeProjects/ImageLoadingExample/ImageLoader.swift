@@ -40,7 +40,11 @@ class ImageLoader: NSObject {
      - Parameter imageView: The image view to load image to and display image.
      */
     func load(_ url: URL, for imageView: UIImageView) {
-        imageView.image = #imageLiteral(resourceName: "ic_image_placeholder")
+        // Show activity indicator before loading is done.
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.startAnimating()
+        imageView.addSubViews([activityIndicator])
+        imageView.centerSubView(activityIndicator)
         // The dataTask in loadImage method is asynchronous.
         let token = self.loadImage(url) { [weak self] result in
             guard let self = self else { return }
@@ -48,6 +52,7 @@ class ImageLoader: NSObject {
             do {
                 let image = try result.get()
                 self.getGCDHelperInContext().runOnMainThread {
+                    activityIndicator.removeFromSuperview()
                     imageView.image = image
                 }
             } catch {
@@ -93,10 +98,13 @@ class ImageLoader: NSObject {
             defer { self.queuedTasks[uuid] = nil }
             
             if let data = data, let image = UIImage(data: data) {
-                self.concurrentImageQueue.async(flags: .barrier) { [weak self] in
-                    // Write data in barrier queue to prevent
-                    self?.unsafeImages[url] = image
+                if let responseURL = response?.url {
+                    self.concurrentImageQueue.async(flags: .barrier) { [weak self] in
+                        // Write data in barrier queue to prevent
+                        self?.unsafeImages[responseURL] = image
+                    }
                 }
+                
                 completion(.success(image))
                 return
             }
@@ -177,6 +185,7 @@ extension UIImageView {
      Reference: Use https://imgbb.com/ to create image urls.
      */
     func loadImage(_ urlString: String, _ loader: ImageLoader) {
+        
         guard let url = URL(string: urlString) else {
             print("Invalid URL string.")
             return

@@ -126,7 +126,8 @@ class MockURLSession: URLSession {
         if let validData = MockConstants.TestJSON.shared.dummyDataMap[url] {
             data = validData
         }
-        return MockURLSessionDataTask { completionHandler(data, nil, error) }
+        let response = URLResponse(url: url, mimeType: nil, expectedContentLength: Int.max, textEncodingName: nil)
+        return MockURLSessionDataTask { completionHandler(data, response, error) }
     }
 }
 
@@ -153,7 +154,6 @@ class MockImageLoader: ImageLoader {
             preconditionFailure("Need to use TestURLSessionDataTask in test environment.")
         }
         currentTask = testTask
-        queuedTasks[uuid] = task
     }
 }
 
