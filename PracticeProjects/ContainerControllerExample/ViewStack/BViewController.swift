@@ -1,5 +1,5 @@
 //
-//  BFirstViewController.swift
+//  BViewController.swift
 //  PracticeProjects
 //
 //  Created by Michael Ho on 1/10/21.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class BFirstViewController: SimpleDisplayViewController {
+class BViewController: SimpleDisplayViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupUI(backgroundColor: .brown, nextViewController: CFirstViewController.self)
+        self.setupUI(backgroundColor: .brown, nextViewController: CViewController.self)
     }
 
     override func didReceiveMemoryWarning() {

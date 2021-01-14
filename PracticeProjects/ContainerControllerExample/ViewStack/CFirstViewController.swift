@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CFirstViewController: SimpleDisplayViewController {
+class CViewController: SimpleDisplayViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupUI(backgroundColor: .cyan, nextViewController: AFirstViewController.self)
+        self.setupUI(backgroundColor: .cyan, nextViewController: AViewController.self)
     }
 }

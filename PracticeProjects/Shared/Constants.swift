@@ -47,7 +47,7 @@ struct Constants {
             case .restAPI: return ContactsViewController()
             case .hitTestResponder: return HitTestViewController()
             case .GCDExample: return GCDViewController()
-            case .containerController: return ReuseNavigationController(rootViewController: AFirstViewController())
+            case .containerController: return ReuseNavigationController(rootViewController: AViewController())
             }
         }
     }
