@@ -155,6 +155,13 @@ class MockImageLoader: ImageLoader {
         }
         currentTask = testTask
     }
+    
+    func completeLoading() {
+        if let pendingTask = self.currentTask {
+            pendingTask.resume()
+            MockGCDHelper.sharedMock.runAllTasksInQueue()
+        }
+    }
 }
 
 class MockGCDHelper: GCDHelper {
@@ -202,6 +209,16 @@ class MockListViewController: ListViewController {
     
     override func registerTableViewCell() {
         tableView.register(MockListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        MockImageLoader.sharedMock.completeLoading()
+        return cell
+    }
+    
+    override func getListDetailViewController() -> ListDetailViewController {
+        return MockListDetailViewController()
     }
 }
 

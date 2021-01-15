@@ -200,6 +200,13 @@
 			path = ViewStack;
 			sourceTree = "<group>";
 		};
+		4992CC5C25B10AC000BFE742 /* VIPERExample */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIPERExample;
+			sourceTree = "<group>";
+		};
 		499694D82571A4500046FF23 /* JSONParsingExample */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +301,7 @@
 				68F772C825683F18001FA363 /* ImageLoadingExample */,
 				6816E8EE25661842007166CB /* JSONDecodingExample */,
 				499694E32571C7E80046FF23 /* RestAPIExample */,
+				4992CC5C25B10AC000BFE742 /* VIPERExample */,
 				49FF6BD9259011C900138B0C /* HitTestExample */,
 				4992CC2525ABBA8E00BFE742 /* GCDExample */,
 				4992CC2C25AC0F4000BFE742 /* ContainerControllerExample */,

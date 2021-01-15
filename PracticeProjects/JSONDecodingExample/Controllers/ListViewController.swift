@@ -75,6 +75,10 @@ class ListViewController: UIViewController {
     func registerTableViewCell() {
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
+    
+    func getListDetailViewController() -> ListDetailViewController {
+        return ListDetailViewController()
+    }
 }
 
 extension ListViewController: UITableViewDelegate {
@@ -84,10 +88,11 @@ extension ListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = ListDetailViewController()
+        let detailVC = getListDetailViewController()
         detailVC.restaurant = restaurantData[indexPath.row]
-        if let cell = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
-            detailVC.imageView.image = cell.restaurantImageView.image?.cropToWideRatio()
+        let cell = self.tableView(self.tableView, cellForRowAt: indexPath)
+        if let listCell = cell as? ListTableViewCell {
+            detailVC.imageView.image = listCell.restaurantImageView.image?.cropToWideRatio()
         }
         // Present the detail view controller
         self.presentInFullscreen(detailVC)

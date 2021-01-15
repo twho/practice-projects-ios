@@ -104,7 +104,6 @@ class ImageLoader: NSObject {
                         self?.unsafeImages[responseURL] = image
                     }
                 }
-                
                 completion(.success(image))
                 return
             }

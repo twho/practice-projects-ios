@@ -27,6 +27,9 @@ class ListViewControllerTests: XCTestCase {
     override func tearDownWithError() throws {
         window?.removeSubviews()
         window = nil
+        MockURLSession.sharedMock.data = nil
+        MockImageLoader.sharedMock.cleanup()
+        MockGCDHelper.sharedMock.removeAllTasks()
     }
     
     private func getCell(forRow row: Int) -> MockListTableViewCell {
@@ -87,13 +90,11 @@ class ListViewControllerTests: XCTestCase {
     }
     
     func testPresentedDetailViewControllerHasImageSetup() {
-        let cellImage = getCell(forRow: 1).restaurantImageView.image
-        // Setup test
-        XCTAssertNotNil(cellImage)
+        let cellImage = getCell(forRow: 1).restaurantImageView.image.unsafelyUnwrapped
         listVC.tableView(listVC.tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
         let detailVC = window?.rootViewController?.presentedViewController as! ListDetailViewController
         // Check image in detail view controller
         XCTAssertNotNil(detailVC.imageView.image)
-        XCTAssertTrue(cellImage!.cropToWideRatio()!.isContentEqualTo(detailVC.imageView.image!))
+        XCTAssertTrue(cellImage.cropToWideRatio()!.isContentEqualTo(detailVC.imageView.image!))
     }
 }

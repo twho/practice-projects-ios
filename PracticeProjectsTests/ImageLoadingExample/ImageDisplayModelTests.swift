@@ -31,8 +31,14 @@ class ImageDisplayModelTests: XCTestCase {
     func testSingleImageLoading() {
         let imageView = UIImageView()
         imageView.loadImage(MockConstants.dummyURL, MockImageLoader.sharedMock)
-        // Check the place holder image
-        XCTAssertEqual(imageView.image, #imageLiteral(resourceName: "ic_image_placeholder"))
+        // Check the activity indicator
+        var hasSpinner = false
+        imageView.subviews.forEach {
+            if $0.isKind(of: UIActivityIndicatorView.self) {
+                hasSpinner = true
+            }
+        }
+        XCTAssertTrue(hasSpinner)
         // Continue the loading task
         XCTAssertNotNil(MockImageLoader.sharedMock.currentTask)
         MockImageLoader.sharedMock.currentTask!.resume()
