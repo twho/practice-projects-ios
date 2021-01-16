@@ -15,13 +15,7 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     private var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
     private var addButton: MHButton!
-    
     private var tasks = [Task]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        presenter?.viewDidLoad()
-    }
     
     override func loadView() {
         super.loadView()
@@ -34,12 +28,9 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        navbar = self.addNavigationBar(title: "VIPER")
+        navbar = addNavigationBar(title: Constants.Example.viperExample.title,
+                                  rightBarItem: UIBarButtonItem(image: #imageLiteral(resourceName: "ic_close"), style: .done, target: self, action: #selector(self.backToPreviousVC)))
         self.view.addSubViews([tableView, addButton])
-    }
-    
-    private func setupResultsView() {
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,14 +47,24 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter?.viewDidAppear()
+    }
+    
+    func showTasks(_ tasks: [Task]) {
+        self.tasks = tasks
+        self.tableView.reloadData()
     }
     
     @objc func addButtonPressed() {
-        presenter?.addNewTask()
+        presenter?.prepareTaskViewController(nil)
     }
     
     func showSearchResults(_ tasks: [Task]) {
         self.tasks = tasks
+    }
+    
+    func dismissSearchController() {
+        self.searchController.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -83,9 +84,24 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: cellReuseIdentifier)
         if !self.tasks.isEmpty {
-            cell.textLabel?.text = tasks[indexPath.row].name
-            cell.detailTextLabel?.text = tasks[indexPath.row].content
+            cell.textLabel?.text = tasks[indexPath.row].content
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            cell.detailTextLabel?.text = formatter.string(from: tasks[indexPath.row].timestamp.unsafelyUnwrapped)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter?.deleteTask(self.tasks[indexPath.row])
+            self.tasks.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.prepareTaskViewController(tasks[indexPath.row])
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }

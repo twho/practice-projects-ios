@@ -9,11 +9,11 @@ import UIKit
 
 class ToDoListRouter: NSObject, ToDoListRouterProtocol {
     
-    static func createMapModule() -> UIViewController {
+    static func createToDoModule() -> UIViewController {
         let view: ToDoListViewProtocol & UIViewController = ToDoListViewController()
         let presenter: ToDoListPresenterProtocol & ToDoListInteractorOutputProtocol = ToDoListPresenter()
         let interactor: ToDoListInteractorInputProtocol = ToDoListInteractor()
-        let localDataManager: ToDoListLocalDataManagerInputProtocol = ToDoListLocalDataManager()
+        let localDataManager: ToDoListLocalDataManagerInputProtocol = ToDoListLocalDataManager.shared
         let router: ToDoListRouterProtocol = ToDoListRouter()
         
         view.presenter = presenter
@@ -25,8 +25,13 @@ class ToDoListRouter: NSObject, ToDoListRouterProtocol {
         return view
     }
     
-    func presentAddTaskViewController(from view: ToDoListViewProtocol) {
-        let addTaskViewController = AddTaskViewController()
+    func presentAddTaskViewController(from view: ToDoListViewProtocol, _ task: Task?, _ dismissBlock: (() -> ())?) {
+        let addTaskViewController = TaskViewController()
+        addTaskViewController.dismissBlock = dismissBlock
+        
+        if let task = task {
+            addTaskViewController.task = task
+        }
    
         if let sourceView = view as? UIViewController {
             sourceView.present(addTaskViewController, animated: true)

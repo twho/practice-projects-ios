@@ -1,5 +1,5 @@
 //
-//  AddTaskViewController.swift
+//  TaskViewController.swift
 //  PracticeProjects
 //
 //  Created by Michael Ho on 1/15/21.
@@ -13,14 +13,23 @@ class TaskViewController: DialogViewController {
     private var taskContentTextView: UITextView!
     private var addButton: MHButton!
     private let localDataMgr = ToDoListLocalDataManager.shared
+    var task: Task?
+    var dismissBlock: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleLabel.text = "Add a New Task"
         taskContentTextView = UITextView()
         taskContentTextView.setCornerBorder(cornerRadius: 5, borderWidth: 0)
+        taskContentTextView.font = .systemFont(ofSize: 16.0)
+        taskContentTextView.becomeFirstResponder()
         addButton = MHButton(text: "Add", bgColor: .systemFill)
         addButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
+        if let task = self.task {
+            addButton.setTitle("Modify")
+            titleLabel.text = "Modify a Task"
+            taskContentTextView.text = task.content
+        }
         self.view.addSubViews([taskContentTextView, addButton])
     }
     
@@ -38,14 +47,27 @@ class TaskViewController: DialogViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        addButton.setTitle("Add")
+        titleLabel.text = "Add a New Task"
+        task = nil
+    }
+    
     @objc func addNewTask() {
-        if let text = taskContentTextView.text, text != "" {
-            do {
-                try localDataMgr.saveTask(text)
-                self.dismiss(animated: true, completion: nil)
-            } catch {
-                print(error)
+        do {
+            if let text = taskContentTextView.text, text != "" {
+                if let task = task {
+                    task.timestamp = Date()
+                    task.content = text
+                    try localDataMgr.updateTask(task)
+                } else {
+                    try localDataMgr.saveTask(text)
+                }
             }
+            self.dismiss(animated: true, completion: dismissBlock)
+        } catch {
+            print(error)
         }
     }
 }

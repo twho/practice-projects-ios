@@ -12,7 +12,7 @@ class MenuViewController: UIViewController {
     private var navbar: UINavigationBar!
     private(set) var stackView: UIStackView!
     // Data
-    private let examples: [Constants.Example] = [.imageLoader, .jsonDecoding, .restAPI,
+    private let examples: [Constants.Example] = [.imageLoader, .jsonDecoding, .restAPI, .viperExample,
                                                  .hitTestResponder, .GCDExample, .containerController]
     // viewDidLoad
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class MenuViewController: UIViewController {
         super.viewDidLayoutSubviews()
         let width = self.view.frame.width
         let height = self.view.frame.height
-        stackView.topAnchor.constraint(equalTo: navbar.bottomAnchor, constant: 0.1 * height).isActive = true
+        stackView.topAnchor.constraint(equalTo: navbar.bottomAnchor, constant: 0.025 * height).isActive = true
         stackView.setConstraintsToView(left: self.view, lConst: 0.1 * width, right: self.view, rConst: -0.1 * width)
         stackView.setHeightConstraint(CGFloat(self.examples.count + 1) * 80)
         self.view.layoutIfNeeded()

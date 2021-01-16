@@ -18,6 +18,8 @@ struct Constants {
         case imageLoader
         /// Rest API example.
         case restAPI
+        /// VIPER architecture example
+        case viperExample
         /// Hit test and responder chain example.
         case hitTestResponder
         /// GCD and lock/deadlock examples.
@@ -32,6 +34,7 @@ struct Constants {
             case .jsonDecoding: return "JSON Parsing Example"
             case .imageLoader: return "Image Loading Example"
             case .restAPI: return "RESTful API Example"
+            case .viperExample: return "VIPER Example"
             case .hitTestResponder: return "Hit Test and Responder Chain"
             case .GCDExample: return "GCD and Lock/Deadlock"
             case .containerController: return "Container Controllers"
@@ -45,6 +48,7 @@ struct Constants {
             case .jsonDecoding: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
             case .restAPI: return ContactsViewController()
+            case .viperExample: return ToDoListRouter.createToDoModule()
             case .hitTestResponder: return HitTestViewController()
             case .GCDExample: return GCDViewController()
             case .containerController: return ReuseNavigationController(rootViewController: AViewController())
