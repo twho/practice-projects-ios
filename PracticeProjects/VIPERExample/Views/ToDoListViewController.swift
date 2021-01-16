@@ -9,8 +9,9 @@ import UIKit
 import MapKit
 
 class ToDoListViewController: UIViewController, ToDoListViewProtocol {
+    // VIPER
     var presenter: ToDoListPresenterProtocol?
-    
+    // UI
     private var navbar: UINavigationBar!
     private var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)

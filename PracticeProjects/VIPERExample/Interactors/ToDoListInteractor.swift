@@ -6,6 +6,7 @@
 //
 
 class ToDoListInteractor: ToDoListInteractorInputProtocol {
+    // VIPER
     weak var presenter: ToDoListInteractorOutputProtocol?
     var localDataManager: ToDoListLocalDataManagerInputProtocol?
     var previousQuery: String?

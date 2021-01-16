@@ -201,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				4968A12825B17C4F006B0CDD /* ToDoListInteractor.swift */,
+				4968A13225B17FDF006B0CDD /* LocalDataManager.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -208,7 +209,7 @@
 		4968A10525B17791006B0CDD /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				4968A13225B17FDF006B0CDD /* LocalDataManager.swift */,
+				682FB7A925B27FDA0068B380 /* PracticeProjectsModel.xcdatamodeld */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -380,7 +381,6 @@
 				6866EDB1256642E200105E06 /* Extensions */,
 				6866EDB2256642F200105E06 /* Supporting Files */,
 				6816E8C925661822007166CB /* Info.plist */,
-				682FB7A925B27FDA0068B380 /* PracticeProjectsModel.xcdatamodeld */,
 			);
 			path = PracticeProjects;
 			sourceTree = "<group>";

@@ -8,11 +8,9 @@
 import UIKit
 
 class ToDoListPresenter: ToDoListPresenterProtocol {
-
+    // VIPER
     weak var view: ToDoListViewProtocol?
-    
     var interactor: ToDoListInteractorInputProtocol?
-    
     var router: ToDoListRouterProtocol?
     
     func viewDidAppear() {
