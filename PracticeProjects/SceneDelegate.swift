@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         // Create view hierachy programmatically
 //        let enteringViewController = MenuViewController()
-        let enteringViewController = MapRouter.createMapModule()
+        let enteringViewController = ContactsViewController()
         // Set the rootViewController of the window to the enteringViewController
         window.rootViewController = enteringViewController
         // Set the window and make it visibile

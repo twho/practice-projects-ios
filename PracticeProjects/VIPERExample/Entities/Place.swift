@@ -7,6 +7,8 @@
 
 import MapKit
 
-struct Place {
+struct Task {
     let coordinate: CLLocationCoordinate2D
+    let name: String
+    let address: String
 }
