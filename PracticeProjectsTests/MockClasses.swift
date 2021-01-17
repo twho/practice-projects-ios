@@ -260,6 +260,13 @@ class MockContactsViewModel: ContactsViewModel {
         self.completeDownloading(with: data)
     }
     
+    override func didChangeQuery(_ query: String) {
+        if !(self.autoQuery is MockAutoQuery) {
+            self.autoQuery = MockAutoQuery()
+        }
+        super.didChangeQuery(query)
+    }
+    
     override func getGCDHelperInContext() -> GCDHelper {
         return MockGCDHelper.sharedMock
     }
@@ -269,6 +276,13 @@ class MockContactsViewController: ContactsViewController {
     var testData: [People] {
         return self.state.elements as? [People] ?? []
     }
+    
+    override func getGCDHelperInContext() -> GCDHelper {
+        return MockGCDHelper.sharedMock
+    }
+}
+
+class MockAutoQuery: AutoQuery {
     
     override func getGCDHelperInContext() -> GCDHelper {
         return MockGCDHelper.sharedMock

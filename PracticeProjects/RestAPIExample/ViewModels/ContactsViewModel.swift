@@ -20,7 +20,8 @@ class ContactsViewModel {
             didUpdatePeopleData?(visibleData)
         }
     }
-    private let autoQuery = AutoQuery()
+    // Set internal for test override
+    var autoQuery = AutoQuery()
     /**
      The URL we are using to fetch data for this demo. The original JSON file is also included
      at the path - RestAPIExample/PeopleSample.json in case the web service is not working.

@@ -12,7 +12,8 @@ class ToDoListPresenter: ToDoListPresenterProtocol {
     weak var view: ToDoListViewProtocol?
     var interactor: ToDoListInteractorInputProtocol?
     var router: ToDoListRouterProtocol?
-    private let autoQuery = AutoQuery()
+    // Set internal for test override
+    var autoQuery = AutoQuery()
     
     func viewDidAppear() {
         interactor?.retrieveToDoList(nil)
