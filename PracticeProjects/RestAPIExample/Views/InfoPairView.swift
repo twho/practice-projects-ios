@@ -9,18 +9,19 @@ import UIKit
 
 class InfoPairView: UIStackView {
     // UI
-    private var parameterLabel: UILabel!
-    private var valueLabel: UILabel!
+    private(set) var parameterLabel: UILabel!
+    private(set) var valueLabel: UILabel!
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
         parameterLabel = UILabel(title: "", size: 16.0, color: .secondaryLabel)
         parameterLabel.textAlignment = .left
+        parameterLabel.lineBreakMode = .byWordWrapping
         valueLabel = UILabel(title: "", size: 16.0, color: .label)
         valueLabel.adjustsFontSizeToFitWidth = true
-        valueLabel.textAlignment = .left
+        valueLabel.textAlignment = .right
         self.axis = .horizontal
-        self.distribution = .equalSpacing
+        self.distribution = .fillProportionally
         self.spacing = 10.0
         self.addArrangedSubview(parameterLabel)
         self.addArrangedSubview(valueLabel)

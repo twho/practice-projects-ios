@@ -253,16 +253,21 @@ class MockImageDisplayViewController: ImageDisplayViewController {
     }
 }
 
+class MockContactsViewModel: ContactsViewModel {
+    
+    override func ready() {
+        let data = MockConstants.TestJSON.people.dummyData as! [People]
+        self.completeDownloading(with: data)
+    }
+    
+    override func getGCDHelperInContext() -> GCDHelper {
+        return MockGCDHelper.sharedMock
+    }
+}
+
 class MockContactsViewController: ContactsViewController {
     var testData: [People] {
         return self.state.elements as? [People] ?? []
-    }
-    
-    override func loadInitialData() {
-        // Use test date and let the model tests to check JSON reading from API.
-        let data = MockConstants.TestJSON.people.dummyData as! [People]
-        self.peopleData = data
-        self.state = .populated(data)
     }
     
     override func getGCDHelperInContext() -> GCDHelper {

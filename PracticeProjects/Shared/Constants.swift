@@ -47,7 +47,9 @@ struct Constants {
             switch self {
             case .jsonDecoding: return ListViewController()
             case .imageLoader: return ImageDisplayViewController()
-            case .restAPI: return ContactsViewController()
+            case .restAPI:
+                let viewModel = ContactsViewModel()
+                return ContactsViewController(viewModel: viewModel)
             case .viperExample: return ToDoListRouter.createToDoModule()
             case .hitTestResponder: return HitTestViewController()
             case .GCDExample: return GCDViewController()

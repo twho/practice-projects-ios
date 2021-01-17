@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MVVM
 class ContactsViewController: UIViewController {
     // UI widgets
     var searchBar: UISearchBar!
@@ -35,22 +36,43 @@ class ContactsViewController: UIViewController {
             }
         }
     }
-    /**
-     The poeple data is used to keep track of the original data loaded from JSON. It has
-     difference purpose from state.elements. It should be in sync with JSON.
-     */
-    var peopleData: [People]?
-    private var searchTask: DispatchWorkItem?
+    private let viewModel: ContactsViewModel
     private let rowHeight: CGFloat = 60.0
-    /**
-     The URL we are using to fetch data for this demo. The original JSON file is also included
-     at the path - RestAPIExample/PeopleSample.json in case the web service is not working.
-     */
-    private let urlString = "https://jsonplaceholder.typicode.com/users"
+    // Override init
+    init(viewModel: ContactsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    // Required method
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        setupViewModel()
+    }
+    /**
+     Set up view model.
+     */
+    private func setupViewModel() {
+        viewModel.isRefreshing = { [weak self] loading in
+            guard let self = self else { return }
+            self.state = .loading
+        }
+        viewModel.didUpdatePeopleData = { [weak self] peopleData in
+            guard let self = self else { return }
+            self.state = peopleData.isEmpty ? .empty : .populated(peopleData)
+        }
+        viewModel.didFailToUpdatePeopleData = { [weak self] error in
+            guard let self = self else { return }
+            self.state = .error(error)
+        }
+        viewModel.readyToPresent = { [weak self] vc in
+            guard let self = self else { return }
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     // loadView
     override func loadView() {
@@ -84,7 +106,8 @@ class ContactsViewController: UIViewController {
         loadingView.centerSubView(activityIndicator)
         // Empty view
         emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.rowHeight))
-        let noResultLabel = UILabel(title: "No results have been found! Check if the data resource is valid.", size: 17.0, bold: false, color: .label, numOfLines: 2)
+        let noResultLabel = UILabel(title: "No results have been found! Check if the data resource is valid.",
+                                    size: 17.0, bold: false, color: .label, numOfLines: 2)
         emptyView.addSubViews([noResultLabel])
         noResultLabel.setConstraintsToView(left: emptyView, right: emptyView)
         emptyView.centerSubView(noResultLabel)
@@ -94,22 +117,10 @@ class ContactsViewController: UIViewController {
         errorView.addSubViews([errorLabel])
         errorLabel.setConstraintsToView(left: errorView, right: errorView)
         errorView.centerSubView(errorLabel)
-        [errorLabel, noResultLabel].forEach({
+        [errorLabel, noResultLabel].forEach {
             $0!.numberOfLines = 2
-        })
-        self.setFooterView()
-    }
-    /**
-     Update table view results.
-     
-     - Parameter newData: The new data to be updated to the table view. It can be an empty array.
-     */
-    private func updateTableViewResults(_ newData: [People]?) {
-        guard let data = newData, !data.isEmpty else {
-            state = .empty
-            return
         }
-        state = .populated(data)
+        self.setFooterView()
     }
     /**
      Set the footer view to display current state.
@@ -137,27 +148,10 @@ class ContactsViewController: UIViewController {
         tableView.setConstraintsToView(bottom: self.view, left: self.view, right: self.view)
         self.view.layoutIfNeeded()
     }
-    // viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loadInitialData()
-    }
-    // MARK: Override for testing
-    /**
-     Load initial data to display.
-     */
-    func loadInitialData() {
-        RestAPIHelper.fetch(urlString, People.self, nil, { [weak self] result in
-            guard let self = self else { return }
-            do {
-                self.peopleData = try result.get()
-                self.getGCDHelperInContext().runOnMainThread {
-                    self.updateTableViewResults(self.peopleData)
-                }
-            } catch {
-                self.state = .error(error)
-            }
-        })
+    // viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.ready()
     }
     /**
      Method to provide GCD helper based on the current context, used for test override.
@@ -176,13 +170,7 @@ extension ContactsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let userCardVC = UserCardViewController()
-        if let data = self.peopleData {
-            userCardVC.people = data[indexPath.row]
-            self.present(userCardVC, animated: true, completion: nil)
-        } else {
-            // TODO: Error handling
-        }
+        viewModel.didSelectRow(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -206,19 +194,6 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let startSearch = self.searchTask {
-            startSearch.cancel()
-        }
-        self.searchTask = DispatchWorkItem { [weak self] in
-            guard let self = self, let searchTask = self.searchTask, !searchTask.isCancelled else { return }
-            if searchText.isEmpty {
-                self.updateTableViewResults(self.peopleData)
-            } else if let data = self.peopleData, !data.isEmpty {
-                self.updateTableViewResults(data.filter { $0.personName.contains(searchText) })
-            }
-        }
-        getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {
-            self.searchTask?.perform()
-        }
+        viewModel.didChangeQuery(searchText)
     }
 }
