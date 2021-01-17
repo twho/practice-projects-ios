@@ -212,7 +212,7 @@ class ImageDisplayViewCell: UICollectionViewCell {
         let height = self.frame.size.height
         let width = self.frame.size.width
         self.restaurantImageView.setConstraintsToView(top: self, tConst: 0.1 * height, left: self, lConst: 0.1 * width, right: self, rConst: -0.1 * width)
-        self.restaurantImageView.setSquareUseWidthReference()
+        self.restaurantImageView.setSquareUsingWidthReference()
         self.title.topAnchor.constraint(equalTo: self.restaurantImageView.bottomAnchor, constant: 0.05 * height).isActive = true
         self.title.setConstraintsToView(bottom: self, bConst: -0.05 * height, left: restaurantImageView, right: restaurantImageView)
         self.layoutIfNeeded()
