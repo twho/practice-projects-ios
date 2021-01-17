@@ -60,10 +60,6 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         presenter?.prepareTaskViewController(nil)
     }
     
-    func showSearchResults(_ tasks: [Task]) {
-        self.tasks = tasks
-    }
-    
     func dismissSearchController() {
         self.searchController.dismiss(animated: true, completion: nil)
     }
