@@ -51,9 +51,12 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         presenter?.viewDidAppear()
     }
     
-    func showTasks(_ tasks: [Task]) {
-        self.tasks = tasks
-        self.tableView.reloadData()
+    func showTasks(_ newTasks: [Task]) {
+        let shouldReload = self.tasks != newTasks
+        self.tasks = newTasks
+        if shouldReload {
+            self.tableView.reloadDataWithAnimation()
+        }
     }
     
     @objc func addButtonPressed() {
@@ -93,7 +96,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             presenter?.deleteTask(self.tasks[indexPath.row])
             self.tasks.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            self.tableView.reloadDataWithAnimation()
         }
     }
     

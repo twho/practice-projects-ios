@@ -11,7 +11,7 @@ protocol ToDoListViewProtocol: class {
     var presenter: ToDoListPresenterProtocol? { get set }
     
     // Presenter -> View
-    func showTasks(_ tasks: [Task])
+    func showTasks(_ newTasks: [Task])
     func dismissSearchController()
 }
 

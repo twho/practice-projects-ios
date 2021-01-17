@@ -12,13 +12,17 @@ class ToDoListPresenter: ToDoListPresenterProtocol {
     weak var view: ToDoListViewProtocol?
     var interactor: ToDoListInteractorInputProtocol?
     var router: ToDoListRouterProtocol?
+    private let autoQuery = AutoQuery()
     
     func viewDidAppear() {
         interactor?.retrieveToDoList(nil)
     }
     
     func shouldUpdateSearchResults(_ searchText: String?) {
-        interactor?.retrieveToDoList(searchText == "" ? nil : searchText)
+        autoQuery.performAutoQuery { [weak self] in
+            guard let self = self else { return }
+            self.interactor?.retrieveToDoList(searchText == "" ? nil : searchText)
+        }
     }
     
     func prepareTaskViewController(_ task: Task?) {

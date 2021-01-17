@@ -27,9 +27,7 @@ class ContactsViewController: UIViewController {
                 self.setFooterView()
                 // Reload table with animations
                 if self.isViewVisible {
-                    let range = NSMakeRange(0, self.tableView.numberOfSections)
-                    let sections = NSIndexSet(indexesIn: range)
-                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                    self.tableView.reloadDataWithAnimation()
                 } else {
                     self.tableView.reloadData()
                 }

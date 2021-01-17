@@ -104,3 +104,14 @@ extension UILabel {
         self.textAlignment = alignment
     }
 }
+// MARK: - UITableView
+extension UITableView {
+    /**
+     Reload data with animation.
+     */
+    func reloadDataWithAnimation() {
+        let range = NSMakeRange(0, self.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        self.reloadSections(sections as IndexSet, with: .automatic)
+    }
+}

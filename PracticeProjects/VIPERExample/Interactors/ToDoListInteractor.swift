@@ -9,19 +9,17 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     // VIPER
     weak var presenter: ToDoListInteractorOutputProtocol?
     var localDataManager: ToDoListLocalDataManagerInputProtocol?
-    var previousQuery: String?
     
     func retrieveToDoList(_ keyword: String?) {
         var result = [Task]()
         do {
-            if let taskList = try localDataManager?.retrieveToDoList(keyword == nil ? previousQuery : keyword) {
+            if let taskList = try localDataManager?.retrieveToDoList(keyword) {
                 result = taskList
             }
         } catch {
             presenter?.didRetrieveTasks(result)
         }
         presenter?.didRetrieveTasks(result)
-        previousQuery = keyword
     }
     
     func deleteTask(_ task: Task) {

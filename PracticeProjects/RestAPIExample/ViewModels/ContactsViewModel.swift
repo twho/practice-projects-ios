@@ -20,8 +20,7 @@ class ContactsViewModel {
             didUpdatePeopleData?(visibleData)
         }
     }
-    // Used to perform auto query.
-    private var queryTask: DispatchWorkItem?
+    private let autoQuery = AutoQuery()
     /**
      The URL we are using to fetch data for this demo. The original JSON file is also included
      at the path - RestAPIExample/PeopleSample.json in case the web service is not working.
@@ -48,16 +47,10 @@ class ContactsViewModel {
      - Parameter query: The quert string.
      */
     func didChangeQuery(_ query: String) {
-        if let startQuery = self.queryTask {
-            startQuery.cancel()
-        }
-        self.queryTask = DispatchWorkItem { [weak self] in
-            guard let self = self, let queryTask = self.queryTask, !queryTask.isCancelled else { return }
+        autoQuery.performAutoQuery { [weak self] in
+            guard let self = self else { return }
             self.visibleData = query.isEmpty ? self.peopleData : self.peopleData.filter { $0.personName.contains(query)}
             self.didUpdatePeopleData?(self.visibleData)
-        }
-        getGCDHelperInContext().runOnMainThreadAfter(delay: 0.5) {
-            self.queryTask?.perform()
         }
     }
     /**
