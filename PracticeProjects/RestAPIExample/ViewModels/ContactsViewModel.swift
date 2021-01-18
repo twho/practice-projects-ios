@@ -8,12 +8,13 @@
 import UIKit
 
 class ContactsViewModel {
-    // MARK: Outputs
+    // MARK: MVVM Outputs
     var isRefreshing: ((Bool) -> Void)?
     var didCompleteQuery: (([People]) -> Void)?
     var didUpdatePeopleData: (([People]) -> Void)?
     var didFailToUpdatePeopleData: ((Error) -> Void)?
     var readyToPresent: ((UIViewController) -> Void)?
+    // Private use
     private var peopleData: [People] = [People]()
     private(set) var visibleData: [People] = [People]() {
         didSet {
