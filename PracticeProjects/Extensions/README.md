@@ -1,5 +1,5 @@
 # Useful Extensions in Swift
-[![Generic badge](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/iOS-12.0+-blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/iOS-13.0+-blue.svg)](https://shields.io/)
 
 ### NSObject
 ```swift
