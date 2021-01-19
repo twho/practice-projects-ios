@@ -11,14 +11,14 @@ class ContactsViewModel {
     // MARK: MVVM Outputs
     var isRefreshing: ((Bool) -> Void)?
     var didCompleteQuery: (([People]) -> Void)?
-    var didUpdatePeopleData: (([People]) -> Void)?
+    var didUpdatePeopleData: ((Bool) -> Void)?
     var didFailToUpdatePeopleData: ((Error) -> Void)?
     var readyToPresent: ((UIViewController) -> Void)?
     // Private use
     private var peopleData: [People] = [People]()
     private(set) var visibleData: [People] = [People]() {
         didSet {
-            didUpdatePeopleData?(visibleData)
+            didUpdatePeopleData?(visibleData.count != 0)
         }
     }
     // Set internal for test override
@@ -52,17 +52,25 @@ class ContactsViewModel {
         autoQuery.performAutoQuery { [weak self] in
             guard let self = self else { return }
             self.visibleData = query.isEmpty ? self.peopleData : self.peopleData.filter { $0.personName.contains(query)}
-            self.didUpdatePeopleData?(self.visibleData)
+            self.didUpdatePeopleData?(self.visibleData.count != 0)
         }
+    }
+    /**
+     
+     
+     */
+    func cellForRow(at indexPath: IndexPath) -> SingleContactViewModel? {
+        guard indexPath.row < visibleData.count else { return nil }
+        return SingleContactViewModel(person: visibleData[indexPath.row])
     }
     /**
      Did select row in the table view.
      
      - Parameter indexPath: The selected index path.
      */
-    func didSelectRow(_ indexPath: IndexPath) {
+    func didSelectRow(at indexPath: IndexPath) {
         guard indexPath.row < visibleData.count else { return }
-        let userCardVC = UserCardViewController(viewModel: UserCardViewModel(person: visibleData[indexPath.row]))
+        let userCardVC = UserCardViewController(viewModel: SingleContactViewModel(person: visibleData[indexPath.row]))
         readyToPresent?(userCardVC)
     }
     /**

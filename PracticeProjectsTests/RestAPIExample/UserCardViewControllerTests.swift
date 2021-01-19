@@ -10,12 +10,12 @@ import XCTest
 @testable import PracticeProjects
 class UserCardViewControllerTests: XCTestCase {
     var userCardVC: UserCardViewController!
-    var userCardViewModel: UserCardViewModel!
+    var userCardViewModel: SingleContactViewModel!
     let targetPerson = (MockConstants.TestJSON.people.dummyData as! [People])[0]
     var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     
     override func setUpWithError() throws {
-        userCardViewModel = UserCardViewModel(person: targetPerson)
+        userCardViewModel = SingleContactViewModel(person: targetPerson)
         userCardVC = UserCardViewController(viewModel: userCardViewModel)
         window?.makeKeyAndVisible()
         window?.rootViewController = userCardVC

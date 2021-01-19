@@ -14,6 +14,7 @@
 		4968A12925B17C4F006B0CDD /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4968A12825B17C4F006B0CDD /* ToDoListInteractor.swift */; };
 		4968A12F25B17D8E006B0CDD /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4968A12E25B17D8E006B0CDD /* ToDoListRouter.swift */; };
 		4968A13325B17FDF006B0CDD /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4968A13225B17FDF006B0CDD /* LocalDataManager.swift */; };
+		4968A15725B68B43006B0CDD /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4968A15625B68B43006B0CDD /* SimpleTableViewCell.swift */; };
 		497AD90C2572E26E008F801B /* PeopleSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 497AD90B2572E26E008F801B /* PeopleSample.json */; };
 		497AD9112572E57F008F801B /* RestAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497AD9102572E57F008F801B /* RestAPIHelper.swift */; };
 		497AD91B2572E699008F801B /* GCDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497AD91A2572E699008F801B /* GCDHelper.swift */; };
@@ -53,7 +54,7 @@
 		682FB7B625B287110068B380 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682FB7B525B287110068B380 /* TaskViewController.swift */; };
 		682FB7BA25B289CE0068B380 /* DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682FB7B925B289CE0068B380 /* DialogViewController.swift */; };
 		682FB7C425B3A1D90068B380 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682FB7C325B3A1D90068B380 /* ContactsViewModel.swift */; };
-		683FE38B25B3AA460084BE85 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683FE38A25B3AA460084BE85 /* UserCardViewModel.swift */; };
+		683FE38B25B3AA460084BE85 /* SingleContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683FE38A25B3AA460084BE85 /* SingleContactViewModel.swift */; };
 		683FE38F25B3B7760084BE85 /* UserCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683FE38E25B3B7760084BE85 /* UserCardViewControllerTests.swift */; };
 		683FE39325B3C3260084BE85 /* AutoQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683FE39225B3C3260084BE85 /* AutoQuery.swift */; };
 		6845E36F256B1C3F002BF781 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6845E36E256B1C3F002BF781 /* MenuViewController.swift */; };
@@ -95,6 +96,7 @@
 		4968A12825B17C4F006B0CDD /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 		4968A12E25B17D8E006B0CDD /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		4968A13225B17FDF006B0CDD /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		4968A15625B68B43006B0CDD /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 		497AD90B2572E26E008F801B /* PeopleSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PeopleSample.json; sourceTree = "<group>"; };
 		497AD9102572E57F008F801B /* RestAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIHelper.swift; sourceTree = "<group>"; };
 		497AD91A2572E699008F801B /* GCDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDHelper.swift; sourceTree = "<group>"; };
@@ -133,7 +135,7 @@
 		682FB7B525B287110068B380 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		682FB7B925B289CE0068B380 /* DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogViewController.swift; sourceTree = "<group>"; };
 		682FB7C325B3A1D90068B380 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
-		683FE38A25B3AA460084BE85 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
+		683FE38A25B3AA460084BE85 /* SingleContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleContactViewModel.swift; sourceTree = "<group>"; };
 		683FE38E25B3B7760084BE85 /* UserCardViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewControllerTests.swift; sourceTree = "<group>"; };
 		683FE39225B3C3260084BE85 /* AutoQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoQuery.swift; sourceTree = "<group>"; };
 		6845E36E256B1C3F002BF781 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -237,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				682FB7C325B3A1D90068B380 /* ContactsViewModel.swift */,
-				683FE38A25B3AA460084BE85 /* UserCardViewModel.swift */,
+				683FE38A25B3AA460084BE85 /* SingleContactViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -332,6 +334,7 @@
 				49D70D5E25737CF3008BBE80 /* InfoPairView.swift */,
 				49D70D5725736478008BBE80 /* UserCardViewController.swift */,
 				499694E42571CA370046FF23 /* ContactsViewController.swift */,
+				4968A15625B68B43006B0CDD /* SimpleTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -649,9 +652,10 @@
 				6816E8BE25661821007166CB /* SceneDelegate.swift in Sources */,
 				682FB7B625B287110068B380 /* TaskViewController.swift in Sources */,
 				6866EE02256648DB00105E06 /* UIView+Extensions.swift in Sources */,
-				683FE38B25B3AA460084BE85 /* UserCardViewModel.swift in Sources */,
+				683FE38B25B3AA460084BE85 /* SingleContactViewModel.swift in Sources */,
 				6866EDFE256648DB00105E06 /* Extensions.swift in Sources */,
 				49D70D5825736478008BBE80 /* UserCardViewController.swift in Sources */,
+				4968A15725B68B43006B0CDD /* SimpleTableViewCell.swift in Sources */,
 				49462E5325AA7A1200CCD7E5 /* Company.swift in Sources */,
 				4992CC4D25AC1B6E00BFE742 /* CViewController.swift in Sources */,
 			);

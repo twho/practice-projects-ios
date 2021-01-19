@@ -10,10 +10,10 @@ import UIKit
 // MVVM
 class UserCardViewController: DialogViewController {
     private(set) var stackView: UIStackView!
-    let viewModel: UserCardViewModel
+    let viewModel: SingleContactViewModel
     var isAnimating = false
     // Override init
-    init(viewModel: UserCardViewModel) {
+    init(viewModel: SingleContactViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,20 +35,18 @@ class UserCardViewController: DialogViewController {
     private func setupViewModel() {
         viewModel.didUpdatePersonData = { [weak self] (person) in
             guard let self = self else { return }
-            if let people = person {
-                if self.isViewVisible, !self.isAnimating {
-                    self.runInAnimation { [weak self] in
-                        guard let self = self else { return }
-                        self.reloadStackData(people)
-                        self.isAnimating = true
-                    } completion: { _ in
-                        self.isAnimating = false
-                    }
-                } else {
-                    self.reloadStackData(people)
+            if self.isViewVisible, !self.isAnimating {
+                self.runInAnimation { [weak self] in
+                    guard let self = self else { return }
+                    self.reloadStackData(person)
+                    self.isAnimating = true
+                } completion: { _ in
+                    self.isAnimating = false
                 }
-                self.titleLabel.text = people.personName
+            } else {
+                self.reloadStackData(person)
             }
+            self.titleLabel.text = person.personName
         }
     }
     // viewDidLayoutSubviews

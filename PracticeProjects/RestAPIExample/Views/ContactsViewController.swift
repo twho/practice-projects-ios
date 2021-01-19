@@ -34,7 +34,7 @@ class ContactsViewController: UIViewController {
             }
         }
     }
-    private let viewModel: ContactsViewModel
+    let viewModel: ContactsViewModel
     private let rowHeight: CGFloat = 60.0
     // Override init
     init(viewModel: ContactsViewModel) {
@@ -59,9 +59,11 @@ class ContactsViewController: UIViewController {
             guard let self = self else { return }
             self.state = .loading
         }
-        viewModel.didUpdatePeopleData = { [weak self] peopleData in
+        viewModel.didUpdatePeopleData = { [weak self] hasData in
             guard let self = self else { return }
-            self.state = peopleData.isEmpty ? .empty : .populated(peopleData)
+            // We do not need to store data in view controller as we
+            // have a viewModel that deals with them
+            self.state = hasData ? .populated([People]()) : .empty
         }
         viewModel.didFailToUpdatePeopleData = { [weak self] error in
             guard let self = self else { return }
@@ -89,7 +91,7 @@ class ContactsViewController: UIViewController {
      */
     private func setupTableView() {
         tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(SimpleTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         (tableView.delegate, tableView.dataSource) = (self, self)
         self.view.addSubViews([tableView])
     }
@@ -168,7 +170,7 @@ extension ContactsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectRow(indexPath)
+        viewModel.didSelectRow(at: indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -176,16 +178,14 @@ extension ContactsViewController: UITableViewDelegate {
 extension ContactsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return state.elements.count
+        return viewModel.visibleData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: cellReuseIdentifier)
-        if let people = state.elements as? [People] {
-            cell.textLabel?.text = people[indexPath.row].personName
-            cell.detailTextLabel?.text = people[indexPath.row].phone
+        if let singleContactViewModel = viewModel.cellForRow(at: indexPath) {
+            return SimpleTableViewCell(viewModel: singleContactViewModel, reuseIdentifier: cellReuseIdentifier)
         }
-        return cell
+        return UITableViewCell()
     }
 }
 

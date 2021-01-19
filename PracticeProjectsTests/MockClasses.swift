@@ -274,7 +274,7 @@ class MockContactsViewModel: ContactsViewModel {
 
 class MockContactsViewController: ContactsViewController {
     var testData: [People] {
-        return self.state.elements as? [People] ?? []
+        return self.viewModel.visibleData
     }
     
     override func getGCDHelperInContext() -> GCDHelper {
